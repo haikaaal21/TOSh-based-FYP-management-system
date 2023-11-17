@@ -11,6 +11,8 @@ app.listen(port, () => {
     console.log("Server Listening on PORT:", port);
 })
 
-router.get('/', (req, res) => {
-    res.send("Hello World");
-});
+router.get('/', (req, res) => getStatus(res));
+
+function getStatus(res) {
+    res.send("Server is running on port: " + port);
+}

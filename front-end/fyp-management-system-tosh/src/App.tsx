@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import './App.css'
 
-const title = 'FYP Management System';
-const subjects: string[] = ['React', 'TypeScript', 'Vite', 'Turtles ?'];
+const title = 'Kontol Aric';
+const subjects: string[] = ['Aric Kontol', 'Jembut Aric', 'Aric Kontol Kontol', 'Aric anjinggg ?'];
 let x = 0;
 function App() {
   
