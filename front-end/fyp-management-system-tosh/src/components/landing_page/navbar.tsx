@@ -92,17 +92,17 @@ const Navbar = () => {
                 }}
             >
                 <li>
-                    <a href="#about">
+                    <a href="/#about">
                         About
                     </a>
                 </li>
                 <li>
-                    <a href="#hall-of-shame">
+                    <a href="/#hall-of-shame">
                         Hall of Shame
                     </a>
                 </li>
                 <li>
-                    <a href="#contact">
+                    <a href="/#contact">
                         Contact
                     </a>
                 </li>
