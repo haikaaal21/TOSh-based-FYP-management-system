@@ -28,7 +28,7 @@ const CustomNav = styled.nav`
     }
 `;
 
-const CustomButton = styled.button`
+const CustomA = styled.a`
     width: 120px;
     border: none;
     background: none;
@@ -72,17 +72,17 @@ const Navbar = () => {
     return (
         <Header>
         <CustomNav id="mobile">
-            <CustomButton >
+            <CustomA >
                     <SparesLogoFull fill2="white" fill="white" />
-            </CustomButton>
+            </CustomA>
             <button onClick={openNav}>
                 <Unicons.UilBars size="30" color="white" />
             </button>
         </CustomNav>
         <CustomNav id="web">
-            <CustomButton >
+            <CustomA >
                 <SparesLogoFull fill2="white" fill="white" />
-            </CustomButton>
+            </CustomA>
             <ul
                 style={{
                     display: "flex",

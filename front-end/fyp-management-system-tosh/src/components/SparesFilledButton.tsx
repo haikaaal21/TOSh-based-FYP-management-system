@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import './component-css.css';
 
 interface ButtonProps {
     text: string;
@@ -12,26 +13,15 @@ interface ButtonProps {
 
 const SparesFilledButton = ({ text, clickFunct, disabled, className, color, backgroundColor }: ButtonProps) => {
     
+    //!! Refactor the CSS so it can be used globally
     const StyledButton = styled.button<ButtonProps>`
-    font-size: 0.9rem;
-    font-family: 'Inter', sans-serif;
-    padding: 0.5rem 1rem;
+
     color: ${color};
     background-color: ${backgroundColor};
-    transition: 0.3s ease-out;
-    border: none;
-    &:hover {
-        box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.25);
-    }
-
-    $:active {
-        background-color: var(--DarkBlue);
-        color: white;
-    }
     `;
 
     return (
-        <StyledButton 
+        <StyledButton
             text={text}
             clickFunct={clickFunct}
             disabled={disabled}

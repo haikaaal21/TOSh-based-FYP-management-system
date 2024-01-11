@@ -44,9 +44,6 @@
 }
 
 #root {
-  /* max-width: 1280px; */
-  text-align: center;
-  font-family: 'Inter', sans-serif;
   width: 100%;
   line-height: 1.1;
 }
