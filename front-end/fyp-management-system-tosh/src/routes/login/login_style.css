@@ -44,6 +44,7 @@ form {
 @media screen and (min-width: 600px) {
    .item:last-child{
         align-items: start;
+        text-align: left;
    }
 
     

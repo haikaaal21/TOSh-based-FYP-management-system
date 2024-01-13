@@ -1,6 +1,7 @@
 import anime from 'animejs/lib/anime.es.js';
 import { useEffect } from "react";
 import Navbar from '../../components/landing_page/navbar';
+import image from "../../assets/images/placeholder.jpeg";
 
 
 
@@ -10,7 +11,7 @@ const url = window.location.href;
 const Custom404 = () => {
     useEffect(() => {
         anime({
-            targets: 'section *',
+            targets: '.content *',
             opacity: [0, 1],
             translateY: [50, 0],
             delay: anime.stagger(100),
@@ -22,14 +23,27 @@ const Custom404 = () => {
     return (
         <div style={
             {
-                backgroundColor: '--var(SparesIndigo)',
-                color: 'black',
+                backgroundColor: "var(--SparesIndigo)",
+                height:'100vh',
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                alignItems: "center",
+                color: "white",
+                padding: "0 1rem",
             }
         }>
             <Navbar />
-            <h1>404</h1>
-            <p>The URL {url} does not exist</p>
-            <p>Click <a href="/">here</a> to go back to the home page</p>
+            <div className='content'>
+                <img style={
+                    {
+                        aspectRatio: "1/1",
+                    }
+                } src={image} alt="" />
+                <h1>404</h1>
+                <p>The URL {url} does not exist</p>
+                <p>Click <a href="/">here</a> to go back to the home page</p>
+            </div>
         </div>
     )
 }

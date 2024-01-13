@@ -30,7 +30,9 @@
   }
 }
 
-
+p{
+  margin: 0;
+}
 
 :root {
   --SparesPurple: #9F71B1;
