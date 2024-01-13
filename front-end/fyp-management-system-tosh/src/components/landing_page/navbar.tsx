@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import SparesLogoFull from "../svgcomponents/spares_logo_full";
-import SparesFilledButton from "../SparesFilledButton";
 import * as Unicons from '@iconscout/react-unicons';
 
 //!! Make the Props!!
@@ -73,6 +72,10 @@ function openNav() {
     }
 }
 
+function navigateToRegister() {
+    window.location.href = "/register";
+}
+
 const Navbar = () => {
 
     return (
@@ -81,9 +84,11 @@ const Navbar = () => {
             <CustomA href="/" >
                     <SparesLogoFull fill2="white" fill="white" />
             </CustomA>
-            <button onClick={openNav}>
-                <Unicons.UilBars size="30" color="white" />
-            </button>
+            <div>
+                <button onClick={openNav} style={{ backgroundColor: "transparent" }}>
+                    <Unicons.UilBars size="30" color="white" />
+                </button>
+            </div>
         </CustomNav>
         <CustomNav id="web">
             <CustomA href="/" >
@@ -114,12 +119,7 @@ const Navbar = () => {
                 </li>
             </ul>
             <div>
-                <SparesFilledButton
-                    text="Get Started"
-                    clickFunct={() => console.log("Clicked")}
-                    color="var(--SparesPurple)"
-                    backgroundColor="white"
-                />
+                <button type="button" onClick={navigateToRegister} style={{backgroundColor:"white", color:"var(--DarkBlue)"}}>Get Started</button>
             </div>
         </CustomNav>
         </CustomHeader>

@@ -38,11 +38,12 @@ const Custom404 = () => {
                 <img style={
                     {
                         aspectRatio: "1/1",
+                        width: "100%",
                     }
                 } src={image} alt="" />
                 <h1>404</h1>
                 <p>The URL {url} does not exist</p>
-                <p>Click <a href="/">here</a> to go back to the home page</p>
+                <p>Click <a href="/" style={{color:"white"}}>here</a> to go back to the home page</p>
             </div>
         </div>
     )

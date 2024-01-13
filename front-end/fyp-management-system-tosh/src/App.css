@@ -34,6 +34,10 @@ p{
   margin: 0;
 }
 
+h1{
+  margin: 0;
+}
+
 :root {
   --SparesPurple: #9F71B1;
   --SparesLightBlue: #68C9E8;

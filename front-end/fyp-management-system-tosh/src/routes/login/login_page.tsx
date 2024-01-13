@@ -1,9 +1,9 @@
 import { useEffect } from "react"
 import './login_style.css';
-import SparesFilledButton from "../../components/SparesFilledButton";
 import image from '../../assets/images/placeholder.jpeg';
 import SparesLogoFull from "../../components/svgcomponents/spares_logo_full";
-import Navbar from "../../components/landing_page/navbar";
+import InputItem from "../../components/inputItem";
+import '../basic-formcss.css';
 
 const LoginPage = () => {
     return (
@@ -11,7 +11,11 @@ const LoginPage = () => {
         <div className="login">
            
             <div className="item">
-                <img src={image} alt="Test-Image" />
+                <img style={{
+                    aspectRatio: '3/4',
+                    width: '80%',
+                    borderRadius: '10px'
+                }} src={image} alt="Test-Image" />
             </div>
             <div className="item">
                 <div style={
@@ -24,20 +28,14 @@ const LoginPage = () => {
                 <h1>Welcome Back!</h1>
                 <p>Don't have an account? <a href="/register">Click here to get started.</a></p>
                 <form action="">
-                    <div className="inputItem">
-                        <label htmlFor="email">Email</label>
-                        <input type="email" name="email" id="email" placeholder="Email" />
-                    </div>
-                    <div className="inputItem">
-                        <label htmlFor="password">Password</label>
-                        <input type="password" name="password" id="password" placeholder="Password" />
-                    </div>
+                    <InputItem label="Email" type="email" htmlFor="email" id="email" placeholder="Email" />
+                    <InputItem label="Password" type="password" htmlFor="password" id="password" placeholder="Password" />
                     <div style={
                         {
                             padding: "1rem 1rem"
                         }
                     }>
-                    <SparesFilledButton text="Login" backgroundColor="var(--SparesIndigo)" clickFunct={() => {}} />
+                        <button type="button">Login</button>
                    </div>
                 </form>
                 <p>Forgot your password?</p>
