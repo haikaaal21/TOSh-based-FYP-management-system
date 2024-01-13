@@ -34,13 +34,7 @@ u{
     max-height: 900px;
 }
 
-nav {
-    padding: 0% 5%;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-}
+
 
 .lefty {
     text-align: left;

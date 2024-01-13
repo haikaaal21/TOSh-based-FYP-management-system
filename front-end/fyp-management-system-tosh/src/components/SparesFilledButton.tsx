@@ -15,7 +15,7 @@ const SparesFilledButton = ({ text, clickFunct, disabled, className, color, back
     
     //!! Refactor the CSS so it can be used globally
     const StyledButton = styled.button<ButtonProps>`
-
+    width: 100%;
     color: ${color};
     background-color: ${backgroundColor};
     `;

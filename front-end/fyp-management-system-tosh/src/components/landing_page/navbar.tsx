@@ -3,12 +3,18 @@ import SparesLogoFull from "../svgcomponents/spares_logo_full";
 import SparesFilledButton from "../SparesFilledButton";
 import * as Unicons from '@iconscout/react-unicons';
 
+//!! Make the Props!!
 
 const CustomNav = styled.nav`
     display: flex;
     justify-content: space-between;
     align-items: center;
     color: white;
+    padding: 0% 5%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
 
     li a {
         color: white;
@@ -43,7 +49,7 @@ const CustomA = styled.a`
     }
 `;
 
-const Header = styled.header`
+const CustomHeader = styled.header`
     @media (max-width: 768px) {
         #web {
             display: none;
@@ -70,9 +76,9 @@ function openNav() {
 const Navbar = () => {
 
     return (
-        <Header>
+        <CustomHeader>
         <CustomNav id="mobile">
-            <CustomA >
+            <CustomA href="/" >
                     <SparesLogoFull fill2="white" fill="white" />
             </CustomA>
             <button onClick={openNav}>
@@ -80,7 +86,7 @@ const Navbar = () => {
             </button>
         </CustomNav>
         <CustomNav id="web">
-            <CustomA >
+            <CustomA href="/" >
                 <SparesLogoFull fill2="white" fill="white" />
             </CustomA>
             <ul
@@ -107,14 +113,16 @@ const Navbar = () => {
                     </a>
                 </li>
             </ul>
-            <SparesFilledButton
-                text="Get Started"
-                clickFunct={() => console.log("Clicked")}
-                color="var(--SparesPurple)"
-                backgroundColor="white"
-            />
+            <div>
+                <SparesFilledButton
+                    text="Get Started"
+                    clickFunct={() => console.log("Clicked")}
+                    color="var(--SparesPurple)"
+                    backgroundColor="white"
+                />
+            </div>
         </CustomNav>
-        </Header>
+        </CustomHeader>
     );
 };
 

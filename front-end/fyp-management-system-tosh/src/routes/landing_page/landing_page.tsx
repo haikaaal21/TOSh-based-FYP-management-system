@@ -4,8 +4,12 @@ import './landing_page_style.css';
 
 export default function LandingPage() {
   return (
-    <>
-    <Navbar />
+    <div style={
+      {
+        width: "100%"
+      }
+    }>
+      <Navbar />
       <div>
         <section id="home">
             <div>
@@ -27,6 +31,6 @@ export default function LandingPage() {
         </section>
       </div>
       <Footer />
-    </>
+    </div>
   );
 }
