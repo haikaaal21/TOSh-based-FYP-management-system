@@ -13,6 +13,7 @@ const InputItem: React.FC<InputItemProps> = ({ type, htmlFor, id, placeholder, l
         <div className="inputItem">
             <label htmlFor={htmlFor}>{label}</label>
             <input type={type} name={htmlFor} id={id} placeholder={placeholder} />
+            
         </div>
     );
 };

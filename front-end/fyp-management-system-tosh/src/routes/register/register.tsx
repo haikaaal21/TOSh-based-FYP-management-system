@@ -1,45 +1,57 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import SparesLogoFull from "../../components/svgcomponents/spares_logo_full";
 import image from '../../assets/images/placeholder.jpeg';
 import './register_style.css';
 import InputItem from "../../components/inputItem";
 import '../basic-formcss.css';
 
-let stage = 1;
-
-
-function registerPage() {
-    useEffect(() => {
-        if(stage == 1) {
-            document.getElementById("bar-1")?.style.setProperty("background-color", "var(--SparesIndigo)");
-            document.getElementById("form-group-2")?.style.setProperty("display", "none");
-            document.getElementById("form-group-3")?.style.setProperty("display", "none");
-        } else if(stage == 2) {
-            document.getElementById("bar-1")?.style.setProperty("background-color", "var(--SparesIndigo)");
-            document.getElementById("bar-2")?.style.setProperty("background-color", "var(--SparesIndigo)");
-            document.getElementById("form-group-1")?.style.setProperty("display", "none");
-            document.getElementById("form-group-3")?.style.setProperty("display", "none");
-        } else if(stage == 3) {
-            document.getElementById("bar-1")?.style.setProperty("background-color", "var(--SparesIndigo)");
-            document.getElementById("bar-2")?.style.setProperty("background-color", "var(--SparesIndigo)");
-            document.getElementById("bar-3")?.style.setProperty("background-color", "var(--SparesIndigo)");
-            document.getElementById("form-group-1")?.style.setProperty("display", "none");
-            document.getElementById("form-group-2")?.style.setProperty("display", "none");
-        }
-    }, []);
+function RegisterPage() {
+    const [stage, setStage] = useState(1);
 
     function nextStage() {
-        stage++;
+        if(stage === 3) return;
+        setStage(stage + 1);
+        
+        //! DEBUG PURPOSES, REMOVE ON PUBLISH
         console.log(stage);
     }
 
     function prevStage() {
-        stage--;
+        if(stage === 1) return;
+        setStage(stage - 1);
+
+        //! DEBUG PURPOSES, REMOVE ON PUBLISH
         console.log(stage);
     }
 
-    return (
+    useEffect(() => {
+        const bar1 = document.getElementById("bar-1");
+        const bar2 = document.getElementById("bar-2");
+        const bar3 = document.getElementById("bar-3");
+        const form1 = document.getElementById("form-group-1");
+        const form2 = document.getElementById("form-group-2");
+        const form3 = document.getElementById("form-group-3");
+        if(stage === 1) {
+            bar1?.style.setProperty("background-color", "var(--SparesPurple)");
+            bar2?.style.setProperty("background-color", "Grey");
+            form1?.style.setProperty("display", "block");
+            form2?.style.setProperty("display", "none");
+            form3?.style.setProperty("display", "none");
+        } else if(stage === 2) {
+            bar2?.style.setProperty("background-color", "var(--SparesPurple)");
+            form1?.style.setProperty("display", "none");
+            form2?.style.setProperty("display", "block");
+            form3?.style.setProperty("display", "none");
+        } else if(stage === 3) {
+            bar3?.style.setProperty("background-color", "var(--SparesPurple)");
+            form1?.style.setProperty("display", "none");
+            form2?.style.setProperty("display", "none");
+            form3?.style.setProperty("display", "block");
+        }
+    }, [stage])
+    
 
+    return (
         <div>
             <div className="register">
                 <div className="item">
@@ -51,7 +63,7 @@ function registerPage() {
                         <SparesLogoFull />
                     </div>
                     <h1>Get started</h1>
-                    <p>Already have an account? <a href="/register">Click here to get login.</a></p>
+                    <p>Already have an account? <a href="/login">Click here to get login.</a></p>
                     <div className="progress-bar-reg">
                         <div className="bar" id="bar-1"></div>
                         <div className="bar" id="bar-2"></div>
@@ -68,35 +80,60 @@ function registerPage() {
                             <InputItem label="Confirm Password" type="password" htmlFor="confirmPassword" id="confirmPassword" placeholder="Confirm Password" />
                             <InputItem label="Date of Birth" type="date" htmlFor="dob" id="dob" placeholder="Date of Birth" />
                             <div style={{padding: "1rem 1rem"}}> 
-                            <button type="button">Next</button>
-                             </div>
+                                <button type="button" onClick={nextStage}>Next</button>
+                            </div>
                         </div>
                         <div id="form-group-2">
+                            <h3>Dropdown Button Here</h3>
+                            <InputItem label="Matric Number" type="number" htmlFor="matricNumb" id="matricNumb" placeholder="000000" />
+                            <p style={{fontWeight:"600", fontSize:"12pt", textAlign:"left", marginLeft:"12pt"}}>Type of Account</p>
+                            <div style={{display:"flex", alignItems:"center", justifyContent:"space-evenly"}}>
+                                <div>
+                                    <input type="radio" name="typeOfAccount" id="student" />
+                                    <label htmlFor="student">Student</label>
+                                </div>
+                                <div>
+                                    <input type="radio" name="typeOfAccount" id="staff" />
+                                    <label htmlFor="staff">Staff</label>
+                                </div>
+                            </div>
+                            <p style={{fontWeight:"600", fontSize:"12pt", textAlign:"left", marginLeft:"12pt"}}>Type of Staff</p>
+                            <div style={{display:"flex", alignItems:"center", justifyContent:"space-evenly"}}>
+                                <div>
+                                    <input type="radio" name="typeOfStaff" id="supervisor" />
+                                    <label htmlFor="supervisor">Supervisor</label>
+                                </div>
+                                <div>
+                                    <input type="radio" name="typeOfStaff" id="coordinator" />
+                                    <label htmlFor="supervisor">Coodinator</label>
+                                </div>
+                            </div>
                             <div style={{padding: "1rem 1rem", display:"flex"}}> 
-                            <button style={{backgroundColor:"gray"}}>Back</button>
-                            <button>Submit</button>
+                                <button style={{backgroundColor:"gray"}} type="button" onClick={prevStage}>Back</button>
+                                <button type="button" onClick={nextStage}>Submit</button>
                             </div>
                         </div>
                         <div id="form-group-3">
                             <div style={{padding: "1rem 1rem"}}> 
-                            <button>Back to Home</button>
+                                <img src="" alt="TestImg"  />
+                                <button >Back to Home</button>
                             </div>
                         </div>
-
                     </form>
                     <p>Forgot your password?</p>
                     <a href="/forgotPassword">Click here to reset your password</a>
                 </div>
                 <div className="item">
-                <img style={{
-                    aspectRatio: '3/4',
-                    width: '80%',
-                    borderRadius: '10px'
-                }} src={image} alt="Test-Image" />
+                    <img style={{
+                        aspectRatio: '3/4',
+                        width: '80%',
+                        maxHeight: '800px',
+                        borderRadius: '10px'
+                    }} src={image} alt="Test-Image" />
                 </div>
             </div>
         </div>
     )
 }
 
-export default registerPage;
+export default RegisterPage;

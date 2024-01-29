@@ -16,3 +16,4 @@ router.get('/', (req, res) => getStatus(res));
 function getStatus(res) {
     res.send("Server is running on port: " + port);
 }
+

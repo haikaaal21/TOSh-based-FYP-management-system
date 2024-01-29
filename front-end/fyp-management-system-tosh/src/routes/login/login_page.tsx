@@ -4,16 +4,19 @@ import image from '../../assets/images/placeholder.jpeg';
 import SparesLogoFull from "../../components/svgcomponents/spares_logo_full";
 import InputItem from "../../components/inputItem";
 import '../basic-formcss.css';
+import Navbar from "../../components/landing_page/navbar";
 
 const LoginPage = () => {
     return (
         <div>
+
         <div className="login">
            
             <div className="item">
                 <img style={{
                     aspectRatio: '3/4',
                     width: '80%',
+                    maxHeight: '800px',
                     borderRadius: '10px'
                 }} src={image} alt="Test-Image" />
             </div>

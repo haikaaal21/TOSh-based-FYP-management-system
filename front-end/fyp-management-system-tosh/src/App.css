@@ -83,4 +83,15 @@ img {
   object-fit: cover;
 }
 
+@media screen and (min-width: 1400px) {
+  .duo-item{
+      display:flex;
+      justify-content: space-between;
+  }
+
+  .duo-item div{
+      width: 50%;
+  }
+}
+
 
