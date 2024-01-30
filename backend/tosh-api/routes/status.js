@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const client = require('../connectDb');
+const client = require('../connectDB');
 
 
 router.get('/', async (req,res) =>{
