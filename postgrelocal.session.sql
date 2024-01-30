@@ -1,0 +1,21 @@
+select *
+from spares_student -- Student Model
+    -- insert into spares_student (
+    --     email,
+    --     password,
+    --     salt,
+    --     dob,
+    --     matric_number,
+    --     institution,
+    --     unsubmitted_tasks,
+    --     profile_picture
+    -- ) values (
+    --     'aimanafiq@examplemail.com',
+    --     'aimanAfiq123',
+    --     'salt',
+    --     '1990-10-10',
+    --     's000001',
+    --     'Universiti Malaya',
+    --     0,
+    --     '/assets/img/aimanafiq1.jpg'
+    -- );
