@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const client = require('../../../connectDb');
+const client = require('../../../connectDB');
 const academicStaffModel = require('../../../model/staff');
 const inputValidator = require('../../../middleware/userMiddleware/inputValidation');
 const passwordHash = require('../../../middleware/userMiddleware/passwordHash');

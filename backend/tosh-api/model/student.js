@@ -17,7 +17,7 @@ class SparesStudentModel {
     }
     
     createStudent() {
-        let studentCreateQuery = `INSERT INTO ${this.table_name} (email, password, salt, dob, matric_number, institution, unsubmitted_tasks, profile_picture) VALUES ('${this.email}', '${this.password}', '${this.salt}', '${this.dob}', '${this.matric_number}', '${this.institution}' , '${this.unsubmitted_tasks}' , '${this.profile_picture}')`;
+        let studentCreateQuery = `INSERT INTO ${this.table_name} (email, password, salt, dob, matric_number, institution, unsubmitted_tasks, profile_picture, is_student) VALUES ('${this.email}', '${this.password}', '${this.salt}', '${this.dob}', '${this.matric_number}', '${this.institution}' , '${this.unsubmitted_tasks}' , '${this.profile_picture}', true)`;
         return studentCreateQuery;
     }
 }
