@@ -6,7 +6,7 @@ const client = require('../connectDB');
 
 router.get('/', async (req,res) =>{
     try {
-        const result = await client.query("SELECT * FROM spares_user");
+        const result = await client.query(`SELECT * FROM "User";`);
         res.json(result.rows);
     } catch (error) {
         console.error('Error in Fetching Status:', error);

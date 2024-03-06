@@ -1,4 +1,4 @@
-require ('dotenv').config();
+require('dotenv').config();
 
 const express = require('express');
 const router = express.Router();
@@ -13,16 +13,23 @@ router.use(loginHash);
 //Identifer Middleware
 router.use(identifier);
 
-router.post('/', async (req,res) => {
+
+router.post('/', async (req, res) => {
     try {
-        const result = await client.query(`SELECT * FROM spares_user WHERE user_id = ${req.body.user_id}`);
+        const query = `SELECT * FROM "User" WHERE email = '${req.body.email}'`;
+        console.log(query);
+        const result = await client.query(query);
         const userResult = result;
-        const user = {user_id:userResult.rows[0].user_id ,email: userResult.rows[0].email, password: userResult.rows[0].password};
+        console.log(userResult.rows[0]);
+        const user = { userid: userResult.rows[0].userID, 
+            email: userResult.rows[0].email, 
+            password: userResult.rows[0].password,
+            isStudent: userResult.rows[0].isstudent };
         const accessToken = jwt.sign(user, process.env.ACCESS_SECRET_TOKEN);
-        res.status(200).json({accessToken: accessToken, is_student: userResult.rows[0].is_student});
+        res.status(200).json({ accessToken: accessToken});
     } catch (error) {
         console.error('Error in Fetching User Details:', error);
-        res.status(500).json({message: 'Error in Fetching User Details!'});
+        res.status(500).json({ message: 'Error in Fetching User Details!' });
     }
 })
 

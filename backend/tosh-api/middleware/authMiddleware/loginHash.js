@@ -7,14 +7,14 @@ const client = require('../../connectDB');
 router.use(async (req, res, next) => {
     const email = req.body.email;
     const password = req.body.password;
-    const sqlQuery = `SELECT * FROM spares_user WHERE email = '${email}'`;
+    const sqlQuery = `SELECT * FROM "User" WHERE email = '${email}'`;
     try {
         const result = await client.query(sqlQuery);
         if(result.rows.length !== 0) {
             const salt = result.rows[0].salt;
             const hashedPassword = await bcrypt.hash(password, salt);
             if(hashedPassword === result.rows[0].password) {
-                req.body.user_id = result.rows[0].user_id;
+                req.body.userID = result.rows[0].userid;
                 next();
             } else {
                 res.status(401).json({

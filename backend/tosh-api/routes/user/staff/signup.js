@@ -16,7 +16,7 @@ router.post('/', async (req, res) => {
     try {
         let newAcademicStaff = new academicStaffModel({});
 
-        newAcademicStaff.createAcademicStaffConstructor(req.body.email, req.body.password, req.body.salt, req.body.dob, req.body.matric_number, req.body.institution, req.body.unsubmitted_tasks, req.body.profile_picture, req.body.is_coordinator, req.body.is_supervisor);
+        newAcademicStaff.createAcademicStaffConstructor(req.body.email, req.body.name, req.body.password, req.body.salt, req.body.dob, req.body.matric_number, req.body.institution, req.body.unsubmitted_tasks, req.body.profile_picture, req.body.is_coordinator, req.body.is_supervisor);
 
         sqlQuery = newAcademicStaff.createAcademicStaff();
         console.log(newAcademicStaff);

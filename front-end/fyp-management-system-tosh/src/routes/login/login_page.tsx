@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import useAuth from "../../hooks/auth/useAuth";
 import './login_style.css';
 import image from '../../assets/images/placeholder.jpeg';
 import SparesLogoFull from "../../components/svgcomponents/spares_logo_full";
@@ -6,10 +7,12 @@ import InputItem from "../../components/landing_page/inputItem";
 import '../basic-formcss.css';
 import useIsLoading from "../../hooks/ui/is_loading";
 import Cookies from 'js-cookie';
+import useOK from "../../hooks/auth/useOK";
 
 
 const LoginPage = () => {
-
+    const { setAuth } = useAuth();
+    //* Validator Hooks
     useEffect(() => {
         document.title = "Login";
     }, []);
@@ -20,7 +23,7 @@ const LoginPage = () => {
     })
 
     const {isLoading, startLoading, stopLoading} = useIsLoading();
-
+    const {greenFlag, redFlag} = useOK();
     const [errors, setErrors] = useState ({} as {[key: string]: string});
 
     const handleChange = (e: any) => {
@@ -28,9 +31,10 @@ const LoginPage = () => {
         console.log(values);
     }
 
+
     const validate = (values: any) => {
         let errors = {} as {[key: string]: string};
-        // const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        // const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; //TODO: Fix Regex and validation for all
         if(!values.email) {
             errors.email = "Valid email is required";
         } 
@@ -43,6 +47,7 @@ const LoginPage = () => {
         return errors;
     }
 
+    //* Handling Submission (API Fetcher)
     const handleSubmit = (event:any) => {
         startLoading();        
         event.preventDefault();
@@ -56,17 +61,20 @@ const LoginPage = () => {
                 body: JSON.stringify(values)
             }).then((response) => {
                 if(response.ok) {
+                    greenFlag();
                     return response.json();
                 }
                 throw response;
             }).then((data) => {
                 let token = data.accessToken;                
-                let is_student = data.is_student;
                 Cookies.set('authToken', token, {expires: 3});
-                Cookies.set('studentAccount', is_student, {expires: 3});
+                setAuth(token);
                 stopLoading();
+
             }).catch((error) => {
-                console.log(error);
+                // TODO: Put error per status of the server!
+                redFlag();
+                console.log(error); // ! ERROR LOGGING REMOVE ON PRODUCTION
             });
         }
     }

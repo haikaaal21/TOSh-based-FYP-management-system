@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const client = require('../../../connectDb');
+const client = require('../../../connectDB');
 const studentModel = require('../../../model/student');
 const inputValidator = require('../../../middleware/userMiddleware/inputValidation');
 const passwordHash = require('../../../middleware/userMiddleware/passwordHash');
@@ -16,7 +16,7 @@ router.post('/', async (req, res) => {
     try {
         let newStudent = new studentModel({});
 
-        newStudent.createStudentConstructor(req.body.email, req.body.password, req.body.salt, req.body.dob, req.body.matric_number, req.body.institution, req.body.unsubmitted_tasks, req.body.profile_picture);
+        newStudent.createStudentConstructor(req.body.email, req.body.name, req.body.password,req.body.salt, req.body.dob, req.body.matric_number, req.body.institution, req.body.unsubmitted_tasks, req.body.profile_picture);
 
         sqlQuery = newStudent.createStudent();
         console.log(newStudent);

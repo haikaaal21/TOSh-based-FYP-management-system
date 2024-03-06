@@ -2,11 +2,13 @@ const express = require('express');
 
 class SparesAcademicStaffModel {
     constructor() {
-        this.table_name = 'spares_academic_staff';
+        this.table_name = 'AcademicStaff';
     }
     
-    createAcademicStaffConstructor(email, password, salt, dob, matric_number, institution, unsubmitted_tasks, profile_picture, is_coordinator, is_supervisor){
+    //TODO : ROMBAK MIDDLEWARE
+    createAcademicStaffConstructor(email, password, name, salt, dob, matric_number, institution, unsubmitted_tasks, profile_picture, is_coordinator, is_supervisor){
         this.email = email;
+        this.name = name;
         this.password = password;
         this.salt = salt;
         this.dob = dob;
@@ -19,7 +21,7 @@ class SparesAcademicStaffModel {
     }
     
     createAcademicStaff() {
-        let academicStaffCreateQuery = `insert into spares_academic_staff (email, password, salt, dob, matric_number, institution, unsubmitted_tasks, profile_picture, is_coordinator, is_supervisor, is_student) values ('${this.email}', '${this.password}', '${this.salt}', '${this.dob}', '${this.matric_number}', '${this.institution}' , '${this.unsubmitted_tasks}' , '${this.profile_picture}', '${this.is_coordinator}', '${this.is_supervisor}', false);`; 
+        let academicStaffCreateQuery = `insert into "${this.table_name}" (email, name, password, salt, dob, matricNumber, institution, unsubmittedTasks, profilePic, isCoordinator, isSupervisor, isStudent) values ('${this.email}','${this.name}' , '${this.password}', '${this.salt}', '${this.dob}', '${this.matric_number}', '${this.institution}' , '${this.unsubmitted_tasks}' , '${this.profile_picture}', '${this.is_coordinator}', '${this.is_supervisor}', false);`; 
         return academicStaffCreateQuery;
     }
 }

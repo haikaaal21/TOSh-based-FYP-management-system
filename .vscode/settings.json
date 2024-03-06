@@ -38,6 +38,16 @@
       "group": "localhost",
       "database": "hoteldb",
       "username": "root"
+    },
+    {
+      "previewLimit": 50,
+      "server": "localhost",
+      "port": 5432,
+      "driver": "PostgreSQL",
+      "name": "spares",
+      "group": "stix",
+      "database": "spares",
+      "username": "kale"
     }
   ]
 }
