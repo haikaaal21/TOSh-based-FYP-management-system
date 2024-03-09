@@ -8,28 +8,39 @@ import { lazy } from 'react';
 import { AuthProvider } from './context/AuthContext';
 import RequireAuth from './utils/RequireAuth';
 
+/** TODO:
+ * 10/03/2024 (Log update)
+ * 1. Clear up the Registration Page
+ * 2. Implement a cookie refresh backend session
+ * 3. Implement an autonavigate if user is already logged in
+ * 4. Implement a session timeout
+ * 5. Make the Dashboard
+ * 6. Use Motion framer for the animations
+ */
 
 const StudentDashboard = lazy(() => import('./routes/student/dashboard'));
 const StaffDashboard = lazy(() => import('./routes/staff/dashboard'));
 
 function App() {
-  
+
   return (
     <>
       <BrowserRouter>
         <AuthProvider>
             <Routes>
               {/* Public Routes */}
-              <Route path="/" element={<LandingPage />} />
-              <Route path="/login" element={<LoginPage />} />
-              <Route path="/register" element={<RegisterPage />} />
-              <Route path="*" element={<Custom404 />} />
+                <Route path="/" element={<LandingPage />} />
+                <Route path="/login" element={<LoginPage />} />
+                <Route path="/register" element={<RegisterPage />} />
+                <Route path="*" element={<Custom404 />} />
 
               {/* Private Routes */}
-              <Route element={<RequireAuth />} >
-                <Route path="/student/dashboard" element={<StudentDashboard />} />
-                <Route path="/staff/dashboard" element={<StaffDashboard />} />
-              </Route>
+                <Route element={<RequireAuth allowedRoles={["10601"]}/>}>
+                  <Route path="student/*" element={<StudentDashboard />} />
+                </Route>
+                <Route element={<RequireAuth allowedRoles={["10602"]}/>}>
+                  <Route path="staff/*" element={<StaffDashboard />} />
+                </Route>
             </Routes>
           </AuthProvider>
       </BrowserRouter>

@@ -26,7 +26,9 @@ router.post('/', async (req, res) => {
             password: userResult.rows[0].password,
             isStudent: userResult.rows[0].isstudent };
         const accessToken = jwt.sign(user, process.env.ACCESS_SECRET_TOKEN);
-        res.status(200).json({ accessToken: accessToken});
+        const refreshToken = jwt.sign(user, process.env.REFRESH_SECRET_TOKEN);
+        const role = userResult.rows[0].isstudent? "10601" : "10602";
+        res.status(200).json({ accessToken: accessToken, refreshToken: refreshToken, role: [role]});
     } catch (error) {
         console.error('Error in Fetching User Details:', error);
         res.status(500).json({ message: 'Error in Fetching User Details!' });

@@ -26,8 +26,6 @@ function RegisterPage() {
         if(stage === 3) return;
         setStage(stage + 1);
         
-        //! DEBUG PURPOSES, REMOVE ON PUBLISH
-        console.log(stage);
     }
 
     function prevStage() {
@@ -94,7 +92,7 @@ function RegisterPage() {
         setFormErrors(errors);
     }
     
-    const changeState = (event:any) => {
+    const changeState = () => {
         validatePhase1(values);
         console.log(formErrors);
         if(Object.keys(formErrors).length === 0) {
