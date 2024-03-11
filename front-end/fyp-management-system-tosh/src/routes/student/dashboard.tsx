@@ -1,9 +1,12 @@
-import {useState, useEffect} from 'react';
+import Dashboard from '../../components/dashboard/Dashboard';
 
 const studentDashboard = () => {
     return (
         <div>
-            <h1>Student Dashboard</h1>
+            <Dashboard />
+            <div>
+
+            </div>
         </div>
     )
 };

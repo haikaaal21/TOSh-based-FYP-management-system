@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import SparesLogoFull from "../svgcomponents/spares_logo_full";
 import SparesLogoS from "../svgcomponents/spares_logo_s";
 
 const CustomFooter = styled.footer`

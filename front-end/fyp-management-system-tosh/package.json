@@ -10,6 +10,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.4",
+    "@emotion/styled": "^11.11.0",
+    "@mui/material": "^5.15.12",
+    "@mui/x-date-pickers": "^6.19.6",
+    "dayjs": "^1.11.10",
     "framer-motion": "^11.0.3",
     "js-cookie": "^3.0.5",
     "localforage": "^1.10.0",
@@ -24,7 +29,6 @@
   },
   "devDependencies": {
     "@iconscout/react-unicons": "^2.0.2",
-    "@types/animejs": "^3.1.12",
     "@types/js-cookie": "^3.0.6",
     "@types/react": "^18.2.15",
     "@types/react-dom": "^18.2.7",

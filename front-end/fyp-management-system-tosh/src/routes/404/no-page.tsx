@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import Navbar from '../../components/landing_page/navbar';
 import image from "../../assets/images/placeholder.jpeg";
 

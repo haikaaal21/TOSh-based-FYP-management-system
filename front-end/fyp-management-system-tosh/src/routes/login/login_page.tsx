@@ -3,14 +3,19 @@ import useAuth from "../../hooks/auth/useAuth";
 import './login_style.css';
 import image from '../../assets/images/placeholder.jpeg';
 import SparesLogoFull from "../../components/svgcomponents/spares_logo_full";
-import InputItem from "../../components/landing_page/inputItem";
 import '../basic-formcss.css';
 import useIsLoading from "../../hooks/ui/is_loading";
 import Cookies from 'js-cookie';
 import useOK from "../../hooks/auth/useOK";
 import useIdentify from "../../hooks/routing/useIdentify";
+import { Grid, TextField, Button, Container } from "@mui/material"; // Add missing import
 
-
+/**! ERRORS
+ * 1. Logging in if the value is empty will cause an infinite loading button (Check the isLoading boolean)
+ * 2. The error message is not being displayed properly
+ * 3. Validator doesn't seem to work properly
+ * 4. Layouting Issues
+ */
 const LoginPage = () => {
     const { setAuth } = useAuth();
     
@@ -32,6 +37,7 @@ const LoginPage = () => {
 
     const handleChange = (e: any) => {
         setValues({ ...values, [e.target.name]: e.target.value });
+        console.log(values);
     }
 
 
@@ -96,7 +102,7 @@ const LoginPage = () => {
     }, [errors]);
 
     return (
-        <div>
+        <Container>
             <div className="login">
 
                 <div className="item">
@@ -108,38 +114,58 @@ const LoginPage = () => {
                     }} src={image} alt="Test-Image" />
                 </div>
                 <div className="item">
-                    <div style={
-                        {
-                            margin: "1rem",
-                            width: "15em",
-                        }
-                    }>
+                    <Grid container spacing={2}>
+                        <Grid item md={6} xs={12}>
+                        </Grid>
+                        <Grid item md={6} xs={12}>
                         <SparesLogoFull />
-                    </div>
-                    <h1 className="font-bold text-2xl">Welcome Back!</h1>
+                        </Grid>
+                    </Grid>
+                    <h1 className="font-bold text-2xl text">Welcome Back!</h1>
                     <p>Don't have an account? <a href="/register">Click here to get started.</a></p>
-                    <form onSubmit={handleSubmit}>
-                        <InputItem onChange={handleChange} value={values.email} label="Email" type="email" htmlFor="email" id="email" placeholder="Email" />
-                        <p className="mx-4 text-[12pt] font-md text-red-600">{errors.email}</p>
-                        <InputItem onChange={handleChange} value={values.password} label="Password" type="password" htmlFor="password" id="password" placeholder="Password" />
-                        <p className="mx-4 text-[12pt] font-md text-red-600">{errors.password}</p>
-                        <div style={
-                            {
-                                padding: "1rem 1rem"
-                            }
-                        }>
-                            {isLoading ?
-                                <button style={{ backgroundColor: "var(--SparesPurple)", color: "white" }} type="submit" disabled>Loading</button> :
-                                <button style={{ backgroundColor: "var(--SparesPurple)", color: "white" }} type="submit">Login</button>
-                            }
-                            {OK ? <></> : <p className="text-center text-red-600">{errorFetching}</p>}
-                        </div>
+                    <form style={{padding:'20px'}} onSubmit={handleSubmit}>
+                        <Grid container spacing={3}>
+                            <Grid item xs={12}>
+                            <TextField
+                                    label="Email"
+                                    type="email"
+                                    id="email"
+                                    name="email"
+                                    fullWidth
+                                    onChange={handleChange}
+                                    value={values.email}
+                                />                        
+                                <p >{errors.email}</p>
+                            </Grid>
+                            <Grid item xs={12}>
+                                <TextField
+                                    onChange={handleChange}
+                                    value={values.password}
+                                    label="Password"
+                                    name="password"
+                                    type="password"
+                                    id="password"
+                                    fullWidth />
+                                <p >{errors.password}</p>
+                                </Grid>
+                                <Grid item xs={12}>
+                                    {isLoading ?
+                                        <Button variant="text" fullWidth type="submit" color="secondary">
+                                          Logging in . . .
+                                        </Button> :
+                                        <Button variant="contained" fullWidth type="submit" color="primary">
+                                        Log in
+                                      </Button> 
+                                    }
+                                    {OK ? <></> : <p className="text-center text-red-600">{errorFetching}</p>}
+                                </Grid>
+                        </Grid>
                     </form>
                     <p>Forgot your password?</p>
                     <a href="/forgotPassword">Click here to reset your password</a>
                 </div>
             </div>
-        </div>
+        </Container>
     );
 }
 

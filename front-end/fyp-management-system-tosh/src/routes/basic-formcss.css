@@ -7,11 +7,6 @@
     flex-direction:column;
 }
 
-form {
-    padding: 1rem 0;
-    width: 100%;
-}
-
 a {   
     color: var(--DarkBlue);
     font-weight: 600;

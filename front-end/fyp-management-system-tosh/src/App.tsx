@@ -16,6 +16,9 @@ import RequireAuth from './utils/RequireAuth';
  * 4. Implement a session timeout
  * 5. Make the Dashboard
  * 6. Use Motion framer for the animations
+ * 
+ * 11/03/2024 (Log update)
+ * 1. Rombak Login Front-end
  */
 
 const StudentDashboard = lazy(() => import('./routes/student/dashboard'));
