@@ -6,16 +6,36 @@ import Stage2 from "../../components/register/Stage2";
 import './register_style.css';
 import { Container, Grid } from "@mui/material";
 import Stage3 from "../../components/register/Stage3";
+import { motion } from "framer-motion";
 
 function RegisterPage() {
+    /**
+     * TODO:
+     * 3. Custom Validator hooks of all fields
+     * 4. API Submit creation
+     * 5. Make the University field fetch the uni data from API
+     */
     useEffect(() => {
         document.title = "Get Started";
     })
 
     const [stage, setStage] = useState(1);
-    
+
+    useEffect(() => {
+        document.getElementById(`bar-${stage}`)?.classList.add('activeBar');
+        if(stage === 1) {
+            document.getElementById('bar-2')?.classList.remove('activeBar');
+            document.getElementById('bar-3')?.classList.remove('activeBar');
+        }
+    },[stage]);
+
     return(
-        <div id="register">
+        <motion.div 
+        id="register" 
+        initial={{translateY:10 ,opacity:0 }} 
+        animate={{translateY:0,  opacity:1, 
+            transition: { ease: "easeOut" } }} 
+        exit={{ opacity: 0 }}>
             <Container sx={{padding:6}} fixed>
                 <Grid container spacing={2}>
                     <Grid sx={{
@@ -51,13 +71,13 @@ function RegisterPage() {
                                 padding: "1rem 0"
                             }
                         }>
-                            <div className="bar"></div>
-                            <div className="bar"></div>
-                            <div className="bar"></div>
+                            <div id="bar-1" className="bar"></div>
+                            <div id="bar-2" className="bar"></div>
+                            <div id="bar-3" className="bar"></div>
                         </div>
                         <form action="" autoComplete="false" autoCorrect="false">
-                            {stage === 1 && <Stage1 />}
-                            {stage === 2 && <Stage2 />}
+                            {stage === 1 && <Stage1 setStage={setStage}  />}
+                            {stage === 2 && <Stage2 setStage={setStage}/>}
                             {stage === 3 && <Stage3 />}
                         </form>
                     </Grid>
@@ -83,7 +103,7 @@ function RegisterPage() {
                     </Grid>
                 </Grid>
             </Container>
-        </div>
+        </motion.div>
     )
 }
 

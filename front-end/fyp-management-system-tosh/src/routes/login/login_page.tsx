@@ -8,7 +8,8 @@ import useIsLoading from "../../hooks/ui/is_loading";
 import Cookies from 'js-cookie';
 import useOK from "../../hooks/auth/useOK";
 import useIdentify from "../../hooks/routing/useIdentify";
-import { Grid, TextField, Button, Container } from "@mui/material"; // Add missing import
+import { Grid, TextField, Button, Container } from "@mui/material";
+import { motion } from "framer-motion";
 
 /**! ERRORS
  * 1. Logging in if the value is empty will cause an infinite loading button (Check the isLoading boolean)
@@ -37,7 +38,6 @@ const LoginPage = () => {
 
     const handleChange = (e: any) => {
         setValues({ ...values, [e.target.name]: e.target.value });
-        console.log(values);
     }
 
 
@@ -103,7 +103,12 @@ const LoginPage = () => {
 
     return (
         <Container>
-            <div className="login">
+            <motion.div 
+             initial={{translateY:10 ,opacity:0 }} 
+             animate={{translateY:0,  opacity:1, 
+                 transition: { ease: "easeOut" } }} 
+             exit={{ opacity: 0 }}
+            className="login">
 
                 <div className="item">
                     <img style={{
@@ -115,15 +120,22 @@ const LoginPage = () => {
                 </div>
                 <div className="item">
                     <Grid container spacing={2}>
-                        <Grid item md={6} xs={12}>
-                        </Grid>
-                        <Grid item md={6} xs={12}>
+                        <Grid item md={4} xs={12}>
                         <SparesLogoFull />
                         </Grid>
+                        <Grid item md={6} xs={12}>
+                        </Grid>
                     </Grid>
-                    <h1 className="font-bold text-2xl text">Welcome Back!</h1>
-                    <p>Don't have an account? <a href="/register">Click here to get started.</a></p>
-                    <form style={{padding:'20px'}} onSubmit={handleSubmit}>
+                    {/* Fix the Typography Issue */}
+                    <h1 style={{
+                        width: '100%',
+                        fontSize: '35pt',
+                        fontWeight: '600',
+                    }}>Welcome Back!</h1>
+                    <p style={{textAlign:'left', width: '100%'}}>Don't have an account? 
+                        <a href="/register">&nbsp;Click here to get started.</a>
+                    </p>
+                    <form style={{padding:'35px 0'}} onSubmit={handleSubmit}>
                         <Grid container spacing={3}>
                             <Grid item xs={12}>
                             <TextField
@@ -164,7 +176,7 @@ const LoginPage = () => {
                     <p>Forgot your password?</p>
                     <a href="/forgotPassword">Click here to reset your password</a>
                 </div>
-            </div>
+            </motion.div>
         </Container>
     );
 }

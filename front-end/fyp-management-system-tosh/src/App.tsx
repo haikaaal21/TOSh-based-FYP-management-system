@@ -7,6 +7,8 @@ import RegisterPage from './routes/register/register';
 import { lazy } from 'react';
 import { AuthProvider } from './context/AuthContext';
 import RequireAuth from './utils/RequireAuth';
+import { LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 
 /** TODO:
  * 10/03/2024 (Log update)
@@ -29,6 +31,7 @@ function App() {
   return (
     <>
       <BrowserRouter>
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
         <AuthProvider>
             <Routes>
               {/* Public Routes */}
@@ -46,6 +49,7 @@ function App() {
                 </Route>
             </Routes>
           </AuthProvider>
+        </LocalizationProvider>
       </BrowserRouter>
     </>
   )
