@@ -19,7 +19,7 @@ function RegisterPage() {
         document.title = "Get Started";
     })
 
-    const [stage, setStage] = useState(1);
+    const [stage, setStage] = useState(2);
 
     useEffect(() => {
         document.getElementById(`bar-${stage}`)?.classList.add('activeBar');

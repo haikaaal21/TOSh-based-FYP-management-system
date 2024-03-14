@@ -1,7 +1,9 @@
 import { Grid, TextField, Autocomplete, FormControl, FormLabel, RadioGroup, FormControlLabel, Radio, Button } from "@mui/material";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
+import { useCheckEmpty } from "../../hooks/form/useCheckEmpty";
 import useOK from "../../hooks/auth/useOK";
+import useForm from "../../hooks/form/useForm";
 // import useForm from "../../hooks/form/useForm";
 
 const Stage2 = ({ setStage }: { setStage: (stage: number) => void }) => {
@@ -10,6 +12,15 @@ const Stage2 = ({ setStage }: { setStage: (stage: number) => void }) => {
     // const {initialValues, setInitialValues} = useForm(
     //     {academicInfo: ''},
     // )
+
+    const objects = {
+        'institution': '',
+        'matricNumber': '',
+        'typeOfAccount': '',
+        'typeOfStaff': ''
+    }
+
+    const {values, handleChange} = useForm(objects);
     
     function backStage() {
         setStage(1);
@@ -35,9 +46,11 @@ const Stage2 = ({ setStage }: { setStage: (stage: number) => void }) => {
             <Grid container spacing={3}>
                 <Grid item xs={12}>
                     <Autocomplete
-                        id="university"
+                        id="institution"
+                        value={values.institution}
+                        onChange={handleChange}
                         options={['Universiti Utara Malaysia']}
-                        renderInput={(params) => <TextField {...params} label="University" required />}
+                        renderInput={(params) => <TextField {...params} label="Institution/University" required />}
                         fullWidth
                     />
                 </Grid>
@@ -46,6 +59,9 @@ const Stage2 = ({ setStage }: { setStage: (stage: number) => void }) => {
                       id="matricNumber"
                       label="Matric Number/Student ID"
                       fullWidth
+                      value={values.matricNumber}
+                      onChange={handleChange}
+                      type="number"
                       required
                     />
                 </Grid>
@@ -53,7 +69,8 @@ const Stage2 = ({ setStage }: { setStage: (stage: number) => void }) => {
                     {/* Add how the radio button works */}
                     <FormControl fullWidth component="fieldset" required>
                     <FormLabel component="legend">Type of Account</FormLabel>
-                      <RadioGroup onChange={(e)=>{setTypeOfAcccount(e.target.value)}} defaultValue={"Student"} aria-label="" name="typeOfAccount" row sx={{justifyContent:'space-around'}} >
+                      <RadioGroup onChange={(e)=>{
+                        setTypeOfAcccount(e.target.value)}} defaultValue={"Student"} aria-label="" name="typeOfAccount" row sx={{justifyContent:'space-around'}} >
                             <FormControlLabel value="Student" control={<Radio />} label="Student" />
                             <FormControlLabel value="Staff" control={<Radio />} label="Staff" />
                       </RadioGroup>

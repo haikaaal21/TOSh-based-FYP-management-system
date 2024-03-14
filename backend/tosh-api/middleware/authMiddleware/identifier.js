@@ -10,7 +10,7 @@ router.use( async (req,res,next) => {
     if(result.length === 0) 
         throw new Error('User not found!');
     else {
-        let identify = result[0].isStudent ? 'Student' : 'AcademicStaff';
+        let identify = result[0].isstudent ? 'Student' : 'AcademicStaff';
         req.body.user_type = identify;
         req.body.userid = result[0].userid;
         req.body.salt = result[0].salt;

@@ -10,6 +10,15 @@ class User {
         const res = await client.query(query);
         return res.rows;
     }
+
+    async fetchAll() {
+        const query = {
+            name: 'fetch-all-users',
+            text: `select * from "User";`
+        }
+        const res = await client.query(query);
+        return res.rows;
+    }
 }
 
 module.exports = User;

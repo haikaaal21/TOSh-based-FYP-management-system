@@ -74,7 +74,9 @@ const LoginPage = () => {
                 throw response;
             }).then((data) => {
                 let token = data.accessToken;
-                Cookies.set('authToken', token, { expires: 3, sameSite:'strict' });
+                let refreshToken = data.refreshToken;
+                Cookies.set('authToken', token);
+                Cookies.set('refreshToken', refreshToken);
                 greenFlag();
                 setAuth(data);
                 identify(data.role.toString());

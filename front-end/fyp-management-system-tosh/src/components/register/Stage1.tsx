@@ -31,16 +31,27 @@ const Stage1 = ({ setStage }: { setStage: (stage: number) => void }) => {
     const {checkEmail} = useCheckEmail();
     const {checkPassword} = useCheckPassword();
 
-    const checkEmailUnique = (emailToCheck: FormValues) => {
-        fetch('http://localhost:4000/auth/check-email', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(emailToCheck)
-            }).then(response => {
-                console.log('Response:', response);
-            }).catch(error => console.log('Error:', error))
+    const checkEmailUnique = (emailToCheck: string) => {
+        fetch('http://localhost:4000/auth/checkUEmail', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({ email: emailToCheck })
+        }).then((res) => {
+            switch (res.status) {
+                case 200:
+                    incrementStage();
+                    break;
+                case 409:
+                    setErrors({ email: 'Email already exists' });
+                    break;
+                case 400:
+                    setErrors({ email: 'Email is Empty' });
+                    break;
+                default:
+                    setErrors({ email: 'Internal Server error, please try again later' });
+            }
+        });
+
     }
 
     const handleNext = () => { 
@@ -54,12 +65,9 @@ const Stage1 = ({ setStage }: { setStage: (stage: number) => void }) => {
         const previousErrors = { ...emptyError, ...emailError, ...passwordError };
         setErrors(previousErrors);
         if (Object.keys(previousErrors).length === 0) {
-            checkEmailUnique({ email: values.email });
+            checkEmailUnique(values.email);
         }
     }
-
-
-
 
     return (
         <motion.div 
