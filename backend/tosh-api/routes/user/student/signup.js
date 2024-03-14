@@ -1,8 +1,6 @@
 const express = require('express');
 const router = express.Router();
-
-const client = require('../../../connectDB');
-const studentModel = require('../../../model/student');
+const StudentModel = require('../../../model/student');
 const inputValidator = require('../../../middleware/userMiddleware/inputValidation');
 const passwordHash = require('../../../middleware/userMiddleware/passwordHash');
 
@@ -14,26 +12,23 @@ router.use(passwordHash);
 
 router.post('/', async (req, res) => {
     try {
-        let newStudent = new studentModel({});
+        const { email, name, password, salt, dob, matricNumber, institution } = req.body;
+        const studentModel = new StudentModel();
+        const newStudent = await studentModel.createStudent(email, name, password, salt, dob, matricNumber, institution);
 
-        newStudent.createStudentConstructor(req.body.email, req.body.name, req.body.password,req.body.salt, req.body.dob, req.body.matric_number, req.body.institution, req.body.unsubmitted_tasks, req.body.profile_picture);
-
-        sqlQuery = newStudent.createStudent();
-        console.log(newStudent);
-        console.log(sqlQuery);
-        let queryResult = await client.query(sqlQuery);
-        
-        res.status(200).json({
-            message: "OK",
-            queryResult
+        res.status(201).json({
+            status: 201,
+            data: newStudent,
+            message: "Student created successfully"
         });
     } catch (error) {
         res.status(500).json({
-            message: "An error occurred while creating the student.",
-            error: error.message
+            status: 500,
+            message: "Internal Server Error"
         });
     }
 });
+
 
 
 module.exports = router;

@@ -11,7 +11,7 @@ import { motion } from "framer-motion";
 function RegisterPage() {
     /**
      * TODO:
-     * 3. Custom Validator hooks of all fields
+     * 3. Check API for unique emails
      * 4. API Submit creation
      * 5. Make the University field fetch the uni data from API
      */

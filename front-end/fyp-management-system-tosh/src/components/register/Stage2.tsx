@@ -5,7 +5,7 @@ import useOK from "../../hooks/auth/useOK";
 // import useForm from "../../hooks/form/useForm";
 
 const Stage2 = ({ setStage }: { setStage: (stage: number) => void }) => {
-    const { OK, greenFlag, redFlag } = useOK();
+    const { OK:staff, greenFlag, redFlag } = useOK();
     const [typeOfStaff, setTypeOfAcccount] = useState('');
     // const {initialValues, setInitialValues} = useForm(
     //     {academicInfo: ''},
@@ -60,7 +60,7 @@ const Stage2 = ({ setStage }: { setStage: (stage: number) => void }) => {
                     </FormControl>
                 </Grid>
                 <Grid item xs={12}>
-                {OK? 
+                {staff? 
                 <motion.div 
                 initial={{opacity:0, translateY:10}} 
                 animate={{opacity:1, translateY:0, transition: { ease: "easeOut" }}}>

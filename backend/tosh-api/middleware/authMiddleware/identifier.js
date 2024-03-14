@@ -1,22 +1,26 @@
 const express = require('express');
 const router = express.Router();
-const loginHash = require('../../middleware/authMiddleware/loginHash.js');
-const client = require('../../connectDB.js');
+const UserModel = require('../../model/user');
 
-//! Fix this identifier Middleware
-router.use((req,res,next) => {
-    var userID = req.body.userID;
-    let table = ['"User"', '"AcademicStaff"'];
-    for(let i=0; i<table.length; i++){
-        let sqlquery = `select * from ${table[i]} where userID = ${userID}`;
-        console.log("SQL QUERY:", sqlquery);
-        client.query(sqlquery);
-        if(res.length === 0) {
-            return;
-        } else {
-            req.body.user_type = table[i];
-            next();
-        }
+router.use( async (req,res,next) => {
+    var email = req.body.email;
+    var userModel = new UserModel();
+    try {
+    var result = await userModel.searchUser(email, 'email');
+    if(result.length === 0) 
+        throw new Error('User not found!');
+    else {
+        let identify = result[0].isStudent ? 'Student' : 'AcademicStaff';
+        req.body.user_type = identify;
+        req.body.userid = result[0].userid;
+        req.body.salt = result[0].salt;
+        next();
+    }   
+    } catch(error) {
+        console.log(error);
+        error.message === 'User not found!' 
+        ? res.status(403).json({message: 'User was not found!'}) 
+        : res.status(500).json({ message: 'Internal Server Error!' });
     }
 })
 

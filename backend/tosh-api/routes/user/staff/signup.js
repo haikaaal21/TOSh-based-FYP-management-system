@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 
-const client = require('../../../connectDB');
 const academicStaffModel = require('../../../model/staff');
 const inputValidator = require('../../../middleware/userMiddleware/inputValidation');
 const passwordHash = require('../../../middleware/userMiddleware/passwordHash');
@@ -14,24 +13,37 @@ router.use(passwordHash);
 
 router.post('/', async (req, res) => {
     try {
-        let newAcademicStaff = new academicStaffModel({});
-
-        newAcademicStaff.createAcademicStaffConstructor(req.body.email, req.body.name, req.body.password, req.body.salt, req.body.dob, req.body.matric_number, req.body.institution, req.body.unsubmitted_tasks, req.body.profile_picture, req.body.is_coordinator, req.body.is_supervisor);
-
-        sqlQuery = newAcademicStaff.createAcademicStaff();
-        console.log(newAcademicStaff);
-        console.log(sqlQuery);
-        let queryResult = await client.query(sqlQuery);
-        
-        res.status(200).json({
-            message: "OK",
-            queryResult
+        const {
+            email, 
+            name, 
+            password, 
+            salt, 
+            dob, 
+            matricNumber, 
+            institution, 
+            isSupervisor, 
+            isCoordinator} = req.body;
+        const staffModel = new academicStaffModel();
+        const balancer = isCoordinator? true: false;
+        const result = await staffModel.createAcademicStaff(
+            email, 
+            name, 
+            password, 
+            salt, 
+            dob, 
+            matricNumber, 
+            institution, 
+            balancer
+        );
+        res.status(201).json({
+            status: 201,
+            message: "Staff created successfully"
         });
     } catch (error) {
+        console.error(error);
         res.status(500).json({
-            message: "An error occurred while creating the academicStaff.",
-            error: error.message,
-            body: req.body
+            status: 500,
+            message: "Internal Server Error"
         });
     }
 });

@@ -7,6 +7,7 @@ import useErrors from "../../hooks/form/useErrors";
 import { useCheckEmpty } from "../../hooks/form/useCheckEmpty";
 import { useCheckEmail } from "../../hooks/form/useCheckEmail";
 import { useCheckPassword } from "../../hooks/form/useCheckPassword";
+import { FormValues } from "../../types/FormValues";
 
 
 const Stage1 = ({ setStage }: { setStage: (stage: number) => void }) => {
@@ -30,6 +31,18 @@ const Stage1 = ({ setStage }: { setStage: (stage: number) => void }) => {
     const {checkEmail} = useCheckEmail();
     const {checkPassword} = useCheckPassword();
 
+    const checkEmailUnique = (emailToCheck: FormValues) => {
+        fetch('http://localhost:4000/auth/check-email', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(emailToCheck)
+            }).then(response => {
+                console.log('Response:', response);
+            }).catch(error => console.log('Error:', error))
+    }
+
     const handleNext = () => { 
         const emptyError = checkEmpty(values);
         const emailError = 
@@ -41,9 +54,11 @@ const Stage1 = ({ setStage }: { setStage: (stage: number) => void }) => {
         const previousErrors = { ...emptyError, ...emailError, ...passwordError };
         setErrors(previousErrors);
         if (Object.keys(previousErrors).length === 0) {
-            incrementStage();
+            checkEmailUnique({ email: values.email });
         }
     }
+
+
 
 
     return (

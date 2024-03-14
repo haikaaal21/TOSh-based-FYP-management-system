@@ -1,26 +1,31 @@
-const express = require('express');
+const client = require('../connectDB');
 
 class SparesStudentModel {
-    constructor() {
-        this.table_name = 'Student';
+    async createStudent(email, name, password, salt, dob, matricNumber, institution) {
+        const query = {
+            name: 'create-user-student',
+            text: `insert into "Student" (email, name, password, salt, dob, matricNumber, institution, isStudent, isStaff) values ($1, $2, $3, $4, $5, $6, $7, $8, $9);` ,
+            values: [email, name, password, salt, dob, matricNumber, institution, true, false],
+        }
+        const res = await client.query(query);
+        return res.rows[0];
     }
-    
-    createStudentConstructor(email, name, password, salt, dob, matric_number, institution, unsubmitted_tasks, profile_picture){
-        this.email = email;
-        this.name = name;
-        this.password = password;
-        this.salt = salt;
-        this.dob = dob;
-        this.matric_number = matric_number;
-        this.institution = institution;
-        this.unsubmitted_tasks = unsubmitted_tasks;
-        this.profile_picture = profile_picture;
-    }
-    
-    createStudent() {
-        let studentCreateQuery = `INSERT INTO "${this.table_name}" (email, name, password, salt, dob, matricNumber, institution, unsubmittedTasks, profilePic) VALUES ('${this.email}', '${this.name}' , '${this.password}', '${this.salt}', '${this.dob}', '${this.matric_number}', '${this.institution}' , '${this.unsubmitted_tasks}' , '${this.profile_picture}')`;
-        return studentCreateQuery;
+
+    async fetchAllStudents() {
+        const query = {
+            name: 'fetch-all-students',
+            text: `select * from "Student";`
+        }
+        const res = await client.query(query);
+        return res.rows;
     }
 }
 
 module.exports = SparesStudentModel;
+
+/**
+ * todo:
+ * 1. Prepared Statements
+ * 2. User Model
+ * 3. Revision of every routes
+ */

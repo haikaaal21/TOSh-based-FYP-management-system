@@ -1,28 +1,17 @@
-const express = require('express');
+const client = require('../connectDB');
 
 class SparesAcademicStaffModel {
-    constructor() {
-        this.table_name = 'AcademicStaff';
-    }
-    
-    //TODO : ROMBAK MIDDLEWARE
-    createAcademicStaffConstructor(email, password, name, salt, dob, matric_number, institution, unsubmitted_tasks, profile_picture, is_coordinator, is_supervisor){
-        this.email = email;
-        this.name = name;
-        this.password = password;
-        this.salt = salt;
-        this.dob = dob;
-        this.matric_number = matric_number;
-        this.institution = institution;
-        this.unsubmitted_tasks = unsubmitted_tasks;
-        this.profile_picture = profile_picture;
-        this.is_coordinator = is_coordinator;
-        this.is_supervisor = is_supervisor;
-    }
-    
-    createAcademicStaff() {
-        let academicStaffCreateQuery = `insert into "${this.table_name}" (email, name, password, salt, dob, matricNumber, institution, unsubmittedTasks, profilePic, isCoordinator, isSupervisor, isStudent) values ('${this.email}','${this.name}' , '${this.password}', '${this.salt}', '${this.dob}', '${this.matric_number}', '${this.institution}' , '${this.unsubmitted_tasks}' , '${this.profile_picture}', '${this.is_coordinator}', '${this.is_supervisor}', false);`; 
-        return academicStaffCreateQuery;
+
+    async createAcademicStaff(email, name, password, salt, dob, matricNumber, institution, balancer ){
+        let coordinator = balancer? true: false;
+        let supervisor = !balancer? true:false;
+        const query = {
+            name: 'create-user-academicStaff',
+            text: 'insert into "AcademicStaff" (email, name, password, salt, dob, matricNumber, institution, isCoordinator, isSupervisor, isStudent, isStaff) values ($1, $2, $3, $4, $5, $6, $7, $8, $9, false, true);',
+            values: [email, name, password, salt, dob, matricNumber, institution, coordinator, supervisor]
+        }
+        const result = await client.query(query);
+        return result.rows[0];
     }
 }
 

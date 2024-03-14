@@ -10,9 +10,7 @@
 --     matricNumber varchar(7) not null unique,
 --     institution varchar(255) not null,
 --     unsubmittedTasks integer not null default 0,
---     profilePic varchar(255) not null default './assets/defaultProfilePic.jpg'
--- );
-
+--     profilePic varchar(255) not null default './assets/defaultProfilePic.jpg'--- );"
 -- create table "AcademicStaff" (
 --     staffID serial primary key,
 --     isCoordinator boolean,
@@ -36,25 +34,9 @@
 --     uniID serial primary key,
 --     uniName varchar(255) not null,
 --     typeOfUni varchar(255) not null
--- );
-
--- INSERT INTO University (uniID, uniName, typeOfUni) VALUES
--- (1, 'Universiti Utara Malaysia', 'Public'),
--- (2, 'Universiti Malaya', 'Public'),
--- (3, 'Universiti Teknologi Malaysia', 'Public'),
--- (4, 'Universiti Sains Malaysia', 'Public'),
--- (5, 'Universiti Kebangsaan Malaysia', 'Public'),
--- (6, 'Universiti Putra Malaysia', 'Public'),
--- (7, 'Universiti Islam Antarabangsa Malaysia', 'Public'),
--- (8, 'Universiti Malaysia Sabah', 'Public'),
--- (9, 'Universiti Malaysia Sarawak', 'Public'),
--- (10, 'Universiti Teknologi MARA', 'Public'),
--- (11, 'Universiti Kuala Lumpur', 'Public'),
--- (12, 'Universiti Tun Hussein Onn Malaysia', 'Public'),
--- (13, 'Universiti Teknikal Malaysia Melaka', 'Public'),
--- (14, 'Universiti Malaysia Pahang', 'Public'),
--- (15, 'Universiti Malaysia Perlis', 'Public'),
--- (16, 'Universiti Sultan Zainal Abidin', 'Public'),
+-- );mi-- INSERT INTO University (uniID, uniName, typeOfUni) VALUESr-- (1, 'Universiti Utara Malaysia', 'Public'),o-- (2, 'Universiti Malaya', 'Public'),l-- (3, 'Universiti Teknologi Malaysia', 'Public'),o-- (4, 'Universiti Sains Malaysia', 'Public'),
+-- (5, 'Universiti Kebangsaan Malaysia', 'Public'),n-- (6, 'Universiti Putra Malaysia', 'Public'), -- (7, 'Universiti Islam Antarabangsa Malaysia', 'Public'),1-- (8, 'Universiti Malaysia Sabah', 'Public'),o-- (9, 'Universiti Malaysia Sarawak', 'Public'),
+-- (10, 'Universiti Teknologi MARA', 'Public'),a-- (11, 'Universiti Kuala Lumpur', 'Public'),u-- (12, 'Universiti Tun Hussein Onn Malaysia', 'Public'),c-- (13, 'Universiti Teknikal Malaysia Melaka', 'Public'),e-- (14, 'Universiti Malaysia Pahang', 'Public'),s-- (15, 'Universiti Malaysia Perlis', 'Public'),m-- (16, 'Universiti Sultan Zainal Abidin', 'Public'),2-- (17, 'Universiti Malaysia Terengganu', 'Public'),r-- (18, 'Multimedia University', 'Private'),n-- (19, 'Taylor''s University', 'Private'),i-- (20, 'Sunway University', 'Private'),a-- (21, 'Monash University Malaysia', 'Private'),y-- (22, 'Asia Pacific University of Technology & Innovation', 'Private'),o-- (23, 'International Medical University', 'Private'),s-- (24, 'University of Nottingham Malaysia', 'Private'),n-- (25, 'HELP University', 'Private');atan Zainal Abidin', 'Public'),
 -- (17, 'Universiti Malaysia Terengganu', 'Public'),
 -- (18, 'Multimedia University', 'Private'),
 -- (19, 'Taylor''s University', 'Private'),
@@ -65,5 +47,5 @@
 -- (24, 'University of Nottingham Malaysia', 'Private'),
 -- (25, 'HELP University', 'Private');
 
-select * from university;
+-- Make a trigger if isStaff is true, then isStudent is false, and vice versa
 

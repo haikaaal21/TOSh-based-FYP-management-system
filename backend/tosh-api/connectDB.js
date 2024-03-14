@@ -1,4 +1,7 @@
 const { Client } = require('pg');
+const config = require('config');
+
+const dbConfig = config.get('development');
 
 const client = new Client({
     host: 'localhost',
