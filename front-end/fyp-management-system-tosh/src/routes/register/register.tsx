@@ -7,6 +7,8 @@ import './register_style.css';
 import { Container, Grid } from "@mui/material";
 import Stage3 from "../../components/register/Stage3";
 import { motion } from "framer-motion";
+import { AccountProvider } from "../../context/AccountContext";
+
 
 function RegisterPage() {
     /**
@@ -19,7 +21,9 @@ function RegisterPage() {
         document.title = "Get Started";
     })
 
-    const [stage, setStage] = useState(2);
+    const [stage, setStage] = useState(1);
+    
+
 
     useEffect(() => {
         document.getElementById(`bar-${stage}`)?.classList.add('activeBar');
@@ -75,11 +79,13 @@ function RegisterPage() {
                             <div id="bar-2" className="bar"></div>
                             <div id="bar-3" className="bar"></div>
                         </div>
-                        <form action="" autoComplete="false" autoCorrect="false">
-                            {stage === 1 && <Stage1 setStage={setStage}  />}
-                            {stage === 2 && <Stage2 setStage={setStage}/>}
-                            {stage === 3 && <Stage3 />}
-                        </form>
+                        <AccountProvider>
+                            <form action="" autoComplete="false" autoCorrect="false">
+                                {stage === 1 && <Stage1 setStage={setStage}  />}
+                                {stage === 2 && <Stage2 setStage={setStage}/>}
+                                {stage === 3 && <Stage3 />}
+                            </form>
+                        </AccountProvider>
                     </Grid>
                     <Grid
                         sx={{

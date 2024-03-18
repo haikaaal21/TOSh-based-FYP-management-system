@@ -1,0 +1,29 @@
+version: '3'
+services:
+  spares-web-db:
+    image: postgres:latest
+    restart: always
+    environment:
+      POSTGRES_USER: kale
+      POSTGRES_PASSWORD: 12345
+      POSTGRES_DB: spares
+    volumes:
+      - ./etc/initPostgres.conf:/etc/postgresql/postgresql.conf
+      - ./etc/initPostgresTables.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - "7000:5432"
+    command: ["postgres", "-c", "config_file=/etc/postgresql/postgresql.conf"]
+  spares-web-front-end:
+    build: ./front-end/fyp-management-system-tosh/
+    environment:
+      - REACT_APP_API_URL=http://spares-web-back-end:4000
+    ports:
+      - "3000:80"
+    stdin_open: true
+    tty: true
+  spares-web-back-end:
+    build: ./backend/tosh-api/
+    depends_on:
+      - spares-web-db
+    ports:
+      - "4000:4000"

@@ -9,7 +9,8 @@ const useForm = (initialValues : FormValues) => {
     const [values, setValues] = useState(initialValues);
 
     const handleChange = (e: any) => {
-        setValues({...values, [e.target.id]: e.target.value});
+        e.target.id === "" ? setValues({...values, [e.target.name]: e.target.value})
+        : setValues({...values, [e.target.id]: e.target.value});
         console.log(values);
     }
 
@@ -19,7 +20,12 @@ const useForm = (initialValues : FormValues) => {
         setValues({...values, [id]: formattedDate});
     }
 
-    return {values, handleChange, handleDateChange};
+    const handleAutoCompleteChange = (e: any, newValue: string | null) => {
+        const targetID = e.target.id.split('-')[0];
+        setValues({...values, [targetID]: newValue});
+    }
+
+    return {values, handleChange, handleDateChange, handleAutoCompleteChange};
 }
 
 export default useForm;

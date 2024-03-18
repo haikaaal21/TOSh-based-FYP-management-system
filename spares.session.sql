@@ -49,3 +49,10 @@
 
 -- Make a trigger if isStaff is true, then isStudent is false, and vice versa
 
+-- DELETE FROM "User" WHERE email ='kalkal22@gmail.com';
+-- ALTER TABLE "User" ALTER COLUMN email SET UNIQUE; -- Remove the "SET" keyword
+-- select * from "User";
+
+-- alter table "User" alter column email 
+-- set email varchar(255) not null unique;
+SELECT * from "AcademicStaff";

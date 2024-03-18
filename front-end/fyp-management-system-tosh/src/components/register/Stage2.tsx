@@ -1,17 +1,17 @@
-import { Grid, TextField, Autocomplete, FormControl, FormLabel, RadioGroup, FormControlLabel, Radio, Button } from "@mui/material";
+import { Grid, TextField, Autocomplete, FormControl, FormLabel, RadioGroup, FormControlLabel, Radio, Button, FormHelperText, CircularProgress } from "@mui/material";
 import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useEffect, useContext, useState} from "react";
 import { useCheckEmpty } from "../../hooks/form/useCheckEmpty";
+import useErrors from "../../hooks/form/useErrors";
 import useOK from "../../hooks/auth/useOK";
 import useForm from "../../hooks/form/useForm";
-// import useForm from "../../hooks/form/useForm";
+import AccountContext from "../../context/AccountContext";
+import useGet from "../../hooks/api/useGet";
+
 
 const Stage2 = ({ setStage }: { setStage: (stage: number) => void }) => {
     const { OK:staff, greenFlag, redFlag } = useOK();
-    const [typeOfStaff, setTypeOfAcccount] = useState('');
-    // const {initialValues, setInitialValues} = useForm(
-    //     {academicInfo: ''},
-    // )
+    const { state, handleGet } = useGet();
 
     const objects = {
         'institution': '',
@@ -19,20 +19,57 @@ const Stage2 = ({ setStage }: { setStage: (stage: number) => void }) => {
         'typeOfAccount': '',
         'typeOfStaff': ''
     }
+    const {checkEmpty} = useCheckEmpty();
+    const {appendAccount} = useContext(AccountContext);
 
-    const {values, handleChange} = useForm(objects);
+
+    const [uniOptions, setUniOptions] = useState([]);
+    const {values, handleChange, handleAutoCompleteChange} = useForm(objects);
+    const {errors, setErrors} = useErrors(objects);
     
     function backStage() {
         setStage(1);
     }
+    function incrementStage() { setStage(3);}
 
     useEffect(() => {
-        if(typeOfStaff === 'Staff') {
+        handleGet('http://localhost:4000/university/fetch');
+    }, [])
+
+    useEffect(() => {
+        if (state.data) {
+            const uniData = state.data.data.map(
+                (uniItem: any) => uniItem.uniname
+            );
+            setUniOptions(uniData);
+        } else if (state.error) {
+            setTimeout(() => {
+                handleGet('http://localhost:4000/university/fetch');
+            }, 30000);
+        }
+    }, [state.data, state.error]);
+
+    useEffect(() => {
+        if(values.typeOfAccount === 'Staff') {
             greenFlag();
         } else {
             redFlag();
         }
-    }, [typeOfStaff])
+    }, [values.typeOfAccount])
+
+    const handleSubmit = (e: any) => {
+        e.preventDefault();
+        const previousErrors = checkEmpty(values);
+        setErrors(previousErrors);
+        if (Object.keys(previousErrors).length === 0) {
+            appendAccount(values);
+            incrementStage();
+        } else if (!staff && previousErrors.typeOfStaff && Object.keys(previousErrors).length === 1) {
+            appendAccount(values);
+            incrementStage();
+        }
+    }
+
 
     return (
         <motion.div 
@@ -44,16 +81,21 @@ const Stage2 = ({ setStage }: { setStage: (stage: number) => void }) => {
         exit={{ opacity: 0 }}>
             <h2 className="lefty" style={{margin:'0px 0 15px'}}>Fill in your academic information here</h2>
             <Grid container spacing={3}>
-                <Grid item xs={12}>
-                    <Autocomplete
-                        id="institution"
-                        value={values.institution}
-                        onChange={handleChange}
-                        options={['Universiti Utara Malaysia']}
-                        renderInput={(params) => <TextField {...params} label="Institution/University" required />}
-                        fullWidth
-                    />
-                </Grid>
+                { uniOptions.length >0 ?
+                    <Grid item xs={12}>
+                        <Autocomplete
+                            id="institution"
+                            value={values.institution}
+                            onChange={handleAutoCompleteChange}
+                            options={uniOptions}
+                            renderInput={(params) => <TextField {...params} label="Institution/University" required />}
+                            fullWidth
+                        />
+                        {errors.institution? <FormHelperText>{errors.institution}</FormHelperText> : null}
+                    </Grid>
+                    : state.error ? <Grid item xs={12}> <p>There was an error fetching the University Data, retrying 30 seconds</p> </Grid>
+                    : <Grid item xs={12}> <CircularProgress /> <p>Fetching University Datas</p> </Grid>
+                }
                 <Grid item xs={12}>
                     <TextField
                       id="matricNumber"
@@ -64,17 +106,18 @@ const Stage2 = ({ setStage }: { setStage: (stage: number) => void }) => {
                       type="number"
                       required
                     />
+                    {errors.matricNumber? <FormHelperText>{errors.matricNumber}</FormHelperText> : null}
                 </Grid>
                 <Grid item xs={12}>
                     {/* Add how the radio button works */}
                     <FormControl fullWidth component="fieldset" required>
                     <FormLabel component="legend">Type of Account</FormLabel>
-                      <RadioGroup onChange={(e)=>{
-                        setTypeOfAcccount(e.target.value)}} defaultValue={"Student"} aria-label="" name="typeOfAccount" row sx={{justifyContent:'space-around'}} >
+                      <RadioGroup onChange={handleChange} aria-label="" name="typeOfAccount" row sx={{justifyContent:'space-around'}} >
                             <FormControlLabel value="Student" control={<Radio />} label="Student" />
                             <FormControlLabel value="Staff" control={<Radio />} label="Staff" />
                       </RadioGroup>
                     </FormControl>
+                    {errors.typeOfAccount? <FormHelperText>{errors.typeOfAccount}</FormHelperText> : null}
                 </Grid>
                 <Grid item xs={12}>
                 {staff? 
@@ -83,11 +126,12 @@ const Stage2 = ({ setStage }: { setStage: (stage: number) => void }) => {
                 animate={{opacity:1, translateY:0, transition: { ease: "easeOut" }}}>
                     <FormControl  fullWidth component="fieldset">
                         <FormLabel component="legend">Type of Staff</FormLabel>
-                        <RadioGroup defaultValue={"Coordinator"} aria-label="" name="typeOfStaff" row sx={{justifyContent:'space-around'}} >
+                        <RadioGroup onChange={handleChange} aria-label="" name="typeOfStaff" row sx={{justifyContent:'space-around'}} >
                                 <FormControlLabel value="Coordinator" control={<Radio />} label="Coordinator" />
                                 <FormControlLabel value="Supervisor" control={<Radio />} label="Supervisor" />
                         </RadioGroup>
                     </FormControl>
+                    {errors.typeOfStaff? <FormHelperText>{errors.typeOfStaff}</FormHelperText> : null}
                 </motion.div> 
                 : null
                 }
@@ -100,7 +144,12 @@ const Stage2 = ({ setStage }: { setStage: (stage: number) => void }) => {
                             </Button>
                         </Grid>
                         <Grid item md={6} xs={12}>
-                            <Button type="submit" variant="contained" color="primary" fullWidth>
+                            <Button 
+                            onClick={handleSubmit}
+                            type="submit" 
+                            variant="contained" 
+                            color="primary" 
+                            fullWidth>
                                 Submit
                             </Button>
                         </Grid>

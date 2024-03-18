@@ -26,13 +26,13 @@
     "react-router": "^6.21.1",
     "react-router-dom": "^6.21.3",
     "sort-by": "^0.0.2",
-    "styled-components": "^6.1.8"
+    "styled-components": "^6.1.8",
+    "@iconscout/react-unicons": "^2.0.2"
   },
   "devDependencies": {
-    "@iconscout/react-unicons": "^2.0.2",
-    "@types/js-cookie": "^3.0.6",
     "@types/react": "^18.2.15",
     "@types/react-dom": "^18.2.7",
+    "@types/js-cookie": "^3.0.6",
     "@typescript-eslint/eslint-plugin": "^6.0.0",
     "@typescript-eslint/parser": "^6.0.0",
     "@vitejs/plugin-react": "^4.0.3",

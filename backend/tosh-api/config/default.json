@@ -5,5 +5,12 @@
         "database": "spares",
         "user": "kale",
         "password": "12345"
+    },
+    "test": {
+        "host": "spares-web-db",
+        "port": 5432,
+        "database": "spares",
+        "user": "kale",
+        "password": "12345"
     }
 }

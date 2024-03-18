@@ -11,9 +11,11 @@ router.use(inputValidator);
 router.use(passwordHash);
 
 router.post('/', async (req, res) => {
+    console.log(req.body);
     try {
         const { email, name, password, salt, dob, matricNumber, institution } = req.body;
         const studentModel = new StudentModel();
+        
         const newStudent = await studentModel.createStudent(email, name, password, salt, dob, matricNumber, institution);
 
         res.status(201).json({

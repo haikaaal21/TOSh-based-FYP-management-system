@@ -7,7 +7,10 @@ import useErrors from "../../hooks/form/useErrors";
 import { useCheckEmpty } from "../../hooks/form/useCheckEmpty";
 import { useCheckEmail } from "../../hooks/form/useCheckEmail";
 import { useCheckPassword } from "../../hooks/form/useCheckPassword";
-import { FormValues } from "../../types/FormValues";
+import { useContext, useEffect, useState } from "react";
+import AccountContext from "../../context/AccountContext";
+import useOK from "../../hooks/auth/useOK";
+
 
 
 const Stage1 = ({ setStage }: { setStage: (stage: number) => void }) => {
@@ -15,6 +18,9 @@ const Stage1 = ({ setStage }: { setStage: (stage: number) => void }) => {
     function incrementStage() {
         setStage(2);
     };
+
+    const {appendAccount} = useContext(AccountContext);
+    const { OK:proceed, greenFlag, redFlag } = useOK();
 
     const objects = {
         firstName: '',
@@ -30,8 +36,10 @@ const Stage1 = ({ setStage }: { setStage: (stage: number) => void }) => {
     const {checkEmpty} = useCheckEmpty();
     const {checkEmail} = useCheckEmail();
     const {checkPassword} = useCheckPassword();
+    const [generalError, setGeneralError] = useState('');
 
     const checkEmailUnique = (emailToCheck: string) => {
+        redFlag();
         fetch('http://localhost:4000/auth/checkUEmail', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
@@ -39,7 +47,7 @@ const Stage1 = ({ setStage }: { setStage: (stage: number) => void }) => {
         }).then((res) => {
             switch (res.status) {
                 case 200:
-                    incrementStage();
+                    greenFlag();
                     break;
                 case 409:
                     setErrors({ email: 'Email already exists' });
@@ -50,8 +58,9 @@ const Stage1 = ({ setStage }: { setStage: (stage: number) => void }) => {
                 default:
                     setErrors({ email: 'Internal Server error, please try again later' });
             }
+        }).catch((err) => {
+            setGeneralError('Internal Server error, please try again later' + err.statusCode);
         });
-
     }
 
     const handleNext = () => { 
@@ -66,8 +75,15 @@ const Stage1 = ({ setStage }: { setStage: (stage: number) => void }) => {
         setErrors(previousErrors);
         if (Object.keys(previousErrors).length === 0) {
             checkEmailUnique(values.email);
+            appendAccount(values);
         }
     }
+
+    useEffect(() => {
+        if (proceed) {
+            incrementStage();
+        }
+    },[proceed])
 
     return (
         <motion.div 
@@ -111,6 +127,18 @@ const Stage1 = ({ setStage }: { setStage: (stage: number) => void }) => {
                         <Button onClick={handleNext} variant="contained" color="primary" fullWidth>
                             Next
                         </Button>
+                        {generalError && 
+                        <Grid
+                          container
+                          direction="row"
+                          justifyContent="center"
+                          alignItems="center"
+                          alignContent="center"
+                          wrap="wrap"
+                        >
+                            <FormHelperText>{generalError}</FormHelperText>
+                        </Grid>
+                        }
                     </Grid>
             </div>
         </motion.div>

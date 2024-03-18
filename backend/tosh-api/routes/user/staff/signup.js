@@ -21,8 +21,9 @@ router.post('/', async (req, res) => {
             dob, 
             matricNumber, 
             institution, 
-            isSupervisor, 
-            isCoordinator} = req.body;
+            typeOfStaff} = req.body;
+            typeOfStaff === 'Coordinator' ? isCoordinator = true : isCoordinator = false;
+            console.log(req.body);
         const staffModel = new academicStaffModel();
         const balancer = isCoordinator? true: false;
         const result = await staffModel.createAcademicStaff(
