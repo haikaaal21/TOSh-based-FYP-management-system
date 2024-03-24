@@ -11,8 +11,7 @@
 - Fix academic staff registration
 - Clean up the styles in the landing page, registration page, and login page.
 
-# SPARES
-(Shame Prompted Action for Responsible Evaluation and Submission)
+# SPARES (Shame Prompted Action for Responsible Evaluation and Submission)
 ## About
 A website designed to pressure Final Year Project participants, including both academic faculty and students, by leveraging psychological tactics to encourage efficient and high-quality project completion.
 
