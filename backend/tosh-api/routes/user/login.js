@@ -19,8 +19,8 @@ router.post('/', async (req, res) => {
         const result = await userModel.searchUser(req.body.email, 'email');
         const user = result[0];
         if (user.password === req.body.password) {
-            const accessToken = jwt.sign(user, process.env.ACCESS_SECRET_TOKEN, { expiresIn: '20m' });
-            const refreshToken = jwt.sign(user, process.env.REFRESH_SECRET_TOKEN, { expiresIn: '1d' });
+            const accessToken = jwt.sign(user, process.env.ACCESS_SECRET_TOKEN, { expiresIn: '4h' });
+            const refreshToken = jwt.sign(user, process.env.REFRESH_SECRET_TOKEN, { expiresIn: '5d' });
             const role = req.body.user_type === 'Student' 
             ? "10601" 
             : "10602";

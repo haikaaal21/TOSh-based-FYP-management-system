@@ -1,4 +1,3 @@
 export interface FormValues {
-    [key: string]: any;
+    [key: string]: any
 }
-

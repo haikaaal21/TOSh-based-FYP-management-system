@@ -1,8 +1,8 @@
 const { Client } = require('pg');
 const config = require('config');
 
-const dbConfig = config.get('test');
-// const dbConfig = config.get('development');
+// const dbConfig = config.get('test');
+const dbConfig = config.get('development');
 
 const client = new Client(dbConfig);
 

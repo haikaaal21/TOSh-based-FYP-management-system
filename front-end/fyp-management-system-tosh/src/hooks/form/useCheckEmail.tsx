@@ -1,17 +1,17 @@
-import { FormValues } from "../../types/FormValues";
+import { FormValues } from '../../types/FormValues'
 
 export const useCheckEmail = () => {
-    let errors = {} as FormValues;
-    
+    let errors = {} as FormValues
+
     function checkEmail(valuesToCheck: FormValues) {
-        let regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+        let regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/
         for (const key in valuesToCheck) {
-            if(!regex.test(valuesToCheck[key])){
-                errors[key] = "Invalid email";
+            if (!regex.test(valuesToCheck[key])) {
+                errors[key] = 'Invalid email'
             }
         }
-        return errors;
+        return errors
     }
 
-    return { checkEmail };
-};
+    return { checkEmail }
+}

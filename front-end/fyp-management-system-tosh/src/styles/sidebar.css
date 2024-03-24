@@ -1,0 +1,128 @@
+.sidebar {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--SparesIndigo);
+    transition: 200ms ease-out;
+    z-index: 150;
+}
+
+.nav-button {
+    transition: 300ms ease-out;
+}
+
+.nav-button span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+}
+
+.profile {
+    display: none;
+}
+
+.active {
+    background-color: var(--SparesOrange);
+}
+
+.nav-button p {
+    display: none;
+}
+
+@media screen and (min-width: 600px) {
+    .sidebar {
+        top: 0;
+        left: 0;
+        height: 100vh;
+        padding: 0 0.3rem;
+        width: 150px;
+        min-height: 600px;
+    }
+
+    .sidebar:hover {
+        width: 350px;
+    }
+
+    .sidebar:hover .nav-button {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1.5rem;
+        width: 300px;
+    }
+
+    .sidebar:hover .profile {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        text-align: left;
+    }
+
+    .sidebar:hover .nav-button p {
+        display: block;
+    }
+
+    .nav-button {
+        height: 90px;
+        width: 90px;
+        border-radius: 15px;
+    }
+
+    .nav-button span * {
+        height: 90px;
+        width: 45px;
+    }
+
+    .sidebar:hover .nav-button span {
+        width: 5rem;
+    }
+
+    .nav-button:hover {
+        background-color: var(--SparesLightBlue);
+        box-shadow: none;
+    }
+
+    .active:hover {
+        background-color: var(--SparesRed);
+    }
+
+    .sb-contents {
+        padding: 1.5rem 0;
+    }
+}
+
+/*Phone contents */
+@media screen and (max-width: 600px) {
+    .sidebar {
+        bottom: 0;
+        width: 100%;
+        padding: 0.8rem 0;
+    }
+
+    .sb-contents:nth-child(2) {
+        display: none;
+    }
+
+    .sb-contents {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+    }
+
+    .nav-button {
+        height: 40px;
+        width: 60px;
+        border-radius: 10px;
+    }
+
+    .nav-button span * {
+        height: 20px;
+        width: 20px;
+    }
+}

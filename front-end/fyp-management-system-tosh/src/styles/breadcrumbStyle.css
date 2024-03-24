@@ -1,0 +1,10 @@
+.bread * {
+    text-decoration: none;
+    font-weight: normal;
+    text-transform: capitalize;
+    color: var(--NeutralGrey);
+}
+
+.bread li:last-child * {
+    font-weight: bold;
+}

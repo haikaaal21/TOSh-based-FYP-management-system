@@ -1,0 +1,26 @@
+.dashboard {
+    display: flex;
+    flex-direction: column;
+}
+
+.dashboard-contents {
+    align-items: flex-start;
+    text-align: left;
+}
+
+@media screen and (min-width: 600px) {
+    .dashboard-contents {
+        padding: 2rem 1rem 0 210px;
+        width: 82%;
+    }
+
+    #mobile-separator {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .dashboard-contents {
+        padding: 2rem 1rem;
+    }
+}

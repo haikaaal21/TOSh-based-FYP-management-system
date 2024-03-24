@@ -13,6 +13,27 @@ class SparesAcademicStaffModel {
         const result = await client.query(query);
         return result.rows[0];
     }
+
+    async fetch(offset, limit){
+        const query = {
+            name: 'fetch-academicStaff',
+            text: `select * from "AcademicStaff" offset $1 limit $2;`,
+            values: [offset, limit]
+        }
+        const result = await client.query(query);
+        return result.rows;
+    }
+
+    async fetchSpecifiedAcademicStaff(userID){
+        const query = {
+            name: 'fetch-specified-academicStaff',
+            text: `select * from "AcademicStaff" where userid = $1;`,
+            values: [userID]
+        }
+        const result = await client.query(query);
+        return result.rows[0];
+    }
+    
 }
 
 module.exports = SparesAcademicStaffModel;

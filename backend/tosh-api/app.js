@@ -15,7 +15,6 @@ const client = require('./connectDB');
 // Route Imports
 var statusRoute = require('./routes/status');
 var studentSignupRoute = require('./routes/user/student/signup');
-var studentFetchRoute = require('./routes/user/student/fetch');
 var academicStaffSignupRoute = require('./routes/user/staff/signup');
 var loginRoute = require('./routes/user/login');
 var checkUniqueEmail = require('./routes/auth/checkEmailUnique');
@@ -25,7 +24,6 @@ var fetchUnis = require('./routes/university/fetch');
 
 app.use('/status', statusRoute);
 app.use('/user/student/signup', studentSignupRoute);
-app.use('/user/student/fetch', studentFetchRoute);
 app.use('/user/staff/signup', academicStaffSignupRoute);
 app.use('/user/login', loginRoute);
 app.use('/auth/checkUEmail', checkUniqueEmail);

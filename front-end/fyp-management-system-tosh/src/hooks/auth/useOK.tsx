@@ -1,17 +1,17 @@
-import {useState} from 'react';
+import { useState } from 'react'
 
 function useOK() {
-    const [OK, setOK] = useState(false);
+    const [OK, setOK] = useState(false)
 
     const greenFlag = () => {
-        setOK(true);
+        setOK(true)
     }
 
     const redFlag = () => {
-        setOK(false);
+        setOK(false)
     }
 
-    return {OK, greenFlag, redFlag};
+    return { OK, greenFlag, redFlag }
 }
 
-export default useOK;
+export default useOK

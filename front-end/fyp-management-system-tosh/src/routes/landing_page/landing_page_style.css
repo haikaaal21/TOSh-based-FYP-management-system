@@ -2,7 +2,6 @@ section {
     padding: 0.5% 5%;
 }
 
-
 @media screen and (min-width: 600px) {
     section:first-child {
         display: flex;
@@ -10,7 +9,7 @@ section {
         text-align: left;
     }
 
-    section:first-child div:first-child *{
+    section:first-child div:first-child * {
         padding: 2%;
         margin: 2%;
         max-width: 1000px;
@@ -23,8 +22,8 @@ section:first-child {
     color: white;
 }
 
-u{
-    color:yellow;
+u {
+    color: yellow;
 }
 
 .secondSect {

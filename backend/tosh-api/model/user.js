@@ -19,6 +19,18 @@ class User {
         const res = await client.query(query);
         return res.rows;
     }
+
+    async fetch(offset, limit) {
+        const query = {
+            name: 'fetch-users',
+            text: `select * from "User" offset $1 limit $2;`,
+            values: [offset, limit]
+        }
+        const res = await client.query(query);
+        return res.rows;
+    }
+
+
 }
 
 module.exports = User;
