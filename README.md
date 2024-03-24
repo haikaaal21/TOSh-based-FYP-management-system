@@ -4,7 +4,7 @@
 - Created a new branch named StudentItems
 - Created skeletons for the student's dashboard
 - Prettier installation
-<br />
+
 **TODOs**
 - Finish the student dashboard's skeletons
 - Create dummy datas for API simulation
