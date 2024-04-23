@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const UserModel = require('../../model/user');
+const UserModel = require('../../model/userModel');
 
 router.use( async (req,res,next) => {
     var email = req.body.email;

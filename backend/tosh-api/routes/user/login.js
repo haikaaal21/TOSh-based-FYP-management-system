@@ -4,7 +4,7 @@ const express = require('express');
 const router = express.Router();
 const loginHash = require('../../middleware/authMiddleware/loginHash.js');
 const identifier = require('../../middleware/authMiddleware/identifier.js');
-const UserModel = require('../../model/user');
+const UserModel = require('../../model/userModel.js');
 const jwt = require('jsonwebtoken');
 
 //Identifer Middleware

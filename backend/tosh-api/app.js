@@ -10,7 +10,6 @@ app.use(router);
 
 const port = process.env.port || 4000;
 
-//? Route Imports
 var studentSignupRoute = require('./routes/user/student/signup');
 var academicStaffSignupRoute = require('./routes/user/staff/signup');
 var loginRoute = require('./routes/user/login');
@@ -21,16 +20,7 @@ var taskRoute = require('./routes/Task');
 var eventRoute = require('./routes/Event');
 var projectRoute = require('./routes/Project');
 
-//? Read Operations
 var fetchUnis = require('./routes/university/fetchUniversities');
-
-
-/**
- * @rombak
- * 1. Task
- * 2. Event
- * 3. Project
- */
 
 app.use('/user/student/signup', studentSignupRoute);
 app.use('/user/staff/signup', academicStaffSignupRoute);
@@ -38,14 +28,9 @@ app.use('/user/login', loginRoute);
 app.use('/auth/checkUEmail', checkUniqueEmail);
 app.use('/university/fetch', fetchUnis);
 
-app.use('/task', taskRoute); //*WORKING!
-app.use('/event', eventRoute); //*WORKING!
+app.use('/task', taskRoute); 
+app.use('/event', eventRoute);
 app.use('/project', projectRoute);
-
-
-//!!! Dokumentasi
-
-
 
 app.use('*', notFound);
 
