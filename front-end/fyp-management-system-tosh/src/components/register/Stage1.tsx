@@ -37,7 +37,7 @@ const Stage1 = ({ setStage }: { setStage: (stage: number) => void }) => {
 
     const checkEmailUnique = (emailToCheck: string) => {
         redFlag()
-        fetch('http://localhost:4000/auth/checkUEmail', {
+        fetch('http://localhost:4000/user/signup/checkemail', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email: emailToCheck }),

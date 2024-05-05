@@ -16,11 +16,11 @@ import DeadlinesPage from '../../components/dashboard/panels/DeadlinesPage'
 import YourProjectPage from '../../components/dashboard/panels/YourProjectPage'
 import ProfilePage from '../../components/dashboard/panels/ProfilePage'
 
+/**
+ *
+ * TODO:
+ */
 const studentDashboard = () => {
-    //! 23 03 24
-    //TODO fix the registration for the academic Staff
-    //TODO TODAY create a dummy data for the dashboard
-
     const location = useLocation()
     const pathnames = location.pathname.split('/').filter((x) => x)
 
@@ -56,13 +56,13 @@ const studentDashboard = () => {
                     {/*Make a logic switcher if the user already has a project or not*/}
                     <Route path="/project/*" element={<ProjectsPage />} />
                     <Route
-                        path="/project/yourproject"
+                        path="/project/:projectid/*"
                         element={<YourProjectPage />}
                     />
                     <Route path="/deadlines/*" element={<DeadlinesPage />} />
                     <Route path="/events/*" element={<EventsPage />} />
                     <Route path="/complaints/*" element={<ComplaintsPage />} />
-                    <Route path="/profile" element={<ProfilePage />} />
+                    <Route path="/profile/:id" element={<ProfilePage />} />
                 </Routes>
             </main>
             <div id="mobile-separator" style={{ height: '3.8rem' }}></div>

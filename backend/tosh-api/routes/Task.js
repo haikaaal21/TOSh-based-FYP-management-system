@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const Task = require('../model/task');
+const Task = require('../model/taskModel');
 
 //? Fetch Details of a Task
 //* WORKING!
@@ -17,6 +17,7 @@ router.get(`/:taskid` , async (req,res) => {
 });
 
 //? Fetch all Tasks by User ID
+//* WORKING!
 router.get('/:userid/:offset', async (req, res) => {
     const offset = req.params.offset;
     const userid = req.params.userid;

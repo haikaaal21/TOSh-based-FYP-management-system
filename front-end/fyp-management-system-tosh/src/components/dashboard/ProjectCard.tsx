@@ -5,29 +5,37 @@ import {
     CardMedia,
     Grid,
 } from '@mui/material'
+import ProjectCardProps from '../../types/ProjectCardProps'
 
-const ProjectCard = () => {
+const ProjectCard: React.FC<ProjectCardProps> = ({ ...props }) => {
+
+    const currentUrl = window.location.href;
+
     return (
         <Grid item xs={12} sm={6} lg={4}>
-            <Card sx={{ borderRadius: '15px' }}>
-                <CardActionArea>
+            <Card id={props.projectid.toString()} sx={{ borderRadius: '15px' }}>
+                <CardActionArea href={`${currentUrl}/${props.projectid}`}>
                     <div style={{ padding: '10px' }}>
                         <CardMedia
                             component="img"
-                            image="https://via.placeholder.com/150"
+                            image={
+                                import.meta.env
+                                    .VITE_APPLICATION_TEST_SERVER_URL +
+                                props.projectimg
+                            }
                             sx={{ aspectRatio: '4/2', borderRadius: '10px' }}
                         />
                     </div>
                     <CardContent>
-                        <h3>Project Title</h3>
+                        <h3>{props.projecttitle}</h3>
                         <b>
                             <span>Icon Here&nbsp;</span>
-                            Supervisor : Whom??
+                            Supervisor : {props.supervisorname}
                         </b>
                         <br />
                         <b>
                             <span>Icon Here&nbsp;</span>
-                            Type : What??
+                            Type : {props.typeofproject}
                         </b>
                         <p
                             style={{
@@ -36,11 +44,7 @@ const ProjectCard = () => {
                                 fontSize: '12pt',
                             }}
                         >
-                            {`Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum nulla eligendi eum, unde beatae est dignissimos assumenda repellat corrupti odit velit impedit pariatur, maxime facere tenetur consequatur minima maiores suscipit.
-                            Voluptatum vero dolorem amet odio dolor hic, sint, aperiam temporibus impedit expedita beatae unde cum adipisci deserunt molestias minima sed distinctio. Dignissimos iure veritatis, quo voluptates itaque temporibus? Hic, facilis.`.slice(
-                                0,
-                                150
-                            )}
+                            {props.projectdescription.slice(0, 150)}
                         </p>
                     </CardContent>
                 </CardActionArea>

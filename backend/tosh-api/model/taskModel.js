@@ -3,7 +3,6 @@ const client = require('../connectDB');
 class Task {
     async fetchTaskByUserId(userID, limit, offset) {
         const query = {
-            name: 'fetch-task',
             text:`
               select "Task".taskid, tasktitle, duedate, tasksubmitted, iscoordinator, name
               from "TaskUser" 
@@ -21,7 +20,6 @@ class Task {
 
     async fetchTaskDetails(taskid) {
         const query = {
-            name: 'fetch-task-details',
             text:`
                 select * 
                 from "Task"
@@ -36,7 +34,6 @@ class Task {
 
     async fetchTaskFiles(taskid) {
         const query = {
-            name : 'fetch-task-files',
             text:`
                 select *
                 from "TaskFiles"
@@ -51,7 +48,6 @@ class Task {
     //! Experimental
     async submitTask(taskid, taskFile) {
         const query = {
-            name:`submit-task`,
             text:`
                 insert into "TaskSubmissionFile" 
                 (taskid, tasksubmissionfile) 

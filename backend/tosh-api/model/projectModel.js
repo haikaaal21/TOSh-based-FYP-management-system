@@ -2,33 +2,31 @@ const client = require('../connectDB');
 
 class Project {
 
-	async fetchProjects(batchid, limit, offset) {
+	async fetchProjects(batchid, limit, offset, userid) {
 		const query = {
-			name: 'fetch-projects',
 			text: `
 				select projectid, projecttitle, projectdescription, projecttype, projectimage,
 				"AcademicStaff".name as supervisorname
 				from "Project"
 				join "AcademicStaff" on "Project".supervisorid = "AcademicStaff".staffid
-				where batchid = $1 and approvalstatus = true
+				join "User" on "AcademicStaff".institution = "User".institution
+				where batchid = $1 and approvalstatus = true and "User".userid = $4
 				limit $2 offset $3;
 			`,
-			values: [batchid, limit, offset]
+			values: [batchid, limit, offset, userid]
 		};
 		const res = await client.query(query);
 		return res.rows;
 	}
 
-	async fetchMyProject(userid) {
+	async fetchMyProject(studentid) {
 		const query = {
-			name: 'fetch-my-project',
 			text: `
 				select *
 				from "ProjectStudent"
-				inner join "Project" on "ProjectStudent".projectid = "Project".projectid
-				where studentid = $1 and requeststatus = true;
+				where studentid = $1;
 			`,
-			values: [userid]
+			values: [studentid]
 		}
 		const res = await client.query(query);
 		return res.rows;
@@ -36,7 +34,6 @@ class Project {
 
 	async fetchProjectDetails(projectid) {
 		const query = {
-			name: 'fetch-project-details',
 			text:`
 				SELECT projectid, projecttitle, projectdescription, projecttype, projectimage,
 				"AcademicStaff".name AS supervisorname, "AcademicStaff".email AS supervisoremail
@@ -47,6 +44,18 @@ class Project {
 			`,
 			values: [projectid]
 		};
+		const res = await client.query(query);
+		return res.rows;
+	}
+
+	async checkProjectStudent(projectid, studentid) {
+		const query = {
+			text: `
+				select * from "ProjectStudent"
+				where projectid = $1 and studentid = $2;
+			`,
+			values: [projectid, studentid]
+		}
 		const res = await client.query(query);
 		return res.rows;
 	}

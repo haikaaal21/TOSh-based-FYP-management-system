@@ -1,5 +1,4 @@
-import { useEffect, useState } from 'react'
-import useAuth from '../../hooks/auth/useAuth'
+import { useContext, useEffect, useState } from 'react'
 import './login_style.css'
 import image from '../../assets/images/placeholder.jpeg'
 import SparesLogoFull from '../../components/svgcomponents/spares_logo_full'
@@ -10,6 +9,7 @@ import useOK from '../../hooks/auth/useOK'
 import useIdentify from '../../hooks/routing/useIdentify'
 import { Grid, TextField, Button, Container } from '@mui/material'
 import { motion } from 'framer-motion'
+import AuthUser from '../../context/AuthUserContext'
 
 /**! ERRORS
  * 1. Logging in if the value is empty will cause an infinite loading button (Check the isLoading boolean)
@@ -18,8 +18,6 @@ import { motion } from 'framer-motion'
  * 4. Layouting Issues
  */
 const LoginPage = () => {
-    const { setAuth } = useAuth()
-
     //* Validator Hooks
     useEffect(() => {
         document.title = 'Login'
@@ -35,6 +33,7 @@ const LoginPage = () => {
     const [errors, setErrors] = useState({} as { [key: string]: string })
     const [errorFetching, setErrorsFetching] = useState<string>()
     const { identify } = useIdentify()
+    const { loginUser } = useContext(AuthUser)
 
     const handleChange = (e: any) => {
         setValues({ ...values, [e.target.name]: e.target.value })
@@ -42,7 +41,8 @@ const LoginPage = () => {
 
     const validate = (values: any) => {
         let errors = {} as { [key: string]: string }
-        // const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; //TODO: Fix Regex and validation for all
+        // const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        //TODO: Fix Regex and validation for all
         if (!values.email) {
             errors.email = 'Valid email is required'
         }
@@ -80,15 +80,19 @@ const LoginPage = () => {
                     Cookies.set('refreshToken', refreshToken, {
                         expires: 5 * 24 * 60,
                     })
+
                     greenFlag()
-                    setAuth(data)
-                    identify(data.role.toString())
+                    loginUser(data.user, data.role.toString())
+                    identify(data.role.toString()) //? This thing navigates the user to the correct page
                 })
                 .catch((error) => {
-                    // TODO: Put error per status of the server!
                     // TODO: Make an attempt counter and lock the user out after 3 attempts
                     redFlag()
-                    if (error.status === 401) {
+                    if (
+                        error.status === 401 ||
+                        error.status === 403 ||
+                        error.status === 404
+                    ) {
                         setErrorsFetching('Invalid email or password!')
                     } else if (error.status === 500) {
                         setErrorsFetching(
@@ -141,7 +145,6 @@ const LoginPage = () => {
                         </Grid>
                         <Grid item md={6} xs={12}></Grid>
                     </Grid>
-                    {/* Fix the Typography Issue */}
                     <h1
                         style={{
                             width: '100%',

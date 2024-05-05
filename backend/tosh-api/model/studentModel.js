@@ -3,7 +3,6 @@ const client = require('../connectDB');
 class SparesStudentModel {
     async createStudent(email, name, password, salt, dob, matricNumber, institution) {
         const query = {
-            name: 'create-user-student',
             text: `insert into "Student" (
                 email, name, password, salt, dob, matricNumber, 
                 institution, isStudent, isStaff) values 
@@ -16,7 +15,6 @@ class SparesStudentModel {
 
     async fetch(offset, limit) {
         const query = {
-            name: 'fetch-students',
             text: `select * from "Student" offset $1 limit $2;`,
             values: [offset, limit]
         }
@@ -26,7 +24,6 @@ class SparesStudentModel {
 
     async fetchSpecifiedStudent(userID) {
         const query = {
-            name: 'fetch-specified-student',
             text: `select * from "Student" where userid = $1;`,
             values: [userID]
         }
@@ -36,7 +33,6 @@ class SparesStudentModel {
 
     async fetchStudentsBatch(studentID) {
         const query = {
-            name: 'fetch-students-batch',
             text: `select "Batch".*
             from "Batch" join "StudentBatch" on "Batch".batchid = "StudentBatch".batchid
             where "Student".studentid = $1;`,

@@ -5,6 +5,7 @@ import Stage1 from '../../components/register/Stage1'
 import Stage2 from '../../components/register/Stage2'
 import './register_style.css'
 import { Container, Grid } from '@mui/material'
+import Stage4 from '../../components/register/Stage4'
 import Stage3 from '../../components/register/Stage3'
 import { motion } from 'framer-motion'
 import { AccountProvider } from '../../context/AccountContext'
@@ -94,7 +95,8 @@ function RegisterPage() {
                             >
                                 {stage === 1 && <Stage1 setStage={setStage} />}
                                 {stage === 2 && <Stage2 setStage={setStage} />}
-                                {stage === 3 && <Stage3 />}
+                                {stage === 3 && <Stage3 setStage={setStage} />}
+                                {stage === 4 && <Stage4 />}
                             </form>
                         </AccountProvider>
                     </Grid>

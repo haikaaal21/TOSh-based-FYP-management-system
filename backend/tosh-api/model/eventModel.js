@@ -3,11 +3,12 @@ const client = require('../connectDB');
 class Event {
     async fetchEvents(userid, limit, offset) {
         const query = {
-                name : 'fetch-all-events',
-                text: `select "Event".eventid, eventtitle, eventdate, eventtime, eventimage
+                text: `select "Event".eventid, eventtitle, eventdate, eventtime, eventimage, "AcademicStaff".name as eventhead, "AcademicStaff".iscoordinator as iscoordinator
                         from "EventUser" 
                         inner join "Event" on "EventUser".eventid = "Event".eventid
+                        inner join "AcademicStaff" on "Event".eventhead = "AcademicStaff".staffid
                         where assignedto = $1 
+                        order by eventdate asc
                         limit $2 offset $3;`,
                 values : [userid, limit, offset]
         }
@@ -17,7 +18,6 @@ class Event {
 
     async fetchEventDetails(eventid) {
         const query = {
-            name : 'fetch-event-details',
             text: `select * from "Event" where eventid = $1;`,
             values : [eventid]
         }

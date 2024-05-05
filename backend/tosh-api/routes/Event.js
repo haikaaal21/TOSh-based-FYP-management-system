@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const Event = require('../model/event');
+const Event = require('../model/eventModel');
 
 //? Fetch Events of a user
 //* WORKING!
@@ -19,6 +19,7 @@ router.get(`/:userid/:offset`,async (req,res) => {
 });
 
 //? Fetch Details of an Event
+//* WORKING!
 router.get(`/:eventid`, async (req,res) => {
     const eventid = req.params.eventid;
     const event = new Event();

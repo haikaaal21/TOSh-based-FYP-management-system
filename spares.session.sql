@@ -176,3 +176,5 @@
 -- alter table "User" add column pastduetasks integer not null default 0;
 -- alter table "User" add column redtasks integer not null default 0;
 -- alter table "User" add column yellowtasks integer not null default 0; 
+
+Select * from "Event";

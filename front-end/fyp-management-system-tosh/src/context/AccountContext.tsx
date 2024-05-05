@@ -14,9 +14,13 @@ export const AccountProvider = ({ children }: any) => {
         setAccount({} as BasicAccount)
     }
 
+    const replaceAccount = (newAccountData: any) => {
+        setAccount(newAccountData)
+    }
+
     return (
         <AccountContext.Provider
-            value={{ account, appendAccount, refreshAccount }}
+            value={{ account, appendAccount, refreshAccount, replaceAccount }}
         >
             {children}
         </AccountContext.Provider>

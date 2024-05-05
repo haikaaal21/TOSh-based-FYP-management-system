@@ -12,6 +12,7 @@ function useIdentify() {
             navigate(whereTo)
         }
     })
+
     function identify(identiferCode: string) {
         switch (identiferCode) {
             case '10601':

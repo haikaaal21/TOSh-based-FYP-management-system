@@ -5,8 +5,8 @@ function RequireAuth({ allowedRoles }: { allowedRoles?: string[] }) {
     const { auth } = useAuth()
     const location = useLocation()
 
-    return auth?.accessToken || auth.refreshToken ? (
-        auth?.role?.find((role: string) => allowedRoles?.includes(role)) ? (
+    return auth.auth ? (
+        allowedRoles?.includes(auth.role) ? (
             <Outlet />
         ) : (
             <Navigate to="/404" />

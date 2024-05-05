@@ -2,7 +2,8 @@ import '../../styles/sidebar.css'
 import { IoPerson } from 'react-icons/io5'
 import StudentDiv from './divs/StudentDiv'
 import { useNavigate, useLocation } from 'react-router'
-import { useEffect } from 'react'
+import { useEffect, useContext } from 'react'
+import AuthUser from '../../context/AuthUserContext'
 
 interface SidebarProps {
     student: boolean
@@ -13,14 +14,7 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
     const current = ''
     const location = useLocation()
     const pathnames = location.pathname.split('/').filter((x) => x)
-
-    /**TODO:
-     * 2. Place Icons (50%)
-     * 3. Place Icon Names (50%)
-     * 4. Make the buttons clickable
-     * 5. Make the sidebar identify on what type of sidebar it is
-     * 6. Make the navigation work
-     */
+    const { auth } = useContext(AuthUser)
 
     const changeActive = (e: any) => {
         e.preventDefault()
@@ -46,7 +40,7 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
             {props.student ? <StudentDiv changeActive={changeActive} /> : <></>}
             <div className="sb-contents">
                 <button
-                    id="profile"
+                    id={`profile/${auth.user.id}`}
                     className="nav-button"
                     onClick={changeActive}
                 >
@@ -55,7 +49,9 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
                     </span>
                     <div className="profile">
                         <h3 style={{ fontWeight: 'normal' }}>Profile</h3>
-                        <p>Profile Name</p>
+                        <p>
+                            {auth.user.firstName} {auth.user.lastName}
+                        </p>
                     </div>
                 </button>
             </div>

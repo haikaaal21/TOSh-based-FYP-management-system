@@ -49,5 +49,6 @@
       "database": "spares",
       "username": "kale"
     }
-  ]
+  ],
+  "files.exclude": {}
 }

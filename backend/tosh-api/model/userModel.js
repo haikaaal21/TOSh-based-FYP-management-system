@@ -3,7 +3,6 @@ const client = require('../connectDB');
 class User {
     async searchUser(valueToSearch, columnTarget){
         const query = {
-            name: 'search-user',
             text: `select * from "User" where ${columnTarget} = $1;`,
             values: [valueToSearch]
         }
@@ -13,7 +12,6 @@ class User {
 
     async fetchAll() {
         const query = {
-            name: 'fetch-all-users',
             text: `select * from "User";`
         }
         const res = await client.query(query);
@@ -22,15 +20,12 @@ class User {
 
     async fetch(offset, limit) {
         const query = {
-            name: 'fetch-users',
             text: `select * from "User" offset $1 limit $2;`,
             values: [offset, limit]
         }
         const res = await client.query(query);
         return res.rows;
     }
-
-
 }
 
 module.exports = User;

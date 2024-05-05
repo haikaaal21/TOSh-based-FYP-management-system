@@ -6,7 +6,6 @@ class SparesAcademicStaffModel {
         let coordinator = balancer? true: false;
         let supervisor = !balancer? true:false;
         const query = {
-            name: 'create-user-academicStaff',
             text: 'insert into "AcademicStaff" (email, name, password, salt, dob, matricNumber, institution, isCoordinator, isSupervisor, isStudent, isStaff) values ($1, $2, $3, $4, $5, $6, $7, $8, $9, false, true);',
             values: [email, name, password, salt, dob, matricNumber, institution, coordinator, supervisor]
         }
@@ -16,7 +15,6 @@ class SparesAcademicStaffModel {
 
     async fetch(offset, limit){
         const query = {
-            name: 'fetch-academicStaff',
             text: `select * from "AcademicStaff" offset $1 limit $2;`,
             values: [offset, limit]
         }
@@ -26,7 +24,6 @@ class SparesAcademicStaffModel {
 
     async fetchSpecifiedAcademicStaff(userID){
         const query = {
-            name: 'fetch-specified-academicStaff',
             text: `select * from "AcademicStaff" where userid = $1;`,
             values: [userID]
         }
