@@ -1,0 +1,2 @@
+interface PopupwindowProps {}
+const Popupwindow = () => {};

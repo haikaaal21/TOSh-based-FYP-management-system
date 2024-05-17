@@ -1,0 +1,13 @@
+.loader {
+  mix-blend-mode: 'difference';
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.loader-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

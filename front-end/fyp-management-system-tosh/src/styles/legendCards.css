@@ -1,20 +1,20 @@
 .legend-content {
-    display: flex;
+  display: flex;
 }
 
 @media screen and (max-width: 600px) {
-    .description {
-        display: none;
-    }
+  .description {
+    display: none;
+  }
 
-    .legend-content {
-        align-items: center;
-        justify-content: center;
-    }
+  .legend-content {
+    align-items: center;
+    justify-content: center;
+  }
 }
 
 @media screen and (min-width: 600px) {
-    .legend-content {
-        padding: 5px 15px;
-    }
+  .legend-content {
+    padding: 5px 15px;
+  }
 }

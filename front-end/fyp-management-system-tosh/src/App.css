@@ -1,33 +1,37 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;400;600;800&display=swap');
 
 @media screen and (min-width: 600px) {
-    h1 {
-        font-size: 52pt;
-    }
-    h2 {
-        font-size: 24pt;
-    }
-    h3 {
-        font-size: 18pt;
-    }
-    p {
-        font-size: 14pt;
-    }
+  h1 {
+    font-size: 52pt;
+  }
+  h2 {
+    font-size: 24pt;
+  }
+  h3 {
+    font-size: 18pt;
+  }
+  p {
+    font-size: 14pt;
+  }
+}
+
+h1 {
+  line-height: 1.2;
 }
 
 @media screen and (max-width: 600px) {
-    h1 {
-        font-size: 32pt;
-    }
-    h2 {
-        font-size: 18pt;
-    }
-    h3 {
-        font-size: 14pt;
-    }
-    p {
-        font-size: 12pt;
-    }
+  h1 {
+    font-size: 32pt;
+  }
+  h2 {
+    font-size: 18pt;
+  }
+  h3 {
+    font-size: 14pt;
+  }
+  p {
+    font-size: 12pt;
+  }
 }
 
 h1,
@@ -38,77 +42,104 @@ h5,
 b,
 i,
 p {
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
 }
 
 :root {
-    --SparesPurple: #9f71b1;
-    --SparesLightBlue: #68c9e8;
-    --DarkBlue: #131724;
-    --SparesOrange: #f08d46;
-    --IndicatorBlue: #7863fb;
-    --SparesRed: #ff6363;
-    --IndicatorRed: #ff0c0c;
-    --SparesIndigo: #9f71b1;
-    --NeutralGrey: #535158;
+  --SparesPurple: #9f71b1;
+  --SparesLightBlue: #68c9e8;
+  --DarkBlue: #131724;
+  --SparesOrange: #f08d46;
+  --IndicatorBlue: #7863fb;
+  --SparesRed: #ff6363;
+  --IndicatorRed: #ff0c0c;
+  --SparesIndigo: #9f71b1;
+  --NeutralGrey: #535158;
+  --Offwhite: #efe8f0;
 }
 
 #root {
-    min-height: 100vh;
-    width: 100%;
-    margin: 0 auto;
-    text-align: center;
+  height: 100vh;
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
 }
 
 /* Input Item stuff */
 
 .inputItem {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
+}
+
+a:hover {
+  color: var(--SparesOrange);
+}
+
+a {
+  text-decoration: none;
+  transition: 200ms ease-out;
+}
+
+button:disabled {
+  background-color: var(--NeutralGrey);
+  color: white;
+  cursor: not-allowed;
+}
+
+button:disabled:hover {
+  background-color: var(--DarkBlue);
+  box-shadow: none;
 }
 
 .inputItem input {
-    background-color: white;
-    color: #131724;
-    border: 0px;
-    padding: 15px;
-    margin: 15px;
-    font-size: 16px;
-    font-family: inherit;
-    box-shadow: rgba(60, 60, 114, 0.5) 0px 5px 10px 0px;
+  background-color: white;
+  color: #131724;
+  border: 0px;
+  padding: 15px;
+  margin: 15px;
+  font-size: 16px;
+  font-family: inherit;
+  box-shadow: rgba(60, 60, 114, 0.5) 0px 5px 10px 0px;
 }
 
 .inputItem label {
-    font-weight: 600;
+  font-weight: 600;
+}
+
+.subtitle {
+  font-size: 0.8rem;
+  color: var(--NeutralGrey);
+  font-display: italic;
 }
 
 select {
-    font: inherit;
-    width: 100%;
-    margin: 0.6rem;
-    padding: 0.8rem;
-    border: 0px;
-    background-color: white;
-    color: black;
-    box-shadow: rgba(60, 60, 114, 0.5) 0px 5px 10px 0px;
+  font: inherit;
+  width: 100%;
+  margin: 0.6rem;
+  padding: 0.8rem;
+  border: 0px;
+  background-color: white;
+  color: black;
+  box-shadow: rgba(60, 60, 114, 0.5) 0px 5px 10px 0px;
 }
 
 img {
-    object-fit: cover;
+  object-fit: cover;
 }
 
 @media screen and (min-width: 1400px) {
-    .duo-item {
-        display: flex;
-        justify-content: space-between;
-    }
+  .duo-item {
+    display: flex;
+    justify-content: space-between;
+  }
 
-    .duo-item div {
-        width: 50%;
-    }
+  .duo-item div {
+    width: 50%;
+  }
 }
 
 form {
-    width: 100%;
+  width: 100%;
 }

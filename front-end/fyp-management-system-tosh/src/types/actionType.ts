@@ -1,6 +1,6 @@
 export const actionTypes = {
-    initial: 'initial',
-    start: 'startRelay',
-    success: 'successRelay',
-    error: 'errorRelay',
-}
+  initial: 'initial',
+  start: 'startRelay',
+  success: 'successRelay',
+  error: 'errorRelay',
+};

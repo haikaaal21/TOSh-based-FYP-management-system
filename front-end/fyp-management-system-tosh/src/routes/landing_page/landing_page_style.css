@@ -1,42 +1,42 @@
 section {
-    padding: 0.5% 5%;
+  padding: 0.5% 5%;
 }
 
 @media screen and (min-width: 600px) {
-    section:first-child {
-        display: flex;
-        justify-content: space-between;
-        text-align: left;
-    }
+  section:first-child {
+    display: flex;
+    justify-content: space-between;
+    text-align: left;
+  }
 
-    section:first-child div:first-child * {
-        padding: 2%;
-        margin: 2%;
-        max-width: 1000px;
-    }
+  section:first-child div:first-child * {
+    padding: 2%;
+    margin: 2%;
+    max-width: 1000px;
+  }
 }
 
 section:first-child {
-    padding: 100px 50px;
-    background-color: var(--SparesIndigo);
-    color: white;
+  padding: 100px 50px;
+  background-color: var(--SparesIndigo);
+  color: white;
 }
 
 u {
-    color: yellow;
+  color: yellow;
 }
 
 .secondSect {
-    padding: 100px 50px;
-    background-color: var(--DarkBlue);
-    color: white;
-    max-height: 900px;
+  padding: 100px 50px;
+  background-color: var(--DarkBlue);
+  color: white;
+  max-height: 900px;
 }
 
 .lefty {
-    text-align: left;
+  text-align: left;
 }
 
 .righty {
-    text-align: right;
+  text-align: right;
 }

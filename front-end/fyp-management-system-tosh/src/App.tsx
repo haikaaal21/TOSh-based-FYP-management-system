@@ -9,7 +9,8 @@ import { AuthUserProvider } from './context/AuthUserContext';
 import RequireAuth from './utils/RequireAuth';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import StudentDashboard from './routes/student/dashboard'; 
+import StudentDashboard from './routes/student/dashboard';
+import CheckAuth from './utils/CheckAuth';
 
 /** TODO:
  * 10/03/2024 (Log update)
@@ -24,48 +25,36 @@ import StudentDashboard from './routes/student/dashboard';
  */
 
 // const StudentDashboard = lazy(() => import('./routes/student/dashboard'));
-const StaffDashboard = lazy(() => import('./routes/staff/dashboard'))
+const StaffDashboard = lazy(() => import('./routes/staff/dashboard'));
 
 function App() {
-    return (
-        <>
-            <BrowserRouter>
-                <LocalizationProvider dateAdapter={AdapterDayjs}>
-                    <AuthUserProvider>
-                        <Routes>
-                            {/* Public Routes */}
-                            <Route path="/" element={<LandingPage />} />
-                            <Route path="*" element={<Custom404 />} />
+  return (
+    <>
+      <BrowserRouter>
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <AuthUserProvider>
+            <Routes>
+              {/* Public Routes */}
+              <Route path="/" element={<LandingPage />} />
+              <Route path="*" element={<Custom404 />} />
 
-                            
-                                <Route path="/login" element={<LoginPage />} />
-                                <Route
-                                    path="/register"
-                                    element={<RegisterPage />}
-                                />
-                                    {/* Private Routes */}
-                                    <Route element={<RequireAuth allowedRoles={["10601"]}/>}>
-                                    <Route
-                                        path="student/*"
-                                        element={<StudentDashboard />}
-                                    />
-                                    </Route>
-                                    <Route
-                                        element={
-                                            <RequireAuth allowedRoles={['10602']} />
-                                        }
-                                    >
-                                        <Route
-                                            path="staff/*"
-                                            element={<StaffDashboard />}
-                                        />
-                                    </Route>
-                        </Routes>
-                    </AuthUserProvider>
-                </LocalizationProvider>
-            </BrowserRouter>
-        </>
-    )
+              <Route element={<CheckAuth />}>
+                <Route path="/login" element={<LoginPage />} />
+                <Route path="/register" element={<RegisterPage />} />
+              </Route>
+              {/* Private Routes */}
+              <Route element={<RequireAuth allowedRoles={['10601']} />}>
+                <Route path="student/*" element={<StudentDashboard />} />
+              </Route>
+              <Route element={<RequireAuth allowedRoles={['10602']} />}>
+                <Route path="staff/*" element={<StaffDashboard />} />
+              </Route>
+            </Routes>
+          </AuthUserProvider>
+        </LocalizationProvider>
+      </BrowserRouter>
+    </>
+  );
 }
 
-export default App
+export default App;

@@ -16,16 +16,17 @@ var eventRoute = require('./routes/Event');
 var projectRoute = require('./routes/Project');
 var itemsRoute = require('./routes/items');
 var UserRoute = require('./routes/User');
-
 var fetchUnis = require('./routes/university/fetchUniversities');
+var ComplaintRoute = require('./routes/Complaint');
 
 app.use('/university/fetch', fetchUnis);
-
 app.use('/task', taskRoute); 
 app.use('/event', eventRoute);
 app.use('/project', projectRoute);
 app.use('/items', itemsRoute);
 app.use('/user', UserRoute);
+app.use('/complaint', ComplaintRoute);
+app.use(express.static('./public'));
 
 app.use('*', notFound);
 

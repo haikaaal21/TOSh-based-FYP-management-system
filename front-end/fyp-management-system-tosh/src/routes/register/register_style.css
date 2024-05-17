@@ -1,33 +1,33 @@
 .bar {
-    background-color: grey;
-    min-height: 25px;
-    max-height: 35px;
-    width: 32%;
-    border-radius: 100px;
+  background-color: grey;
+  min-height: 25px;
+  max-height: 35px;
+  width: 32%;
+  border-radius: 100px;
 }
 
 .activeBar {
-    background-color: var(--SparesPurple);
+  background-color: var(--SparesPurple);
 }
 
 #register {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
 }
 
 .lefty {
-    text-align: center;
+  text-align: center;
 }
 @media screen and (min-width: 600px) {
-    .lefty {
-        text-align: left;
-        width: 100%;
-    }
+  .lefty {
+    text-align: left;
+    width: 100%;
+  }
 }
 
 .nonActive {
-    display: none;
+  display: none;
 }

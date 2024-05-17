@@ -24,7 +24,10 @@ class SparesStudentModel {
 
     async fetchSpecifiedStudent(userID) {
         const query = {
-            text: `select * from "Student" where userid = $1;`,
+            text: `select 
+            * from "Student" 
+            inner join "Batch" on "Student".batchid = "Batch".batchid
+            where userid = $1;`,
             values: [userID]
         }
         const res = await client.query(query);

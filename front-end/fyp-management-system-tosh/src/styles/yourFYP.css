@@ -1,24 +1,24 @@
 .project-hero {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .hero-container {
-    width: 50%;
-    max-height: 340px;
+  width: 50%;
+  max-height: 340px;
 }
 
 .hero-container:first-child {
-    padding: 25px;
+  padding: 25px;
 }
 
 @media screen and (max-width: 768px) {
-    .project-hero {
-        flex-direction: column;
-    }
+  .project-hero {
+    flex-direction: column;
+  }
 
-    .hero-container {
-        width: 100%;
-    }
+  .hero-container {
+    width: 100%;
+  }
 }

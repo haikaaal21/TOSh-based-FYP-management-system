@@ -11,12 +11,13 @@ const academicStaffModel = require('../model/staffModel');
 const inputValidator = require('../middleware/userMiddleware/inputValidation');
 const passwordHash = require('../middleware/userMiddleware/passwordHash');
 const Project = require('../model/projectModel.js');
+const BatchModel = require('../model/batchModel.js');
 
-
+const batchModel = new BatchModel();
+const userModel = new UserModel();
 
 router.post('/login', identifier, loginHash, async (req, res) => {
     try {
-        const userModel = new UserModel();
         const result = await userModel.searchUser(req.body.email, 'email');
         const user = result[0];
         if (user.password === req.body.password) {
@@ -40,7 +41,9 @@ router.post('/login', identifier, loginHash, async (req, res) => {
                     specialid: studentItem.studentid,
                     pastduetasks: studentItem.pastduetasks,
                     closelyupcomingtasks: studentItem.redtasks + studentItem.yellowtasks,
-                    batchid: studentItem.batchid
+                    batchid: studentItem.batchid,
+                    batchname: studentItem.batchname,
+                    role: 'Student'
                 }
             } else if(role === '10602') {
                 const staffItem = await new academicStaffModel().fetchSpecifiedAcademicStaff(user.userid);
@@ -56,6 +59,7 @@ router.post('/login', identifier, loginHash, async (req, res) => {
                     specialid: staffItem.staffid,
                     pastduetasks: staffItem.pastduetasks,
                     closelyupcomingtasks: staffItem.redtasks + staffItem.yellowtasks,
+                    role: 'Staff'
                 }
             }
             res.status(200).json({ accessToken: accessToken, refreshToken: refreshToken, role: [role], message: 'Login Successful', user: userItem});
@@ -130,7 +134,6 @@ router.post('/signup/staff', inputValidator, passwordHash, async (req, res) => {
 });
 
 router.post('/signup/checkemail', async (req, res) => {
-    const userModel = new UserModel();
     const emailToBeChecked = req.body.email;
     console.log('req', req);
     try {
@@ -163,7 +166,6 @@ router.get('/fetchprofile/:id', async (req, res) => {
     const id = req.params.id;
     try {
         let project = {};
-        const userModel = new UserModel();
         const user = await userModel.searchUser(id, 'userid');
         if(user[0].isstudent) {
             console.log('student')

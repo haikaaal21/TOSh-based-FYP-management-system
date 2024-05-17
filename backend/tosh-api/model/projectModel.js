@@ -2,21 +2,39 @@ const client = require('../connectDB');
 
 class Project {
 
-	async fetchProjects(batchid, limit, offset, userid) {
+	async fetchProjects(batchid, limit, offset, userid, searchValue) {
+		console.log(
+			'batchid:', batchid,
+			'limit:', limit,
+			'offset:', offset,
+			'userid:', userid,
+			'searchValue:', searchValue
+		)
+		let queryText = `select projectid, projecttitle, projectdescription, projecttype, projectimage, "AcademicStaff".name as supervisorname
+		from "Project"
+		join "AcademicStaff" on "Project".supervisorid = "AcademicStaff".staffid join "User" on "AcademicStaff".institution = "User".institution
+		where batchid = $1 and approvalstatus = true and "User".userid = $4`
+		let values = [batchid, limit, offset, userid];
+		if (searchValue !== undefined) {
+			queryText += ` and projecttitle ilike '%' || $5 || '%'`;
+			values.push(searchValue);
+		}
+		queryText += ' limit $2 offset $3';
 		const query = {
-			text: `
-				select projectid, projecttitle, projectdescription, projecttype, projectimage,
-				"AcademicStaff".name as supervisorname
-				from "Project"
-				join "AcademicStaff" on "Project".supervisorid = "AcademicStaff".staffid
-				join "User" on "AcademicStaff".institution = "User".institution
-				where batchid = $1 and approvalstatus = true and "User".userid = $4
-				limit $2 offset $3;
-			`,
-			values: [batchid, limit, offset, userid]
+			text: queryText,
+			values: values
 		};
 		const res = await client.query(query);
 		return res.rows;
+	}
+
+	async fetchTags () {
+		const query = {
+			text: `
+				select * from "Tags";
+			`
+		}
+		const res = await client.query(query);
 	}
 
 	async fetchMyProject(studentid) {
@@ -48,6 +66,8 @@ class Project {
 		return res.rows;
 	}
 
+	con
+
 	async checkProjectStudent(projectid, studentid) {
 		const query = {
 			text: `
@@ -58,8 +78,20 @@ class Project {
 		}
 		const res = await client.query(query);
 		return res.rows;
-	}
 	
+	}
+
+	async requestToPartakeinProject(projectid, studentid) {
+		const query = {
+			text:`
+				insert into "ProjectStudent" (projectid, studentid) values ($1, $2);
+			`,
+			values : [projectid, studentid]
+		}
+		console.log(query);
+		const res = await client.query(query);
+		return res.rows;
+	}
 }
 
 module.exports = Project;

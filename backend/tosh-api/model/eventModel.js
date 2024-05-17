@@ -17,12 +17,28 @@ class Event {
     }
 
     async fetchEventDetails(eventid) {
-        const query = {
-            text: `select * from "Event" where eventid = $1;`,
+        const eventDetailQuery = {
+            text: `select * from "Event" 
+            where "Event".eventid = $1`,
             values : [eventid]
         }
-        const res = await client.query(query);
-        return res.rows;
+        const res = await client.query(eventDetailQuery);
+        const speakersQuery = {
+            text: `select * from "EventSpeaker" where eventid = $1`,
+            values : [eventid]
+        }
+        const speakers = await client.query(speakersQuery);
+        const documentsQuery = {
+            text: `select * from "EventFiles" where eventid = $1`,
+            values : [eventid]
+        }
+        const documents = await client.query(documentsQuery);
+        const eventDetail = {
+            ...res.rows[0],
+            speakers: speakers.rows,
+            documents: documents.rows
+        }
+        return eventDetail;
     }
 }
 

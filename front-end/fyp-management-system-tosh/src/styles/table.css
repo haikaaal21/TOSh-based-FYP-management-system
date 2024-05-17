@@ -1,0 +1,25 @@
+.table-item thead {
+  background-color: var(--Offwhite);
+}
+
+.table-item thead tr th {
+  color: var(--NeutralGrey);
+}
+
+.table-item {
+  margin: 25px 0;
+}
+
+.row-item:hover {
+  height: 150px;
+}
+
+.row-item {
+  height: 50px;
+  transition: 250ms ease-out;
+}
+
+.importantItem {
+  color: var(--IndicatorRed) !important;
+  font-weight: bold !important;
+}

@@ -1,38 +1,29 @@
-import { useLocation, Navigate, Outlet } from 'react-router'
-import AuthUser from '../context/AuthUserContext'
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react';
+import { Navigate, Outlet } from 'react-router';
+import AuthUserContext from '../context/AuthUserContext';
+import Loading from '../components/Loading';
 
 function CheckAuth() {
-    const { loginUser, user } = useContext(AuthUser)
-    const location = useLocation()
-    const [hasLocalStorage, setHasLocalStorage] = useState(false)
+  const { auth } = useContext(AuthUserContext);
+  const [whereto, setWhereto] = useState<string>('');
 
-    const checkLocalStorage = () => {
-        if(Object.keys(user).length === 0) {
-            const localUser = JSON.parse(localStorage.getItem('user') as string);
-            const localRole = JSON.parse(localStorage.getItem('role') as string);
-            const localAuth = localStorage.getItem('auth')
+  useEffect(() => {
+    console.log('auth', auth);
+    if (auth.role === '10601') setWhereto('/student');
+    else if (auth.role === '10602') setWhereto('/staff');
+  }, []);
 
-            console.log(localUser, localRole, localAuth);
+  useEffect(() => {}, [auth]);
 
-            if (localUser && localRole && localAuth === 'true') {
-                loginUser(localUser, localRole)
-                setHasLocalStorage(true)
-                console.log('Actual User Context', user);
-            }
-        }
-    }
-
-    useEffect(() => {
-        checkLocalStorage()
-    }, [])
-
-
-    return hasLocalStorage || Object.keys(user).length>0 ? (
-        <Outlet />
+  return auth.auth ? (
+    whereto !== '' ? (
+      <Navigate to={whereto} />
     ) : (
-        <Navigate to="/login" state={{ from: location.pathname }} />
+      <Loading />
     )
+  ) : (
+    <Outlet />
+  );
 }
 
-export default CheckAuth
+export default CheckAuth;

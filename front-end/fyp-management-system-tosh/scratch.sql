@@ -1,18 +1,34 @@
-CREATE OR REPLACE FUNCTION update_tag()
-RETURNS TRIGGER AS $$
-BEGIN
-    -- Check if the projecttype already exists in the Tag table
-    IF EXISTS (SELECT 1 FROM "Tag" WHERE tagname = NEW.projecttype) THEN
-        -- If it exists, increase the tagcount by 1
-        UPDATE "Tag" SET tagcount = tagcount + 1 WHERE tagname = NEW.projecttype;
-    ELSE
-        -- If it doesn't exist, insert a new row with the projecttype and tagcount = 1
-        INSERT INTO "Tag" (tagname, tagcount) VALUES (NEW.projecttype, 1);
-    END IF;
-    RETURN NEW;
-END;
-$$ LANGUAGE plpgsql;
+-- create table IF NOT EXISTS "Complaint" (
+--     complaintid serial primary key,
+--     studentid integer references "Student"(studentid),
+--     complainttitle varchar(100),
+--     complainttext text,
+--     complaintstatus varchar(20),
+--     complaintnotification integer
+-- )
 
-CREATE TRIGGER update_tag
-AFTER INSERT ON "Project"
-FOR EACH ROW EXECUTE FUNCTION update_tag();
+-- create table if not exists "ComplaintFile" (
+--     complaintfileid serial primary key,
+--     complaintid integer references "Complaint"(complaintid),
+--     complaintfilename varchar(100),
+--     complaintfiletype varchar(20),
+--     studentid integer references "Student"(studentid)
+-- )
+
+-- create table if not exists "ComplaintReply" (
+--     complaintreplyid serial primary key,
+--     complaintid integer references "Complaint"(complaintid),
+--     userid integer,
+--     complaintreplytext text,
+--     complaintreplydate date
+-- )
+
+-- create table if not exists "ComplaintReplyFile" (
+--     complaintreplyfileid serial primary key,
+--     complaintreplyid integer references "ComplaintReply"(complaintreplyid),
+--     complaintreplyfilename varchar(100),
+--     complaintreplyfiletype varchar(20),
+--     userid integer
+-- )
+
+

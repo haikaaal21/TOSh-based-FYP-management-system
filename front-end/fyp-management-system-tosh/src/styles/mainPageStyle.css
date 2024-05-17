@@ -1,21 +1,21 @@
 .deadlines {
-    display: flex;
-    overflow-x: scroll;
-    padding: 1.2rem 0;
+  display: flex;
+  overflow-x: scroll;
+  padding: 1.2rem 0;
 }
 
 .deadlines div {
-    margin: 0 1rem;
+  margin: 0 1rem;
 }
 
 @media screen and (min-width: 600px) {
-    .deadlines {
-        width: 89vw;
-    }
+  .deadlines {
+    width: 89vw;
+  }
 }
 
 @media screen and (max-width: 600px) {
-    .deadlines {
-        width: 100vw;
-    }
+  .deadlines {
+    width: 100vw;
+  }
 }
