@@ -49,7 +49,15 @@ const FileCard: React.FC<FileCardProps> = (props) => {
         )}
         <div>
           <p style={{ fontWeight: 'bold' }}>{props.fileName}</p>
-          <p>Type of file: {props.typeOfFile}</p>
+          <p
+            style={{
+              whiteSpace: 'nowrap',
+              overflow: 'hidden',
+              textOverflow: 'ellipsis',
+              width: '150px',
+            }}>
+            {props.typeOfFile}
+          </p>{' '}
         </div>
       </CardActionArea>
     </Card>

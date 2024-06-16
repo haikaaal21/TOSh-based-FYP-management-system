@@ -53,7 +53,7 @@ const EventsPage = () => {
 
   return (
     <>
-      <h1>Upcoming Events</h1>
+      <h1>Events</h1>
       <div>
         <Grid sx={{ padding: '25px 25px' }} container spacing={4}>
           {state.data ? (

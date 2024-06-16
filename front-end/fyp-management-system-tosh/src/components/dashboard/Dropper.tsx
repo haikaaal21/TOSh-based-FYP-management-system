@@ -5,11 +5,13 @@ interface DropperProps {
   isDragActive: boolean;
   getRootProps: () => any;
   uploadfile: () => void;
+  id?: string;
 }
 
 const Dropper: React.FC<DropperProps> = (props) => {
   return (
     <div
+      id={props.id}
       style={{
         backgroundColor: props.isDragActive ? 'var(--SparesIndigo)' : '',
       }}
@@ -39,6 +41,7 @@ const Dropper: React.FC<DropperProps> = (props) => {
           <p>Drop your files here</p>
           <p>Or</p>
           <button
+            type="button"
             onClick={props.uploadfile}
             style={{
               display: 'flex',

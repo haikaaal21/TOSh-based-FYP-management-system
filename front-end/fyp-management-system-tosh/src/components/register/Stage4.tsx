@@ -11,9 +11,10 @@ const Stage4 = () => {
   const { account } = useContext(AccountContext);
   const { state, handlePost } = usePost();
   const [url, setUrl] = useState('');
+  const link = import.meta.env.VITE_APPLICATION_TEST_SERVER_URL;
 
   const setURL = () => {
-    let url = 'http://localhost:4000/user/signup/';
+    let url = `${link}user/signup/`;
     account.typeOfStaff === undefined ? (url += 'student') : (url += 'staff');
     setUrl(url);
   };
@@ -63,7 +64,10 @@ const Stage4 = () => {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}>
               <h3>Account creation successful</h3>
-              <p>Click the button below to go back to the home page</p>
+              <p>
+                An email has been sent as a means of verification, please verify
+                to activate your account.
+              </p>
             </motion.div>
           ) : state.loading ? (
             <motion.div

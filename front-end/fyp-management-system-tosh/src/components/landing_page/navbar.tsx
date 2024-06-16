@@ -32,21 +32,6 @@ const CustomNav = styled.nav`
   }
 `;
 
-const CustomA = styled.a`
-  width: 120px;
-  border: none;
-  background: none;
-  cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  &:hover * {
-    transition: 0.3s ease-out;
-    fill: yellow;
-  }
-`;
-
 const CustomHeader = styled.header`
   @media (max-width: 768px) {
     #web {
@@ -123,5 +108,20 @@ const Navbar = () => {
     </CustomHeader>
   );
 };
+
+const CustomA = styled.a`
+  width: 120px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &:hover * {
+    transition: 0.3s ease-out;
+    fill: yellow;
+  }
+`;
 
 export default Navbar;

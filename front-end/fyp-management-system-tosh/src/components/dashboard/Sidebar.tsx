@@ -5,6 +5,8 @@ import { useNavigate, useLocation } from 'react-router';
 import { useEffect, useContext } from 'react';
 import AuthUser from '../../context/AuthUserContext';
 import SupervisorDiv from './divs/SupervisorDiv';
+import { BiAlignJustify } from 'react-icons/bi';
+import { Drawer, Fab } from '@mui/material';
 
 interface SidebarProps {
   student: boolean;
@@ -43,22 +45,29 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
       ) : (
         <SupervisorDiv changeActive={changeActive} />
       )}
-      <div className="sb-contents">
-        <button
-          id={`profile/${auth.user.id}`}
-          className="nav-button"
-          onClick={changeActive}>
-          <span>
-            <IoPerson />
-          </span>
-          <div className="profile">
-            <h3 style={{ fontWeight: 'normal' }}>Profile</h3>
-            <p>
-              {auth.user.firstName} {auth.user.lastName}
-            </p>
-          </div>
-        </button>
-      </div>
+      <div className="sb-contents"></div>
+      <button
+        id={`profile/${auth.user.id}`}
+        className="nav-button profile-item"
+        onClick={changeActive}>
+        <span>
+          <IoPerson />
+        </span>
+        <div className="profile">
+          <h3 style={{ fontWeight: 'normal' }}>Profile</h3>
+          <p>
+            {auth.user.firstName} {auth.user.lastName}
+          </p>
+        </div>
+      </button>
+      <Fab
+        className="drawer-button"
+        onClick={(event) => {
+          changeActive(event);
+          goto(current + 'profile/' + auth.user.id);
+        }}>
+        <IoPerson />
+      </Fab>
     </div>
   );
 };

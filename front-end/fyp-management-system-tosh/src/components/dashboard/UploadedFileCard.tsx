@@ -48,7 +48,7 @@ const UploadedFileCard: React.FC<UploadedFileCardProps> = (props) => {
             right: 0,
             backgroundColor: 'var(--IndicatorRed)',
             color: 'white',
-            width: '12%',
+            scale: '0.68',
             aspectRatio: '1/1',
             margin: '5px',
             borderRadius: '20%',

@@ -9,6 +9,7 @@ import Stage4 from '../../components/register/Stage4';
 import Stage3 from '../../components/register/Stage3';
 import { motion } from 'framer-motion';
 import { AccountProvider } from '../../context/AccountContext';
+import CreateImage from '../../assets/images/create.png';
 
 function RegisterPage() {
   /**
@@ -110,7 +111,7 @@ function RegisterPage() {
                 width: '80%',
                 borderRadius: '20px',
               }}
-              src={image}
+              src={CreateImage}
               alt=""
             />
           </Grid>

@@ -34,6 +34,7 @@ const DeadlinesPage = () => {
         dateFrom: task.name,
         dueDate: task.duedate,
         coordinatorDesignated: task.iscoordinator,
+        submissionstatus: task.submissionstatus,
       };
       groupedData[month].push(itemCardProps);
     });
@@ -53,26 +54,35 @@ const DeadlinesPage = () => {
 
   return (
     <>
-      <h1>Tasks you are assigned</h1>
-      <div>
-        <Grid sx={{ padding: '25px 0' }} container spacing={4}>
-          {state.data && groupedData !== null ? (
-            state.data.length > 0 ? (
-              Object.keys(groupedData).map((task: any) => {
-                return (
-                  <MonthlyGrid currentMonth={task} items={groupedData[task]} />
-                );
-              })
-            ) : state.data.length === 0 ? (
-              <p>No Upcoming Tasks ahead!</p>
+      <h1>Deadlines</h1>
+      {auth.user.role === 'Student' ? (
+        <div>
+          <Grid sx={{ padding: '25px 0' }} container spacing={4}>
+            {state.data && groupedData !== null ? (
+              state.data.length > 0 ? (
+                Object.keys(groupedData).map((task: any) => {
+                  return (
+                    <MonthlyGrid
+                      currentMonth={task}
+                      items={groupedData[task]}
+                    />
+                  );
+                })
+              ) : state.data.length === 0 ? (
+                <p>No Upcoming Tasks ahead!</p>
+              ) : (
+                <p>Loading</p>
+              )
             ) : (
-              <p>Loading</p>
-            )
-          ) : (
-            <p>Error, could not fetch Datas from the server!</p>
-          )}
-        </Grid>
-      </div>
+              <p>Error, could not fetch Datas from the server!</p>
+            )}
+          </Grid>
+        </div>
+      ) : (
+        <>
+          <p>Staff View</p>
+        </>
+      )}
     </>
   );
 };

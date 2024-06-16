@@ -1,5 +1,5 @@
 import Navbar from '../../components/landing_page/navbar';
-import image from '../../assets/images/placeholder.jpeg';
+import image from '../../assets/images/notfound.png';
 
 const url = window.location.href;
 

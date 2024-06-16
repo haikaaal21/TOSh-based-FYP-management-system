@@ -1,18 +1,19 @@
-const { Client } = require('pg');
+const { Pool } = require('pg');
 const config = require('config');
 
 // const dbConfig = config.get('test');
 const dbConfig = config.get('development');
 
-const client = new Client(dbConfig);
 
-client.connect((err) => {
-    if (err) {
-        console.log("Connection Error:", err);
-    } else {
-        console.log("Connection Success!");
-    }
+const client = new Pool(dbConfig);
+
+client.on('connect',() => {
+    console.log('Connected to Database!');
 })
+
+client.on('error', (err) => {
+    console.error('Error in Database Connection:', err);
+});
 
 
 module.exports = client;

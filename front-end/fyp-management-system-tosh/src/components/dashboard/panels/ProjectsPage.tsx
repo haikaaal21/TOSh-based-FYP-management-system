@@ -1,4 +1,11 @@
-import { Grid, InputAdornment, MenuItem, Pagination, Select, TextField } from '@mui/material';
+import {
+  Grid,
+  InputAdornment,
+  MenuItem,
+  Pagination,
+  Select,
+  TextField,
+} from '@mui/material';
 import { useNavigate, useLocation } from 'react-router-dom';
 import ProjectCard from '../ProjectCard';
 import ProjectCardProps from '../../../types/ProjectCardProps';
@@ -50,43 +57,66 @@ const ProjectsPage = () => {
 
   useEffect(() => {
     if (state.data !== null) {
-      console.log(state.data)
-      updateDatas(state.data);
+      updateDatas(state.data.projects);
     }
   }, [state.data]);
 
   //!! Revise Data fetching!
   const changePage = () => {
-
+    setOffset(offset + 6);
+    handleGet(
+      import.meta.env.VITE_APPLICATION_TEST_SERVER_URL +
+        `project/fetchall/${auth.user.id}/${auth.user.batchid}/` +
+        offset
+    );
   };
 
   const [searchValue, setSearchValue] = useState('');
 
   const handleSearchChange = (event: any) => {
     setSearchValue(event.target.value);
-  }
+  };
 
   //? Search Items
   const handleSearch = (event: any) => {
-    if(event.key === 'Enter') {
-      handleGet(
-        import.meta.env.VITE_APPLICATION_TEST_SERVER_URL +
-          `project/fetchall/${auth.user.id}/${auth.user.batchid}/` +
-          offset+ `/${searchValue}`
-      );
+    if (event.key === 'Enter') {
+      fetchProject(event);
     }
-  }
+  };
+
+  const fetchProject = (event: any) => {
+    event.preventDefault();
+    let endQuery = '?';
+    if (searchValue !== '') {
+      endQuery += `search=${searchValue}&`;
+    }
+    if (filter !== '') {
+      endQuery += `filter=${filter}&`;
+    }
+    handleGet(
+      import.meta.env.VITE_APPLICATION_TEST_SERVER_URL +
+        `project/fetchall/${auth.user.id}/${auth.user.batchid}/` +
+        offset +
+        endQuery
+    );
+    console.log(
+      import.meta.env.VITE_APPLICATION_TEST_SERVER_URL +
+        `project/fetchall/${auth.user.id}/${auth.user.batchid}/` +
+        offset +
+        endQuery
+    );
+  };
+
+  useEffect(() => {
+    console.log('datas', datas);
+  });
 
   //? Filter Items
   const [filter, setFilter] = useState('');
   const handleFilterChange = (event: any) => {
     setFilter(event.target.value);
-    // handleGet(
-    //   import.meta.env.VITE_APPLICATION_TEST_SERVER_URL +
-    //     `project/fetchall/${auth.user.id}/${auth.user.batchid}/` +
-    //     offset+ `/${searchValue}/${event.target.value}`
-    // );
-  }
+    fetchProject(event);
+  };
 
   return (
     <>
@@ -97,9 +127,11 @@ const ProjectsPage = () => {
         <Grid item lg={10} sm={8} xs={12}>
           <h1>Projects</h1>
         </Grid>
-        <Grid item lg={2} sm={4} xs={12}>
-          <button onClick={handleNavigate}>Your Project</button>
-        </Grid>
+        {auth.user.projectid ? (
+          <Grid item lg={2} sm={4} xs={12}>
+            <button onClick={handleNavigate}>Your Project</button>
+          </Grid>
+        ) : null}
       </Grid>
       <Grid container spacing={2}>
         <Grid item xs={12} md={8} lg={10}>
@@ -108,12 +140,8 @@ const ProjectsPage = () => {
           </p>
           <TextField
             value={searchValue}
-            onChange={
-              (event) => handleSearchChange(event)
-            }
-            onKeyDown={
-              (event) => handleSearch(event)
-            }
+            onChange={(event) => handleSearchChange(event)}
+            onKeyDown={(event) => handleSearch(event)}
             id="search"
             fullWidth
             InputProps={{
@@ -130,25 +158,33 @@ const ProjectsPage = () => {
             <b>Filter</b>
           </p>
           <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          value={filter}
-          label="Age"
-          fullWidth
-          onChange={(event) => handleFilterChange(event)}
-        >
-            <MenuItem value={''}><p>All</p></MenuItem>
-            <MenuItem value={'IoT'}>IoT</MenuItem>
-        </Select>
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            value={filter}
+            label="Age"
+            fullWidth
+            onChange={(event) => handleFilterChange(event)}>
+            <MenuItem value={''}>
+              <p>All</p>
+            </MenuItem>
+            {state.data &&
+              state.data.tagItems?.map((tag: any) => {
+                return (
+                  <MenuItem value={tag.tagname}>
+                    <p>{tag.tagname}</p>
+                  </MenuItem>
+                );
+              })}
+          </Select>
         </Grid>
       </Grid>
       <Grid sx={{ width: '100%', padding: '1rem 0' }} container spacing={2}>
         {datas && state.data ? (
-          state.data.length > 0 ? (
+          state.data.projects.length > 0 ? (
             datas.map((project: ProjectCardProps) => {
               return <ProjectCard {...project} />;
             })
-          ) : state.data.length === 0 ? (
+          ) : state.data.projects.length === 0 ? (
             <p>No projects available</p>
           ) : (
             <p>Loading</p>
@@ -165,13 +201,15 @@ const ProjectsPage = () => {
           justifyContent: 'center',
           height: '80px',
         }}>
-        <Pagination
-          className="pagination"
-          count={state.data !== null ? Math.round(state.data.length / 6) : 1}
-          color="primary"
-          variant="outlined"
-          onClick={changePage}
-        />
+        {state.data && state.data.length / 6 > 1 ? (
+          <Pagination
+            className="pagination"
+            count={state.data !== null ? Math.round(state.data.length / 6) : 1}
+            color="primary"
+            variant="outlined"
+            onClick={changePage}
+          />
+        ) : null}
       </div>
     </>
   );

@@ -11,7 +11,6 @@ interface PopupProps {
   yesClicked?: () => void;
   noClicked?: () => void;
 }
-
 const Popup: React.FC<PopupProps> = (props) => {
   const handleYesClick = props.yesClicked || (() => {});
   const handleNoClick = props.noClicked || (() => {});
@@ -41,9 +40,13 @@ const Popup: React.FC<PopupProps> = (props) => {
           <p>{props.content}</p>
         </CardContent>
         <CardActions>
-          <button onClick={handleYesClick}>{props.button1}</button>
+          <button className="full-width" onClick={handleYesClick}>
+            {props.button1}
+          </button>
           {props.button2 ? (
-            <button onClick={handleNoClick}>{props.button2}</button>
+            <button className="full-width" onClick={handleNoClick}>
+              {props.button2}
+            </button>
           ) : null}
         </CardActions>
       </Card>

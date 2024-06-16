@@ -5,8 +5,8 @@ class Item {
 	async fetchAll(userid, limit, offset) {
 		const Task = new taskModel();
 		const Event = new eventModel();
-		const task = await Task.fetchTaskByUserId(userid, limit, offset);
-		const event = await Event.fetchEvents(userid, limit, offset);
+		const task = await Task.fetchTaskByUserId(userid, limit, offset, true);
+		const event = await Event.fetchEvents(userid, limit, offset, true);
 
 		const combined = [...task, ...event];
 		combined.sort((a, b) => {

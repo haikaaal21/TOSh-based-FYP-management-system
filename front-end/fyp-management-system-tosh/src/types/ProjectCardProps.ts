@@ -5,4 +5,7 @@ export default interface ProjectCardProps {
   supervisorname: string;
   typeofproject: string;
   projectdescription: string;
+  projectNotification?: number;
+  projectBatch?: string;
+  pendingForDeletion?: boolean;
 }

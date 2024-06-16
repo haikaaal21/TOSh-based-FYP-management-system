@@ -2,11 +2,13 @@ import { Grid } from '@mui/material';
 import ItemCard from './ItemCard';
 import '../../styles/monthlyGridStyle.css';
 import ItemCardProps from '../../types/itemCardsProps';
+import { useEffect } from 'react';
 
 interface MonthlyGridProps {
   currentMonth: string;
   items: ItemCardProps[];
 }
+
 const MonthlyGrid: React.FC<MonthlyGridProps> = ({ currentMonth, items }) => {
   return (
     <Grid item md={4} xs={12}>

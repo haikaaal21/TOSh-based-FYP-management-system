@@ -13,4 +13,6 @@ export default interface User {
   batchid: number;
   batchname: string;
   role: string;
+  projectid: number;
+  requeststatus: boolean;
 }

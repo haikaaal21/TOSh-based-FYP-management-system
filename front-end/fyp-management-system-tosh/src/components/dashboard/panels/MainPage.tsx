@@ -21,13 +21,11 @@ const MainPage = () => {
 
   const { handleGet, state } = useGet();
   const { auth } = useContext(AuthUser);
+  const currentDate = dayjs();
 
   useEffect(() => {
     handleGet(
-      import.meta.env.VITE_APPLICATION_TEST_SERVER_URL +
-        'items/' +
-        auth.user.id +
-        '/0'
+      import.meta.env.VITE_APPLICATION_TEST_SERVER_URL + 'items/' + auth.user.id
     );
   }, []);
 
@@ -37,17 +35,14 @@ const MainPage = () => {
     if (state.data !== null) {
       setData(state.data);
     }
-    console.log(data);
   }, [state.data]);
 
-  useEffect(() => {
-    console.log(data);
-  });
+  const [emptyCount, setEmptyCount] = useState(0);
 
   return (
     <>
       <p>Final Year Project - Batch</p>
-      <h1>{auth.user.batchname}</h1>
+      <h1>{auth.user.batchname ? auth.user.batchname : ''}</h1>
       <h2>Hall of Shame (Experimental)</h2>
       <TableOfShame />
       {/**? Don't forget to add the table comp */}
@@ -56,7 +51,11 @@ const MainPage = () => {
         {data ? (
           data.length > 0 ? (
             data.map((item: ItemCardProps) => {
-              return <ItemCard {...item} />;
+              return (
+                <div style={{ margin: '0px 10px' }}>
+                  <ItemCard {...item} />
+                </div>
+              );
             })
           ) : data.length === 0 ? (
             <p>No upcoming tasks or events</p>
@@ -68,57 +67,90 @@ const MainPage = () => {
         )}
       </div>
       <h2>Timeline</h2>
-      <div style={{position:'relative'}} className="timeline">
-       
+      <p style={{ textAlign: 'right' }} className="subtitle">
+        Current Year:&nbsp;<b>{dayjs().format('YYYY')}</b>
+      </p>
+      <div style={{ position: 'relative' }} className="timeline">
         {data !== null ? (
           <>
-           <div style={{position:'absolute',
-           top:'0',
-           left:'8px', width:'10%',
-           display:'flex',
-           flexDirection:'column',
-           alignItems:'flex-start',
-           height:'80%', zIndex:'1'}}>
-         <div style={{
-           width:'5px',
-           height:'50%',
-           zIndex:1,
-           backgroundColor:'red'
-         }}></div>
-         <p className='subtitle'>You</p>
-       </div>
-          <Chart
-            chartType="Timeline"
-            loader={<div>Loading Chart</div>}
-            legendToggle={false}
-            data={[
-              [
-                { type: 'string', id: 'Role' },
-                { type: 'string', id: 'Name' },
-                { type: 'date', id: 'Start' },
-                { type: 'date', id: 'End' },
-              ],
-              ...data.map((item: any) => {
-                return [
-                  item.typeOfItem,
-                  item.title,
-                  item.typeOfItem === 'task'
-                    ? new Date()
-                    : new Date(item.dueDate),
-                  item.typeOfItem === 'task'
-                  ? new Date(item.dueDate)
-                  : new Date(
-                    new Date(item.dueDate).getTime() + 1000 * 60 * 60 * 24
-                  ),
-                ];
-              }),
-            ]}
-            options={{
-              timeline: { showRowLabels: false },
-              avoidOverlappingGridLines: false,
-              colors: ['#333333'],
-            }}
-          />
+            <div
+              style={{
+                position: 'absolute',
+                top: '0',
+                left: '8px',
+                width: '10%',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'flex-start',
+                height: '80%',
+                zIndex: '1',
+              }}>
+              <div
+                style={{
+                  width: '5px',
+                  height: '50%',
+                  zIndex: 1,
+                  backgroundColor: 'red',
+                }}></div>
+              <div>
+                <p
+                  style={{
+                    lineHeight: '1',
+                  }}
+                  className="subtitle">
+                  You
+                </p>
+                <p
+                  style={{
+                    lineHeight: '1',
+                  }}
+                  className="subtitle">
+                  {dayjs().format('ddd')}
+                </p>
+                <p
+                  style={{
+                    lineHeight: '1',
+                  }}
+                  className="subtitle">
+                  {dayjs().format('MM/DD')}
+                </p>
+              </div>
+            </div>
+            <Chart
+              chartType="Timeline"
+              loader={<div>Loading Chart</div>}
+              legendToggle={false}
+              data={[
+                [
+                  { type: 'string', id: 'Role' },
+                  { type: 'string', id: 'Name' },
+                  { type: 'date', id: 'Start' },
+                  { type: 'date', id: 'End' },
+                ],
+                ...data.map((item: any) => {
+                  {
+                    return [
+                      item.typeOfItem,
+                      item.title,
+                      item.typeOfItem === 'task'
+                        ? new Date()
+                        : new Date(item.dueDate),
+                      item.typeOfItem === 'task'
+                        ? new Date(item.dueDate)
+                        : new Date(
+                            new Date(item.dueDate).getTime() +
+                              1000 * 60 * 60 * 24
+                          ),
+                    ];
+                  }
+                }),
+              ]}
+              options={{
+                timeline: { showRowLabels: false },
+                avoidOverlappingGridLines: false,
+                colors: ['#333333'],
+              }}
+            />
           </>
         ) : (
           <Loading />

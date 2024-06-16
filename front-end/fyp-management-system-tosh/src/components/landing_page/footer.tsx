@@ -6,6 +6,7 @@ const CustomFooter = styled.footer`
     display: flex;
     justify-content: space-between;
     text-align: left;
+    
 
     .sparesLogo {
       width: 2.4rem;
@@ -19,6 +20,7 @@ const CustomFooter = styled.footer`
     }
   }
 
+
   p {
     font-size: 0.8rem;
   }
@@ -28,6 +30,7 @@ const CustomFooter = styled.footer`
   }
 
   @media (max-width: 768px) {
+    
     .sparesLogo {
       width: 30px;
     }
@@ -45,7 +48,6 @@ const CustomFooter = styled.footer`
   }
   align-items: center;
   color: white;
-  background-color: var(--SparesLightBlue);
   padding: 1rem 2rem;
 
   ul {
@@ -66,14 +68,16 @@ const Footer = () => {
           Year Projects that are anually created as an evaluation method on
           academic grounds.
         </p>
+        <p style={{color:'var(--SparesIndigo)'}} className='subtitle'>Unstable build - Beta 1.0</p>
       </div>
       <div>
         <p>
           <b>Contact Us</b>
         </p>
         <ul>
-          <li>+60-xxx-xx</li>
-          <li>+60-xxx-xx</li>
+          <li>+60-149-5023-95</li>
+          <li ><a style={{color:'white'}} href="mailto:muhammad.haikal100602@gmail.com">muhammmad.haikal100602@gmail.com</a></li>
+          <li>Haikal</li>
         </ul>
       </div>
     </CustomFooter>

@@ -44,8 +44,10 @@ const Stage2 = ({ setStage }: { setStage: (stage: number) => void }) => {
     setStage(3);
   }
 
+  const url = import.meta.env.VITE_APPLICATION_TEST_SERVER_URL;
+
   useEffect(() => {
-    handleGet('http://localhost:4000/university/fetch');
+    handleGet(url + 'university/fetch');
   }, []);
 
   useEffect(() => {
@@ -54,7 +56,7 @@ const Stage2 = ({ setStage }: { setStage: (stage: number) => void }) => {
       setUniOptions(uniData);
     } else if (state.error) {
       setTimeout(() => {
-        handleGet('http://localhost:4000/university/fetch');
+        handleGet(url + 'university/fetch');
       }, 30000);
     }
   }, [state.data, state.error]);

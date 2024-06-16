@@ -1,6 +1,5 @@
 import Grid from '@mui/material/Grid';
 import '../../styles/legendCards.css';
-import { CardActionArea } from '@mui/material';
 
 interface LegendCardProps {
   coordinator: boolean;
@@ -37,7 +36,10 @@ const LegendCard: React.FC<LegendCardProps> = (props) => {
           </p>
           <div className="description">
             <p>By: {props.name}</p>
-            <p>{props.desc1}</p>
+            <p>
+              {props.desc2 === 'Task' ? 'Due by: ' : 'Event at: '}
+              {props.desc1}
+            </p>
             <p>{props.desc2}</p>
           </div>
         </Grid>

@@ -5,4 +5,6 @@ export default interface ItemCardProps {
   dateFrom: string;
   dueDate: string;
   coordinatorDesignated: boolean;
+  type?: string;
+  submissionstatus?: string;
 }

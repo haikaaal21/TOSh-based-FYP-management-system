@@ -10,21 +10,20 @@ interface ComplaintReplyProps {
   ComplaintReply: string;
 }
 
-const ComplaintReply:React.FC<ComplaintReplyProps> = (props) => {
-
+const ComplaintReply: React.FC<ComplaintReplyProps> = (props) => {
   const [replyDate, setReplyDate] = useState<string>(props.ComplaintReply);
 
   useEffect(() => {
     setReplyDate(dayjs(props.ComplaintReply).format('DD/MM/YYYY'));
-  },[])
+  }, []);
 
   return (
-    <motion.div 
-    initial={{ opacity: 0, translateY:25 }}
-    animate={{ opacity: 1, translateY:0 }}
-    key={props.complaintreplyid}
+    <motion.div
+      initial={{ opacity: 0, translateY: 25 }}
+      animate={{ opacity: 1, translateY: 0 }}
+      key={props.complaintreplyid}
       style={{
-        margin:'10px 0',
+        margin: '10px 0',
         position: 'relative',
         backgroundColor: 'white',
         padding: '15px 10px',
@@ -32,14 +31,21 @@ const ComplaintReply:React.FC<ComplaintReplyProps> = (props) => {
         display: 'flex',
         alignItems: 'center',
       }}>
-        <p style={{
+      <p
+        style={{
           position: 'absolute',
           top: '5px',
           right: '10px',
-          
-        }} className='subtitle'>{replyDate}</p>
+        }}
+        className="subtitle">
+        {replyDate}
+      </p>
       <div>
-        <Avatar src={import.meta.env.VITE_APPLICATION_TEST_SERVER_URL + props.profilepic}/>
+        <Avatar
+          src={
+            import.meta.env.VITE_APPLICATION_TEST_SERVER_URL + props.profilepic
+          }
+        />
       </div>
       <div style={{ width: '15px' }} />
       <div>

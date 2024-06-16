@@ -1,5 +1,6 @@
 import { Card, CardContent, CardMedia } from '@mui/material';
 import { IoPerson } from 'react-icons/io5';
+import DefaultImage from '../../assets/images/default/Speaker.png';
 
 interface Speaker {
   eventspeakerid: number;
@@ -15,10 +16,14 @@ const SpeakerCard: React.FC<Speaker> = (props) => {
       <CardMedia
         component="img"
         image={
-          import.meta.env.VITE_APPLICATION_TEST_SERVER_URL +
           props.eventspeakerimage
+            ? props.eventspeakerimage.includes('blob')
+              ? props.eventspeakerimage
+              : import.meta.env.VITE_APPLICATION_TEST_SERVER_URL +
+                props.eventspeakerimage
+            : DefaultImage
         }
-        sx={{ width: '200px' }}
+        sx={{ width: '200px', height: '200px' }}
       />
       <CardContent
         sx={{

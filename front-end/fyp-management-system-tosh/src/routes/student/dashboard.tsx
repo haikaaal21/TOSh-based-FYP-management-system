@@ -19,6 +19,10 @@ import TaskPage from '../../components/dashboard/panels/TaskPage';
 import EventPage from '../../components/dashboard/panels/EventPage';
 import CreateComplaint from '../../components/dashboard/CreateComplaint';
 import ComplaintPage from '../../components/dashboard/panels/ComplaintPage';
+import TransitionHOC from '../../hooks/transition/TransitionHOC';
+import CheckProject from '../../utils/CheckProject';
+import NoPage from '../../components/dashboard/panels/NoPagePanel';
+import UserProject from '../../components/dashboard/panels/UserProjectPage';
 
 /**
  *
@@ -29,8 +33,8 @@ const studentDashboard = () => {
   const pathnames = location.pathname.split('/').filter((x) => x);
 
   useEffect(() => {
-    document.title = 'SPARES';
-  });
+    document.title = 'SPARES | Student';
+  }, []);
 
   return (
     <div className="dashboard">
@@ -56,21 +60,36 @@ const studentDashboard = () => {
           })}
         </Breadcrumbs>
         <Routes>
-          <Route path="/" element={<MainPage />} />
-          {/*Make a logic switcher if the user already has a project or not*/}
-          <Route path="/project/*" element={<ProjectsPage />} />
-          <Route path="/project/:projectid/*" element={<YourProjectPage />} />
-          <Route path="/deadlines/*" element={<DeadlinesPage />} />
-          <Route path="/events/*" element={<EventsPage />} />
-          <Route path="/complaints/*" element={<ComplaintsPage />} />
-          <Route path="/profile/:id" element={<ProfilePage />} />
-          <Route path="/event/:eventid" element={<EventPage />} />
-          <Route path="/task/:taskid" element={<TaskPage />} />
-          <Route path="/complaints/create" element={<CreateComplaint />} />
-          <Route path="/complaint/:complaintid" element={<ComplaintPage />} />
+          <Route path="/" element={TransitionHOC(MainPage)} />
+          <Route
+            path="/project/:projectid/*"
+            element={TransitionHOC(YourProjectPage)}
+          />
+          <Route path="/project/*" element={TransitionHOC(ProjectsPage)} />
+          <Route
+            path="/project/yourproject/:projectid"
+            element={TransitionHOC(YourProjectPage)}
+          />
+          <Route path="/deadlines/*" element={TransitionHOC(DeadlinesPage)} />
+          <Route path="/events/*" element={TransitionHOC(EventsPage)} />
+          <Route path="/complaints/*" element={TransitionHOC(ComplaintsPage)} />
+          <Route path="/profile/:id" element={TransitionHOC(ProfilePage)} />
+          <Route path="/event/:eventid" element={TransitionHOC(EventPage)} />
+          <Route path="/task/:taskid" element={TransitionHOC(TaskPage)} />
+          <Route
+            path="/complaints/create"
+            element={TransitionHOC(CreateComplaint)}
+          />
+          <Route path="*" element={TransitionHOC(NoPage)} />
+          <Route
+            path="/complaint/:complaintid"
+            element={TransitionHOC(ComplaintPage)}
+          />
+          <Route path="/MyProject" element={TransitionHOC(UserProject)} />
         </Routes>
       </main>
       <div style={{ height: '3.8rem' }}></div>
+      <p style={{marginBottom:'1.5rem'}} className='subtitle'>Unstable build - Beta 1.0</p>
       <div id="mobile-separator" style={{ height: '3.8rem' }}></div>
     </div>
   );

@@ -52,11 +52,14 @@ p {
   --DarkBlue: #131724;
   --SparesOrange: #f08d46;
   --IndicatorBlue: #7863fb;
+  --Preparation: #3e3574;
   --SparesRed: #ff6363;
   --IndicatorRed: #ff0c0c;
   --SparesIndigo: #9f71b1;
   --NeutralGrey: #535158;
   --Offwhite: #efe8f0;
+  --GoodGreen: #04b91c;
+  --IndicatorYellow: #d6c630;
 }
 
 #root {
@@ -142,4 +145,10 @@ img {
 
 form {
   width: 100%;
+}
+
+.buttonWithLeading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

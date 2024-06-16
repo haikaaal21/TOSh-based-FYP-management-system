@@ -4,11 +4,10 @@ const Item = require('../model/itemModel');
 
 const item = new Item();
 
-router.get('/:userid/:offset', async(req,res) => {
-    const limit = 5;
+router.get('/:userid', async(req,res) => {
+    const limit = 35;
+    const offset = 0;
     const userid = req.params.userid;
-    const offset = req.params.offset;
-
     try{
         const result = await item.fetchAll(userid, limit, offset);
         res.status(200).json(result);

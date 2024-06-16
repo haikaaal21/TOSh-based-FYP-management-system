@@ -7,9 +7,19 @@ import useIsLoading from '../../hooks/ui/is_loading';
 import Cookies from 'js-cookie';
 import useOK from '../../hooks/auth/useOK';
 import useIdentify from '../../hooks/routing/useIdentify';
-import { Grid, TextField, Button, Container } from '@mui/material';
+import {
+  Grid,
+  TextField,
+  Container,
+  Snackbar,
+  Alert,
+  AlertColor,
+} from '@mui/material';
 import { motion } from 'framer-motion';
 import AuthUser from '../../context/AuthUserContext';
+import { MdLogin } from 'react-icons/md';
+import Loading from '../../components/Loading';
+import LoginImage from '../../assets/images/login.png';
 
 /**! ERRORS
  * 1. Logging in if the value is empty will cause an infinite loading button (Check the isLoading boolean)
@@ -29,9 +39,8 @@ const LoginPage = () => {
   });
 
   const { isLoading, startLoading, stopLoading } = useIsLoading();
-  const { OK, greenFlag, redFlag } = useOK();
+  const { greenFlag, redFlag } = useOK();
   const [errors, setErrors] = useState({} as { [key: string]: string });
-  const [errorFetching, setErrorsFetching] = useState<string>();
   const { identify } = useIdentify();
   const { loginUser } = useContext(AuthUser);
 
@@ -54,6 +63,14 @@ const LoginPage = () => {
     return errors;
   };
 
+  useEffect(() => {
+    if (Object.keys(errors).length > 0) {
+      stopLoading();
+    }
+  }, [errors]);
+
+  const [fetchErrorMessage, setFetchErrorMessage] = useState<string>('');
+
   //* Handling Submission (API Fetcher)
   const handleSubmit = (event: any) => {
     event.preventDefault();
@@ -62,7 +79,7 @@ const LoginPage = () => {
     setErrors(previousErrors);
 
     if (Object.keys(previousErrors).length === 0) {
-      fetch('http://localhost:4000/user/login', {
+      fetch(`${import.meta.env.VITE_APPLICATION_TEST_SERVER_URL}user/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(values),
@@ -86,23 +103,29 @@ const LoginPage = () => {
           window.location.reload();
         })
         .catch((error) => {
-          // TODO: Make an attempt counter and lock the user out after 3 attempts
-          redFlag();
-          if (
-            error.status === 401 ||
-            error.status === 403 ||
-            error.status === 404
-          ) {
-            setErrorsFetching('Invalid email or password!');
-          } else if (error.status === 500) {
-            setErrorsFetching(
-              'Server Error, please try again later. (ERR CODE: 500)'
-            );
-          } else if (error.status === 400) {
-            setErrorsFetching(
-              'Bad Request to the server, please try again later. (ERR CODE: 400)'
-            );
+          if (typeof error.json == 'function') {
+            error
+              .json()
+              .then((errormessage: any) => {
+                setFetchErrorMessage(errormessage.message);
+                setSnackbar({
+                  open: true,
+                  message: fetchErrorMessage,
+                  severity: 'error',
+                });
+              })
+              .catch(() => {
+                setFetchErrorMessage('An error occured while fetching data');
+              })
+          } else {
+            setFetchErrorMessage('An error occured while fetching data');
+            setSnackbar({
+              open: true,
+              message: 'An error occured while fetching data',
+              severity: 'error',
+            });
           }
+          redFlag();
         });
       setValues({ email: '', password: '' });
       stopLoading();
@@ -114,8 +137,26 @@ const LoginPage = () => {
     }
   }, [errors]);
 
+  const [snackbar, setSnackbar] = useState({
+    open: false,
+    message: '',
+    severity: 'success',
+  });
+
   return (
     <Container>
+      <Snackbar
+        open={snackbar.open}
+        autoHideDuration={6000}
+        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+        onClose={() => setSnackbar({ ...snackbar, open: false })}>
+        <Alert
+          sx={{ width: '100vh' }}
+          severity={snackbar.severity as AlertColor}
+          variant="filled">
+          {snackbar.message}
+        </Alert>
+      </Snackbar>
       <motion.div
         initial={{ translateY: 10, opacity: 0 }}
         animate={{
@@ -133,7 +174,7 @@ const LoginPage = () => {
               maxHeight: '800px',
               borderRadius: '10px',
             }}
-            src={image}
+            src={LoginImage}
             alt="Test-Image"
           />
         </div>
@@ -166,16 +207,19 @@ const LoginPage = () => {
                   type="email"
                   id="email"
                   name="email"
+                  error={errors.email ? true : false}
+                  helperText={errors.email}
                   fullWidth
                   onChange={handleChange}
                   value={values.email}
                 />
-                <p>{errors.email}</p>
               </Grid>
               <Grid item xs={12}>
                 <TextField
                   onChange={handleChange}
                   value={values.password}
+                  error={errors.password ? true : false}
+                  helperText={errors.password}
                   label="Password"
                   name="password"
                   type="password"
@@ -186,26 +230,12 @@ const LoginPage = () => {
               </Grid>
               <Grid item xs={12}>
                 {isLoading ? (
-                  <Button
-                    variant="text"
-                    fullWidth
-                    type="submit"
-                    color="secondary">
-                    Logging in . . .
-                  </Button>
+                  <Loading />
                 ) : (
-                  <Button
-                    variant="contained"
-                    fullWidth
-                    type="submit"
-                    color="primary">
-                    Log in
-                  </Button>
-                )}
-                {OK ? (
-                  <></>
-                ) : (
-                  <p className="text-center text-red-600">{errorFetching}</p>
+                  <button className="full-width" type="submit">
+                    <MdLogin />
+                    &nbsp;Log in
+                  </button>
                 )}
               </Grid>
             </Grid>

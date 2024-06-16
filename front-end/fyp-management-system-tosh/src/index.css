@@ -27,11 +27,13 @@ body {
 
 button {
   font: inherit;
-  width: 100%;
   cursor: pointer;
   background-color: var(--SparesIndigo);
-  padding: 0.5rem;
+  padding: 0.5rem 1.5rem;
   border: 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 button:hover {
@@ -41,6 +43,10 @@ button:hover {
 button:active {
   opacity: 0.5;
   box-shadow: 0;
+}
+
+.full-width {
+  width: 100%;
 }
 
 /* a {

@@ -9,23 +9,14 @@ import { AuthUserProvider } from './context/AuthUserContext';
 import RequireAuth from './utils/RequireAuth';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import StudentDashboard from './routes/student/dashboard';
 import CheckAuth from './utils/CheckAuth';
+import VerificationPage from './routes/verify';
+import ForgotPassword from './routes/ForgotPassword';
 
-/** TODO:
- * 10/03/2024 (Log update)
- * 1. Clear up the Registration Page
- * 2. Implement a cookie refresh backend session
- * 3. Implement an autonavigate if user is already logged in
- * 4. Implement a session timeout
- * 6. Use Motion framer for the animations
- *
- * 11/03/2024 (Log update)
- * 1. Rombak Login Front-end
- */
-
-// const StudentDashboard = lazy(() => import('./routes/student/dashboard'));
 const StaffDashboard = lazy(() => import('./routes/staff/dashboard'));
+const StudentDashboard = lazy(() => import('./routes/student/dashboard'));
+const KalPage = lazy(() => import('./components/KalPage'));
+
 
 function App() {
   return (
@@ -37,10 +28,13 @@ function App() {
               {/* Public Routes */}
               <Route path="/" element={<LandingPage />} />
               <Route path="*" element={<Custom404 />} />
+              <Route path="/verify" element={<VerificationPage />} />
+              <Route path="/tinkermyalreadyfragilemind" element={<KalPage />} />
 
               <Route element={<CheckAuth />}>
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/register" element={<RegisterPage />} />
+                <Route path="/forgotPassword" element={<ForgotPassword />} />
               </Route>
               {/* Private Routes */}
               <Route element={<RequireAuth allowedRoles={['10601']} />}>

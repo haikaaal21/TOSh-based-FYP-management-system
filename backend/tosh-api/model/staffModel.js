@@ -31,6 +31,15 @@ class SparesAcademicStaffModel {
         return result.rows[0];
     }
     
+    async fetchSupervisorByUni(UniName){
+        const query = {
+            text: `select * from "AcademicStaff" where institution = $1 and issupervisor = true order by staffid desc;`,
+            values: [UniName]
+        }
+        const result = await client.query(query);
+        return result.rows;
+    
+    }
 }
 
 module.exports = SparesAcademicStaffModel;

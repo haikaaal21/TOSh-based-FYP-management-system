@@ -6,7 +6,9 @@ class SparesStudentModel {
             text: `insert into "Student" (
                 email, name, password, salt, dob, matricNumber, 
                 institution, isStudent, isStaff) values 
-                ($1, $2, $3, $4, $5, $6, $7, $8, $9);` ,
+                ($1, $2, $3, $4, $5, $6, $7, $8, $9)
+                returning userid, verificationkey
+                ` ,
             values: [email, name, password, salt, dob, matricNumber, institution, true, false],
         }
         const res = await client.query(query);
@@ -26,12 +28,18 @@ class SparesStudentModel {
         const query = {
             text: `select 
             * from "Student" 
-            inner join "Batch" on "Student".batchid = "Batch".batchid
+            left join "Batch" on "Student".batchid = "Batch".batchid
             where userid = $1;`,
             values: [userID]
         }
         const res = await client.query(query);
-        return res.rows[0];
+        const checkProject = {
+            text: `select projectid, requeststatus from "ProjectStudent" where studentid = $1;`,
+            values: [res.rows[0].studentid]
+        }
+        const project = await client.query(checkProject);
+        const studentItem = {...res.rows[0], ...project.rows[0]};
+        return studentItem;
     }
 
     async fetchStudentsBatch(studentID) {
@@ -44,6 +52,31 @@ class SparesStudentModel {
         const res = await client.query(query);
         return res.rows[0];
     }
+
+    async fetchStudentByUni(UniName) {
+        const query = {
+            text: `select * from "Student" where institution = $1 and batchid is null order by studentid desc;`,
+            values: [UniName]
+        }
+        const res = await client.query(query);
+        return res.rows;
+    }
+
+    async fetchStudentByProject(staffid, batchid) {
+        const query = {
+            text: `
+                select "Student".*
+                from "Student"
+                left join "ProjectStudent" on "Student".studentid = "ProjectStudent".studentid
+                right join "Project" on "ProjectStudent".projectid = "Project".projectid
+                where "Project".supervisorid = $1 and "Project".status = 'approved' and "Batch".batchid = $2;
+            `,
+            values: [staffid, batchid]
+        }
+        const res = await client.query(query);
+        return res.rows;
+    }
+
 }
 
 module.exports = SparesStudentModel;

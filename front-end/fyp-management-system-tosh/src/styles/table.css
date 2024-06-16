@@ -14,6 +14,26 @@
   height: 150px;
 }
 
+@keyframes heightAnimation {
+  from {
+    height: 0;
+  }
+  to {
+    height: 90px;
+  }
+}
+
+.row-item:hover .hide-before-hover {
+  height: 90px;
+  animation: heightAnimation 250ms ease-out;
+}
+
+.hide-before-hover {
+  height: 0px;
+  overflow: hidden;
+  transition: 250ms ease-out;
+}
+
 .row-item {
   height: 50px;
   transition: 250ms ease-out;
@@ -22,4 +42,8 @@
 .importantItem {
   color: var(--IndicatorRed) !important;
   font-weight: bold !important;
+}
+
+table {
+  background-color: var(--Offwhite);
 }

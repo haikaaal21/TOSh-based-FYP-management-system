@@ -34,10 +34,11 @@ const Stage1 = ({ setStage }: { setStage: (stage: number) => void }) => {
   const { checkEmail } = useCheckEmail();
   const { checkPassword } = useCheckPassword();
   const [generalError, setGeneralError] = useState('');
+  const url = import.meta.env.VITE_APPLICATION_TEST_SERVER_URL;
 
   const checkEmailUnique = (emailToCheck: string) => {
     redFlag();
-    fetch('http://localhost:4000/user/signup/checkemail', {
+    fetch(`${url}user/signup/checkemail`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email: emailToCheck }),
