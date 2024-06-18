@@ -27,10 +27,9 @@ const ProjectsPage = () => {
   const { handleGet, state } = useGet();
   const [datas, setDatas] = useState<ProjectCardProps[]>();
   const [offset, setOffset] = useState(0);
-  const [myProject, setMyProject] = useState<any>(null);
 
   const updateDatas = (data: any) => {
-    let projectCards: ProjectCardProps[] = [];
+    const projectCards: ProjectCardProps[] = [];
     data.forEach((project: any) => {
       const projectCard: ProjectCardProps = {
         projectid: project.projectid,

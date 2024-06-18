@@ -75,7 +75,7 @@ const StaffMainPage = () => {
   const [loading, setLoading] = useState(false);
 
   const highlightDays = (currentMonth: Date) => {
-    let highlightedDays = [];
+    const highlightedDays = [];
     const month = currentMonth;
     const toDateFormat = dayjs(month).format('MMMM');
     const taskDates = tasks.map((task: any) => {

@@ -1,7 +1,7 @@
 import { FormValues } from '../../types/FormValues';
 
 export const useCheckEmpty = () => {
-  let errors = {} as FormValues;
+  const errors = {} as FormValues;
 
   function checkEmpty(initialValues: FormValues) {
     for (const key in initialValues) {

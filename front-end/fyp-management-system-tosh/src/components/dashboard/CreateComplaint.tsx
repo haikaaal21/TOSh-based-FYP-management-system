@@ -36,7 +36,7 @@ const CreateComplaint = () => {
   const { auth } = useContext(AuthUser);
 
   const validator = (items: string[]) => {
-    let errors = {} as { [key: string]: string };
+    const errors = {} as { [key: string]: string };
     for (let i = 0; i < items.length; i++) {
       if (items[i] === '') {
         errors[Object.keys(values)[i]] = 'This field is required';

@@ -13,6 +13,7 @@ services:
     ports:
       - "7000:5432"
     command: ["postgres", "-c", "config_file=/etc/postgresql/postgresql.conf"]
+
   spares-web-front-end:
     build: ./front-end/fyp-management-system-tosh/
     environment:
@@ -21,6 +22,7 @@ services:
       - "5137:80"
     stdin_open: true
     tty: true
+
   spares-web-back-end:
     build: ./backend/tosh-api/
     depends_on:

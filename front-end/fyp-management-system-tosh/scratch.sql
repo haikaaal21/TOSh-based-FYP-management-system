@@ -1,1 +1,1 @@
-delete * from "BetaTester";
+DELETE FROM "BetaTester";

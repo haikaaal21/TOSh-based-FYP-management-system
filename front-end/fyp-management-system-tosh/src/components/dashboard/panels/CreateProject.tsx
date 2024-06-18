@@ -52,8 +52,8 @@ const CreateProject = () => {
   const { handleGet, state } = useGet();
   const { auth } = useContext(AuthUser);
   const [project, setProject] = useState(getLocalProject);
-  const [dummyImage, setDummyImage] = useState<String>();
-  const [dummyBatch, setDummyBatch] = useState<String>();
+  const [dummyImage, setDummyImage] = useState<string>();
+  const [dummyBatch, setDummyBatch] = useState<string>();
   const [batches, setBatch] = useState<any>([]);
   const [tags, setTag] = useState<any>([]);
   const [pop, setPop] = useState(false);
@@ -98,7 +98,7 @@ const CreateProject = () => {
 
   const queryParams = new URLSearchParams(window.location.search);
   const edit = queryParams.get('edit');
-  const [projectid, setProjectid] = useState(queryParams.get('projectid'));
+  const [projectid] = useState(queryParams.get('projectid'));
 
   //? On Render useEffect
   useEffect(() => {
@@ -151,7 +151,7 @@ const CreateProject = () => {
   const [errors, setErrors] = useState({} as { [key: string]: string });
 
   const onDrop = useCallback((acceptedFiles: File[]) => {
-    let imageFile = acceptedFiles[0];
+    const imageFile = acceptedFiles[0];
     appendFile(imageFile);
   }, []);
 
@@ -230,7 +230,7 @@ const CreateProject = () => {
   const validate = (values: any) => {
     let prevErrors = {} as { [key: string]: string };
     Object.keys(values).map((key) => {
-      let errorObject = {} as { [key: string]: string };
+      const errorObject = {} as { [key: string]: string };
       errorObject[key] = checkEmpty(project[key]) as string;
       if (errorObject[key]) {
       } else if (errorObject[key] === '') {
@@ -502,15 +502,21 @@ const CreateProject = () => {
                       freeSolo
                       value={project.type || ''}
                       onChange={(event, newValue) =>
-                        setProject({
-                          ...project,
-                          type: newValue || '',
-                        })
+                        {
+                          console.log(event);
+                          setProject({
+                            ...project,
+                            type: newValue || '',
+                          })
+                        }
                       }
                       onInputChange={(event, value) =>
-                        handleChange({
-                          target: { name: 'type', value },
-                        })
+                        {
+                          console.log(event);
+                          handleChange({
+                            target: { name: 'type', value },
+                          })
+                        }
                       }
                       options={tags.map((tag: any) => tag.tagname)}
                       renderInput={(params) => (

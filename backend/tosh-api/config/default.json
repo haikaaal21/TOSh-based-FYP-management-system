@@ -9,7 +9,7 @@
         "idleTimeoutMillis": 30000,
         "connectionTimeoutMillis": 5000
     },
-    "test": {
+    "production": {
         "host": "spares-web-db",
         "port": 5432,
         "database": "spares",

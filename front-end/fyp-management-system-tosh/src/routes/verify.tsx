@@ -28,7 +28,7 @@ function useQuery() {
 }
 
 const VerificationPage = () => {
-    let query = useQuery();
+    const query = useQuery();
     const url = import.meta.env.VITE_APPLICATION_TEST_SERVER_URL;
     const uid = query.get('uid');
     const key = query.get('key');

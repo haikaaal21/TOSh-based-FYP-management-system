@@ -27,7 +27,7 @@ const ItemCard: React.FC<ItemCardProps> = ({ ...props }) => {
   };
 
   const navigateToTask = () => {
-    let url = location.pathname.split('/')[1];
+    const url = location.pathname.split('/')[1];
     navigate(`/${url}/${itemType}/${props.itemid}`);
   };
 

@@ -18,7 +18,7 @@ interface ComplaintCardProps {
 }
 
 const ComplaintCard: React.FC<ComplaintCardProps> = (props) => {
-  const [statusColor, setStatusColor] = useState<String>('');
+  const [statusColor, setStatusColor] = useState<string>('');
   const { auth } = useContext(AuthUser);
 
   useEffect(() => {

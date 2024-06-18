@@ -1,6 +1,5 @@
 import { useContext, useEffect, useState } from 'react';
 import './login_style.css';
-import image from '../../assets/images/placeholder.jpeg';
 import SparesLogoFull from '../../components/svgcomponents/spares_logo_full';
 import '../basic-formcss.css';
 import useIsLoading from '../../hooks/ui/is_loading';
@@ -49,7 +48,7 @@ const LoginPage = () => {
   };
 
   const validate = (values: any) => {
-    let errors = {} as { [key: string]: string };
+    const errors = {} as { [key: string]: string };
     // const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     //TODO: Fix Regex and validation for all
     if (!values.email) {
@@ -75,7 +74,7 @@ const LoginPage = () => {
   const handleSubmit = (event: any) => {
     event.preventDefault();
     startLoading();
-    let previousErrors = validate(values);
+    const previousErrors = validate(values);
     setErrors(previousErrors);
 
     if (Object.keys(previousErrors).length === 0) {
@@ -91,8 +90,8 @@ const LoginPage = () => {
           throw response;
         })
         .then((data) => {
-          let token = data.accessToken;
-          let refreshToken = data.refreshToken;
+          const token = data.accessToken;
+          const refreshToken = data.refreshToken;
           Cookies.set('accessToken', token, { expires: 4 * 60 });
           Cookies.set('refreshToken', refreshToken, {
             expires: 5 * 24 * 60,

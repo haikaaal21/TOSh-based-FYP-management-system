@@ -112,7 +112,7 @@ const SpeakerCreationComponent: React.FC<SpeakerCreationComponentProps> = (
   const validate = (checkValues: any) => {
     let errorsItem = {} as { [key: string]: string };
     Object.keys(checkValues).forEach((key) => {
-      let error = {} as { [key: string]: string };
+      const error = {} as { [key: string]: string };
       if (key !== 'image') {
         error[key] = checkEmpty(checkValues[key]);
         if (error[key] === '') {

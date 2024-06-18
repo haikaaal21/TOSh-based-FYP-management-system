@@ -20,7 +20,6 @@ import EventPage from '../../components/dashboard/panels/EventPage';
 import CreateComplaint from '../../components/dashboard/CreateComplaint';
 import ComplaintPage from '../../components/dashboard/panels/ComplaintPage';
 import TransitionHOC from '../../hooks/transition/TransitionHOC';
-import CheckProject from '../../utils/CheckProject';
 import NoPage from '../../components/dashboard/panels/NoPagePanel';
 import UserProject from '../../components/dashboard/panels/UserProjectPage';
 

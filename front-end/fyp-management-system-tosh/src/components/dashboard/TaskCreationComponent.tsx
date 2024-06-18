@@ -71,7 +71,7 @@ const TaskCreationComponent: React.FC<TaskCreationComponentProps> = (props) => {
   const validate = (values: any) => {
     let prevErrors = {} as { [key: string]: string };
     Object.keys(values).map((key) => {
-      let errorObject = {} as { [key: string]: string };
+      const errorObject = {} as { [key: string]: string };
       if (key !== 'duedate' && key !== 'yellowzone' && key !== 'redzone') {
         errorObject[key] = checkEmpty(values[key]);
         if (errorObject[key] === '') {

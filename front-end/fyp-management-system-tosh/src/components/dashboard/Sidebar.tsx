@@ -5,8 +5,7 @@ import { useNavigate, useLocation } from 'react-router';
 import { useEffect, useContext } from 'react';
 import AuthUser from '../../context/AuthUserContext';
 import SupervisorDiv from './divs/SupervisorDiv';
-import { BiAlignJustify } from 'react-icons/bi';
-import { Drawer, Fab } from '@mui/material';
+import { Fab } from '@mui/material';
 
 interface SidebarProps {
   student: boolean;

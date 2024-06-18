@@ -27,7 +27,7 @@ import {
 } from 'react-icons/md';
 import { IoPeopleCircle } from 'react-icons/io5';
 import '../../../styles/panels.css';
-import { DateCalendar, DatePicker } from '@mui/x-date-pickers';
+import { DatePicker } from '@mui/x-date-pickers';
 import BriefProject from '../../BriefProject';
 import Repostitory from '../../repository';
 import AuthUser from '../../../context/AuthUserContext';
@@ -175,7 +175,7 @@ const BatchPage = () => {
     }
   };
 
-  const { state: editedState, handlePost: postEdited } = usePost();
+  const { handlePost: postEdited } = usePost();
 
   useEffect(() => {
     validateBatch();

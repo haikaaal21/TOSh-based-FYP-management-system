@@ -1,7 +1,7 @@
 import { FormValues } from '../../types/FormValues';
 
 export const useCheckLength = () => {
-  let errors = {} as FormValues;
+  const errors = {} as FormValues;
 
   function checkLength(
     initialValues: FormValues,

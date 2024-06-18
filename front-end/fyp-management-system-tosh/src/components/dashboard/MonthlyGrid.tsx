@@ -2,7 +2,6 @@ import { Grid } from '@mui/material';
 import ItemCard from './ItemCard';
 import '../../styles/monthlyGridStyle.css';
 import ItemCardProps from '../../types/itemCardsProps';
-import { useEffect } from 'react';
 
 interface MonthlyGridProps {
   currentMonth: string;

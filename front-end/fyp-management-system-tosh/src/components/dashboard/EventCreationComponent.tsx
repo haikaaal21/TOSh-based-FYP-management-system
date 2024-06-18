@@ -122,7 +122,7 @@ const EventCreationComponent: React.FC<EventCreationComponentProps> = (
   const validate = () => {
     let prevErrors = {} as { [key: string]: string };
     Object.keys(eventItem).forEach((key) => {
-      let errorInstance = {} as { [key: string]: string };
+      const errorInstance = {} as { [key: string]: string };
       if (key === 'title' || key === 'description' || key === 'location') {
         errorInstance[key] = checkEmpty(eventItem[key]);
         if (errorInstance[key] === '') {

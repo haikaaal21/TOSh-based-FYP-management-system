@@ -20,9 +20,9 @@ const DeadlinesPage = () => {
   }, []);
 
   const groupByMonth = (data: any) => {
-    let groupedData: { [month: string]: ItemCardProps[] } = {};
+    const groupedData: { [month: string]: ItemCardProps[] } = {};
     data.forEach((task: any) => {
-      let month = dayjs(task.duedate).format('MMMM');
+      const month = dayjs(task.duedate).format('MMMM');
       if (groupedData[month] === undefined) {
         groupedData[month] = [];
       }

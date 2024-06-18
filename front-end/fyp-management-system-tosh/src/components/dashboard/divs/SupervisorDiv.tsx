@@ -1,7 +1,7 @@
 import { BiBook, BiSolidBookBookmark } from 'react-icons/bi';
 import { FaCalendar } from 'react-icons/fa';
 import SparesWhite from '../../../assets/svg/s_white.svg';
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import AuthUser from '../../../context/AuthUserContext';
 import { MdPeople } from 'react-icons/md';
 import { FaFileCircleExclamation } from 'react-icons/fa6';

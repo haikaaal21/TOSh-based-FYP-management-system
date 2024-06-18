@@ -42,7 +42,7 @@ const EventCreateCard = () => {
                 className="with-leading"
                 style={{ color: 'white' }}
                 href={eventItem.location}
-                target="_blank">
+                target="_blank" rel="noreferrer">
                 <FaLocationPin />
                 &nbsp;Click to be directed to the location
               </a>

@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import SparesLogoFull from '../../components/svgcomponents/spares_logo_full';
-import image from '../../assets/images/placeholder.jpeg';
 import Stage1 from '../../components/register/Stage1';
 import Stage2 from '../../components/register/Stage2';
 import './register_style.css';

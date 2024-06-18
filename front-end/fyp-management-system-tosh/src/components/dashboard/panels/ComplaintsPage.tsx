@@ -1,4 +1,4 @@
-import { Grid, Pagination } from '@mui/material';
+import { Grid } from '@mui/material';
 import ComplaintCard from '../ComplaintCard';
 import AuthUser from '../../../context/AuthUserContext';
 import { useContext, useEffect, useState } from 'react';

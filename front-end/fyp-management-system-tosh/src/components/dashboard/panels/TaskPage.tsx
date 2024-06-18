@@ -57,8 +57,8 @@ const TaskPage = () => {
   const [taskFiles, setTaskFiles] = useState<any>(null);
   const { taskid } = useParams();
   const { state, handleGet } = useGet();
-  const [color, setColor] = useState<String>('');
-  const [word, setWord] = useState<String>('');
+  const [color, setColor] = useState<string>('');
+  const [word, setWord] = useState<string>('');
   const [uploadedfiles, setUploadedFiles] = useState<any>(null);
   const { state: postState, handlePost } = usePost();
   const { auth } = useContext(AuthUser);
@@ -213,7 +213,7 @@ const TaskPage = () => {
     if (task) zoneChecker();
   }, [task]);
 
-  const [afterSubmission, setAfterSubmission] = useState<String>();
+  const [afterSubmission, setAfterSubmission] = useState<string>();
 
   const zoneChecker = () => {
     let type = 'before any';
@@ -372,7 +372,7 @@ const TaskPage = () => {
   });
 
   const validate = () => {
-    let errors = {
+    const errors = {
       tasktitle: '',
       taskdescription: '',
       duedate: '',

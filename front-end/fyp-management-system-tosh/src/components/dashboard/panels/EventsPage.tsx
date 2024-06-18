@@ -20,9 +20,9 @@ const EventsPage = () => {
   }, []);
 
   const groupByMonth = (data: any) => {
-    let groupedData: { [month: string]: ItemCardProps[] } = {};
+    const groupedData: { [month: string]: ItemCardProps[] } = {};
     data.forEach((event: any) => {
-      let month = dayjs(event.eventdate).format('MMMM');
+      const month = dayjs(event.eventdate).format('MMMM');
       if (groupedData[month] === undefined) {
         groupedData[month] = [];
       }

@@ -42,7 +42,7 @@ const ForgotPassword = () => {
     },[toBeInput])
 
     const validate = () => {
-        let errors = {} as { [key: string]: string };
+        const errors = {} as { [key: string]: string };
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@$!%*?&]).{6,20}$/;
         if(!toBeInput.email || !emailRegex.test(toBeInput.email)){

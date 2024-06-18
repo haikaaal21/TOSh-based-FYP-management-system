@@ -172,7 +172,7 @@ const CreateBatch = () => {
   const validate = (values: any) => {
     let prevErrors = { ...errors };
     Object.keys(values).map((key) => {
-      let errorObject = {} as { [key: string]: string };
+      const errorObject = {} as { [key: string]: string };
       if (key === 'studentLength') {
         if (values[key] < 10) {
           errorObject[key] = 'At least 10 students are required';

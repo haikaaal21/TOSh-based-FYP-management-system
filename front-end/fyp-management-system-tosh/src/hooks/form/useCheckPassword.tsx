@@ -1,10 +1,10 @@
 import { FormValues } from '../../types/FormValues';
 
 export const useCheckPassword = () => {
-  let errors = {} as FormValues;
+  const errors = {} as FormValues;
 
   function checkPassword(password: string, confirmPassword: string) {
-    let regex =
+    const regex =
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[a-zA-Z\d!@#$%^&*]{8,}$/;
     if (!regex.test(password)) {
       errors.password =

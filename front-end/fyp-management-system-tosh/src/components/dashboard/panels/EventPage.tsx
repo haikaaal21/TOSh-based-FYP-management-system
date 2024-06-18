@@ -171,7 +171,7 @@ const EventPage = () => {
       return errors;
     }
 
-    const { state:eventEditState, handlePost:eventEdit } = usePost();
+    const { handlePost:eventEdit } = usePost();
 
     const updateEvent = (e: any) => {
       e.preventDefault();

@@ -397,10 +397,13 @@ const ProfilePage = () => {
                             onFocus={fetchInstitution}
                             value={profileData.institution ?? ''}
                             onChange={(event, value) =>
+                             {
+                              console.log(event);
                               setProfileData({
                                 ...profileData,
                                 institution: value ?? '',
                               })
+                             }
                             }
                             options={institution ? institution : []}
                             renderInput={(params) => <TextField {...params} />}

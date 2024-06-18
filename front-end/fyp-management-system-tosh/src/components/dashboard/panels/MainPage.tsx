@@ -21,7 +21,6 @@ const MainPage = () => {
 
   const { handleGet, state } = useGet();
   const { auth } = useContext(AuthUser);
-  const currentDate = dayjs();
 
   useEffect(() => {
     handleGet(
@@ -37,7 +36,6 @@ const MainPage = () => {
     }
   }, [state.data]);
 
-  const [emptyCount, setEmptyCount] = useState(0);
 
   return (
     <>
