@@ -69,8 +69,6 @@ const LoginPage = () => {
     }
   }, [errors]);
 
-  const [fetchErrorMessage, setFetchErrorMessage] = useState<string>('');
-
   //* Handling Submission (API Fetcher)
   const handleSubmit = (event: any) => {
     event.preventDefault();
@@ -106,8 +104,7 @@ const LoginPage = () => {
           if (typeof error.json == 'function') {
             error
               .json()
-              .then((errormessage: any) => {
-                setFetchErrorMessage(errormessage.message);
+              .then(() => {
                 setSnackbar({
                   open: true,
                   message: 'Incorrect Email or Password!',
@@ -115,10 +112,13 @@ const LoginPage = () => {
                 });
               })
               .catch(() => {
-                setFetchErrorMessage('An error occured while fetching data');
+                setSnackbar({
+                  open: true,
+                  message: 'An error occured while fetching data',
+                  severity: 'error',
+                });
               })
           } else {
-            setFetchErrorMessage('An error occured while fetching data');
             setSnackbar({
               open: true,
               message: 'An error occured while fetching data',

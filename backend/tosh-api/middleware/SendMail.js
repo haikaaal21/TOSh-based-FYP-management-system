@@ -26,7 +26,7 @@ const transporter = nodemailer.createTransport({
 
 transporter.verify(function (error, response) {
    if (error) {
-       console.log('Error in sending mail:', error);
+       console.error('Error in sending mail:', error);
    } else {
        console.log('Server is ready to take messages');
    }

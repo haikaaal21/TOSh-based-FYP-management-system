@@ -3,6 +3,7 @@ const client = require('./connectDB');
 async function getUsers(offset, limit) {
     const query = {
         text: `select userid from "User"
+        where verified = true
         offset $1 limit $2;`,
         values: [offset, limit]
     }
@@ -45,7 +46,6 @@ async function markShame(taskid, target, markboolean) {
         `,
         values: [taskid, markboolean]
     }
-    console.log(query);
     await client.query(query);
 }
 
@@ -93,7 +93,7 @@ async function calculateShame(offset, limit, timetorecheck = false) {
         }
         return usercount !== undefined ? {rowCount: usercount.rows[0].count, changes: changesWasMade} : {rowCount: undefined, changes: changesWasMade};
     } catch(err) {
-        console.log(err);
+        console.error(err);
     }
 }
 

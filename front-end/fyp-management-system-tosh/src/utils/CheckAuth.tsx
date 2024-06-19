@@ -8,12 +8,9 @@ function CheckAuth() {
   const [whereto, setWhereto] = useState<string>('');
 
   useEffect(() => {
-    console.log('auth', auth);
     if (auth.role === '10601') setWhereto('/student');
     else if (auth.role === '10602') setWhereto('/staff');
   }, []);
-
-  useEffect(() => {}, [auth]);
 
   return auth.auth ? (
     whereto !== '' ? (

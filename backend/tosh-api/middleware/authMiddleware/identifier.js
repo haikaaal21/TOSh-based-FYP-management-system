@@ -17,7 +17,7 @@ router.use( async (req,res,next) => {
         next();
     }   
     } catch(error) {
-        console.log(error);
+        console.error(error);
         error.message === 'User not found!' 
         ? res.status(403).json({message: 'User was not found!'}) 
         : res.status(500).json({ message: 'Internal Server Error!' });
