@@ -100,17 +100,7 @@ const ProjectsPage = () => {
         offset +
         endQuery
     );
-    console.log(
-      import.meta.env.VITE_APPLICATION_TEST_SERVER_URL +
-        `project/fetchall/${auth.user.id}/${auth.user.batchid}/` +
-        offset +
-        endQuery
-    );
   };
-
-  useEffect(() => {
-    console.log('datas', datas);
-  });
 
   //? Filter Items
   const [filter, setFilter] = useState('');
@@ -186,6 +176,24 @@ const ProjectsPage = () => {
               return <ProjectCard {...project} />;
             })
           ) : state.data.projects.length === 0 ? (
+            <Grid item xs={12}>
+              <div style={{
+                width: '100%',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                height: '80px',
+              }}>
+                <h3>No projects available</h3>
+              </div>
+            </Grid>
+          ) : (
+            <Grid item xs={12}>
+              <Loading />
+            </Grid>
+          )
+        ) : auth.user.batchid ? (
+          <Grid item xs={12}>
             <div style={{
               width: '100%',
               display: 'flex',
@@ -193,24 +201,14 @@ const ProjectsPage = () => {
               alignItems: 'center',
               height: '80px',
             }}>
-              <h3>No projects available</h3>
+              <h3>You are not inserted in any batches yet</h3>
             </div>
-          ) : (
-            <Loading />
-          )
-        ) : auth.user.batchid ? (
-          <div style={{
-            width: '100%',
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            height: '80px',
-          }}>
-            <h3>You are not inserted in any batches yet</h3>
-          </div>
+          </Grid>
         )
         : (
-          <ErrorPanel />
+          <Grid item xs={12}>
+            <ErrorPanel />
+          </Grid>
         )}
       </Grid>
       <div
