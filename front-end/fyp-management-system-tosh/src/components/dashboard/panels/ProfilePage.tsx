@@ -258,7 +258,7 @@ const ProfilePage = () => {
                         }}
                         component="img"
                         image={
-                        profileData.image.name ? URL.createObjectURL(profileData.image) : state.data && state.data.user[0].profilepic ?  import.meta.env.VITE_APPLICATION_TEST_SERVER_URL +
+                        profileData.image.name ? URL.createObjectURL(profileData.image) : state.data && state.data.user[0].profilepic ?  import.meta.env.VITE_APPLICATION_TEST_SERVER_URL + '/assets' +
                         state.data.user[0].profilepic : DefaultImage
                         }
                       />
@@ -571,7 +571,7 @@ const ProfilePage = () => {
                                   image={
                                     detailsData[0].projectimage
                                       ? import.meta.env
-                                          .VITE_APPLICATION_TEST_SERVER_URL +
+                                          .VITE_APPLICATION_TEST_SERVER_URL + '/assets' +
                                         detailsData[0].projectimage
                                       : DefaultProjectImage
                                   }
@@ -611,7 +611,7 @@ const ProfilePage = () => {
                                 src={
                                   detailsData[0].profilepic
                                     ? import.meta.env
-                                        .VITE_APPLICATION_TEST_SERVER_URL +
+                                        .VITE_APPLICATION_TEST_SERVER_URL + '/assets' +
                                       detailsData[0].profilepic
                                     : DefaultImage
                                 }

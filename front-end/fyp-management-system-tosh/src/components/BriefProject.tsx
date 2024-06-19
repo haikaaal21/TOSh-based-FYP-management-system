@@ -37,7 +37,7 @@ const BriefProject: React.FC<BriefProjectProps> = ({
             height="180"
             image={
               imageUrl
-                ? import.meta.env.VITE_APPLICATION_TEST_SERVER_URL + imageUrl
+                ? import.meta.env.VITE_APPLICATION_TEST_SERVER_URL + '/assets' + imageUrl
                 : DefaultImage
             }
             alt={title}

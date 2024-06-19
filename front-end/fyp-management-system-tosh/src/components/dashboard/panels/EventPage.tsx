@@ -297,7 +297,7 @@ const EventPage = () => {
                   component="img"
                   image={
                     eventItem.eventimage
-                      ? import.meta.env.VITE_APPLICATION_TEST_SERVER_URL +
+                      ? import.meta.env.VITE_APPLICATION_TEST_SERVER_URL + '/assets' +
                         eventItem.eventimage
                       : defaultImage
                   }

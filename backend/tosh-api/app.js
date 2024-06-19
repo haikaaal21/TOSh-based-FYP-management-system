@@ -37,7 +37,7 @@ app.use('/api/items', itemsRoute);
 app.use('/api/user', UserRoute);
 app.use('/api/complaint', ComplaintRoute);
 app.use('/api/batch', BatchRoute);
-app.use('/api/public', express.static('./public'));
+app.use('/api/assets', express.static('./public'));
 
 const client = require('./connectDB');
 

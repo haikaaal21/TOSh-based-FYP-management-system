@@ -43,7 +43,7 @@ const ComplaintReply: React.FC<ComplaintReplyProps> = (props) => {
       <div>
         <Avatar
           src={
-            import.meta.env.VITE_APPLICATION_TEST_SERVER_URL + props.profilepic
+            import.meta.env.VITE_APPLICATION_TEST_SERVER_URL + '/assets' + props.profilepic
           }
         />
       </div>

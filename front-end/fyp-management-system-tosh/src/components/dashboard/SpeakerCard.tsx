@@ -19,7 +19,7 @@ const SpeakerCard: React.FC<Speaker> = (props) => {
           props.eventspeakerimage
             ? props.eventspeakerimage.includes('blob')
               ? props.eventspeakerimage
-              : import.meta.env.VITE_APPLICATION_TEST_SERVER_URL +
+              : import.meta.env.VITE_APPLICATION_TEST_SERVER_URL + '/assets' +
                 props.eventspeakerimage
             : DefaultImage
         }

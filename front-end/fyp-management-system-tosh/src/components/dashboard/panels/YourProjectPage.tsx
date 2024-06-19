@@ -43,7 +43,7 @@ const YourProjectPage = () => {
 
   const getMarkDown = async () => {
     const markdownurl =
-      import.meta.env.VITE_APPLICATION_TEST_SERVER_URL +
+      import.meta.env.VITE_APPLICATION_TEST_SERVER_URL + '/assets' +
       state.data.project.intromarkdown;
     fetch(markdownurl)
       .then((response) => response.text())
@@ -127,7 +127,7 @@ const YourProjectPage = () => {
                         alt={student.name}
                         src={
                           student.profilepic
-                            ? import.meta.env.VITE_APPLICATION_TEST_SERVER_URL +
+                            ? import.meta.env.VITE_APPLICATION_TEST_SERVER_URL + '/assets' +
                               student.profilepic
                             : DefaultImage
                         }
@@ -140,7 +140,7 @@ const YourProjectPage = () => {
             <img
               src={
                 state.data.project.projectimage
-                  ? import.meta.env.VITE_APPLICATION_TEST_SERVER_URL +
+                  ? import.meta.env.VITE_APPLICATION_TEST_SERVER_URL + '/assets' +
                   state.data.project.projectimage
                   : DefaultProjectImage
               }

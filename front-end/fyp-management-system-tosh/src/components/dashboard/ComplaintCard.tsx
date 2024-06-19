@@ -109,7 +109,7 @@ const ComplaintCard: React.FC<ComplaintCardProps> = (props) => {
                     }}
                     src={
                       props.profilepic
-                        ? import.meta.env.VITE_APPLICATION_TEST_SERVER_URL +
+                        ? import.meta.env.VITE_APPLICATION_TEST_SERVER_URL + '/assets' + 
                           props.profilepic
                         : DefaultImage
                     }

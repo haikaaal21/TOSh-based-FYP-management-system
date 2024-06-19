@@ -33,7 +33,7 @@ const FileCard: React.FC<FileCardProps> = (props) => {
         display: 'flex',
       }}>
       <CardActionArea
-        href={import.meta.env.VITE_APPLICATION_TEST_SERVER_URL + props.fileurl}
+        href={import.meta.env.VITE_APPLICATION_TEST_SERVER_URL + '/assets' + props.fileurl}
         download={props.fileName}
         target="_blank"
         sx={{
