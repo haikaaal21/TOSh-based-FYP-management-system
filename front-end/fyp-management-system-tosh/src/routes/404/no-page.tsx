@@ -1,5 +1,6 @@
 import Navbar from '../../components/landing_page/navbar';
 import image from '../../assets/images/notfound.png';
+import { Link } from 'react-router-dom';
 
 const url = window.location.href;
 
@@ -30,9 +31,9 @@ const Custom404 = () => {
         <p>The URL {url} does not exist</p>
         <p>
           Click{' '}
-          <a href="/" style={{ color: 'white' }}>
+          <Link to="/" style={{ color: 'white' }}>
             here
-          </a>{' '}
+          </Link>{' '}
           to go back to the home page
         </p>
       </div>

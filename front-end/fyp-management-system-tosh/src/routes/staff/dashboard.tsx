@@ -29,6 +29,7 @@ import EventPage from '../../components/dashboard/panels/EventPage';
 import NoPage from '../../components/dashboard/panels/NoPagePanel';
 import RequestsPage from '../../components/dashboard/panels/RequestsPage';
 import Attendance from '../../components/dashboard/panels/Attendance';
+import { Link } from 'react-router-dom';
 
 const staffDashboard = () => {
   useEffect(() => {
@@ -56,13 +57,13 @@ const staffDashboard = () => {
             const first = index === 0;
             const to = `/${pathnames.slice(0, index + 1).join('/')}`;
             return first ? (
-              <a href={to} key={to}>
+              <Link to={to} key={to}>
                 home
-              </a>
+              </Link>
             ) : (
-              <a href={to} key={to}>
+              <Link to={to} key={to}>
                 {value}
-              </a>
+              </Link>
             );
           })}
         </Breadcrumbs>

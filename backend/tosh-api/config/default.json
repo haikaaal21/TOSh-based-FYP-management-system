@@ -1,22 +1,12 @@
 {
-    "development": {
-        "host": "localhost",
-        "port": 5432,
-        "database": "spares",
-        "user": "kale",
-        "password": "12345",
-        "max": 150,
-        "idleTimeoutMillis": 30000,
-        "connectionTimeoutMillis": 5000
-    },
-    "production": {
-        "host": "spares-web-db",
-        "port": 5432,
-        "database": "spares",
-        "user": "kale",
-        "password": "12345",
-        "max": 150,
-        "idleTimeoutMillis": 30000,
-        "connectionTimeoutMillis": 5000
+    "release": {
+        "host":"localhost",
+        "port":5432,
+        "database":"spares",
+        "user":"kale",
+        "password":"rLO35VTLodffLwBtjBFS9Q",
+        "max":150,
+        "idleTimeoutMillis":30000,
+        "connectionTimeoutMillis":5000
     }
 }

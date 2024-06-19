@@ -19,6 +19,7 @@ import AuthUser from '../../context/AuthUserContext';
 import { MdLogin } from 'react-icons/md';
 import Loading from '../../components/Loading';
 import LoginImage from '../../assets/images/login.png';
+import { Link } from 'react-router-dom';
 
 /**! ERRORS
  * 1. Logging in if the value is empty will cause an infinite loading button (Check the isLoading boolean)
@@ -194,7 +195,7 @@ const LoginPage = () => {
           </h1>
           <p style={{ textAlign: 'left', width: '100%' }}>
             Don't have an account?
-            <a href="/register">&nbsp;Click here to get started.</a>
+            <Link to="/register">&nbsp;Click here to get started.</Link>
           </p>
           <form
             style={{ padding: '35px 0' }}
@@ -240,7 +241,7 @@ const LoginPage = () => {
             </Grid>
           </form>
           <p>Forgot your password?</p>
-          <a href="/forgotPassword">Click here to reset your password</a>
+          <Link to="/forgotPassword">Click here to reset your password</Link>
         </div>
       </motion.div>
     </Container>

@@ -22,6 +22,7 @@ import ComplaintPage from '../../components/dashboard/panels/ComplaintPage';
 import TransitionHOC from '../../hooks/transition/TransitionHOC';
 import NoPage from '../../components/dashboard/panels/NoPagePanel';
 import UserProject from '../../components/dashboard/panels/UserProjectPage';
+import { Link } from 'react-router-dom';
 
 /**
  *
@@ -48,13 +49,13 @@ const studentDashboard = () => {
             const first = index === 0;
             const to = `/${pathnames.slice(0, index + 1).join('/')}`;
             return first ? (
-              <a href={to} key={to}>
+              <Link to={to} key={to}>
                 home
-              </a>
+              </Link>
             ) : (
-              <a href={to} key={to}>
+              <Link to={to} key={to}>
                 {value}
-              </a>
+              </Link>
             );
           })}
         </Breadcrumbs>

@@ -1,8 +1,9 @@
 const { Pool } = require('pg');
 const config = require('config');
 
-const dbConfig = config.get('production');
+// const dbConfig = config.get('production');
 // const dbConfig = config.get('development');
+const dbConfig = config.get('release');
 
 
 const client = new Pool(dbConfig);

@@ -6,6 +6,7 @@ import SparesLogoFull from "../components/svgcomponents/spares_logo_full";
 import ForgotPassImage from '../assets/images/forgot_pass.png';
 import usePost from "../hooks/api/usePost";
 import { useNavigate } from "react-router";
+import { Link } from "react-router-dom";
 
 const ForgotPassword = () => {
 
@@ -105,7 +106,7 @@ const ForgotPassword = () => {
                         <button onClick={sendRequest} style={{marginBottom:'25px'}} className="full-width buttonWithLeading"><MdChangeCircle />&nbsp;Change Password</button>
                         <div style={{display:'flex', width:'100%', flexDirection:'column'}}>
                         <p>Changed your mind?</p>
-                        <a href="../login">Login by clicking here</a>
+                        <Link to="../login">Login by clicking here</Link>
                         </div>
                     </Grid>
                 </Grid>

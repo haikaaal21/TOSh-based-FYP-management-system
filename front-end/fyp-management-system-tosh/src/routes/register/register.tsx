@@ -9,6 +9,7 @@ import Stage3 from '../../components/register/Stage3';
 import { motion } from 'framer-motion';
 import { AccountProvider } from '../../context/AccountContext';
 import CreateImage from '../../assets/images/create.png';
+import { Link } from 'react-router-dom';
 
 function RegisterPage() {
   /**
@@ -70,7 +71,7 @@ function RegisterPage() {
             </h1>
             <p className="lefty">
               Already have an account?&nbsp;
-              <a href="/login">Sign in here</a>
+              <Link to="/login">Sign in here</Link>
             </p>
             <div
               style={{
