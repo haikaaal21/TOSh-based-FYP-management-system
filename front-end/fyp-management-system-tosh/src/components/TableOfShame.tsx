@@ -33,7 +33,7 @@ const RowItem: React.FC<rowItem> = (props) => {
           flexDirection: 'column',
         }}>
         <img
-          src={props.profilepic ? url + props.profilepic : DefaultImage}
+          src={props.profilepic ? url + 'assets' + props.profilepic : DefaultImage}
           alt="Avatar"
           className="hide-before-hover"
           style={{ width: '90px' }}
@@ -120,7 +120,7 @@ const TableOfShame = () => {
                       }
                       institution={fetched.institution}
                       shamepoints={fetched.shamepoints}
-                      profilepic={import.meta.env.VITE_APPLICATION_TEST_SERVER_URL + 'assets' + fetched.profilepic}
+                      profilepic={fetched.profilepic}
                     />
                   );
                 })
