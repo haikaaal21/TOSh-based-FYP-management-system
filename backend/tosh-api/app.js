@@ -29,15 +29,15 @@ const { sendMail } = require('./middleware/SendMail');
 const calculateShame = require('./CalculateShame');
 const wss = new Websocket.Server({port : 8080});
 
-app.use('/university/fetch', fetchUnis);
-app.use('/task', taskRoute); 
-app.use('/event', eventRoute);
-app.use('/project', projectRoute);
-app.use('/items', itemsRoute);
-app.use('/user', UserRoute);
-app.use('/complaint', ComplaintRoute);
-app.use('/batch', BatchRoute);
-app.use(express.static('./public'));
+app.use('/api/university/fetch', fetchUnis);
+app.use('/api/task', taskRoute); 
+app.use('/api/event', eventRoute);
+app.use('/api/project', projectRoute);
+app.use('/api/items', itemsRoute);
+app.use('/api/user', UserRoute);
+app.use('/api/complaint', ComplaintRoute);
+app.use('/api/batch', BatchRoute);
+app.use('/api/public', express.static('./public'));
 
 const client = require('./connectDB');
 
