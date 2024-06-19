@@ -14,6 +14,7 @@ import {
   MdPerson,
 } from 'react-icons/md';
 import DefaultImage from '../../assets/images/default/Project.png';
+import { Link } from 'react-router-dom';
 
 const ProjectCard: React.FC<ProjectCardProps> = ({ ...props }) => {
   const currentUrl = window.location.href;
@@ -22,12 +23,13 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ ...props }) => {
       <Card
         id={props.projectid.toString()}
         sx={{ borderRadius: '15px', height: '430px', backgroundColor: props.pendingForDeletion ? 'var(--SparesRed)' : 'white' }}>
+        <Link to={props.pendingForDeletion ? '' : `${currentUrl}/${props.projectid}`}>
         <CardActionArea
           sx={{
             height: '100%',
           }}
           disabled={props.pendingForDeletion}
-          href={`${currentUrl}/${props.projectid}`}>
+          >
           {props.projectNotification && props.projectNotification > 0 ? (
             <div
               style={{
@@ -95,6 +97,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ ...props }) => {
             </p>
           </CardContent>
         </CardActionArea>
+        </Link>
       </Card>
     </Grid>
   );

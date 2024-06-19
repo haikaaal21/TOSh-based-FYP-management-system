@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import image404 from '../../../assets/images/notfound.png';
 
 const NoPage = () => {
@@ -25,9 +26,9 @@ const NoPage = () => {
         The page you're trying to navigate to is missing or you've assembled the
         link incorrectly,
       </p>
-      <a style={{ color: 'var(--IndicatorBlue)' }} href="./">
+      <Link style={{ color: 'var(--IndicatorBlue)' }} to="./">
         Click here to go back to home.
-      </a>
+      </Link>
     </div>
   );
 };

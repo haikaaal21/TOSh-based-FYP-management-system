@@ -1,5 +1,6 @@
 import { MdLogout, MdRestartAlt } from 'react-icons/md';
 import ErrorImg from '../../../assets/images/error.png';
+import { Link } from 'react-router-dom';
 
 interface ErrorPanelProps {
   isItProfile?: boolean;
@@ -19,7 +20,7 @@ const ErrorPanel: React.FC<ErrorPanelProps> = (props) => {
       <img style={{ maxWidth: '300px' }} src={ErrorImg} alt="" />
       <h1>Whoops!</h1>
       <p>Looks like we could not connect to our dedicated server!</p>
-      <a
+      <button
         style={{ color: 'var(--IndicatorBlue)', cursor: 'pointer' }}
         className="buttonWithLeading"
         onClick={() => {
@@ -27,16 +28,16 @@ const ErrorPanel: React.FC<ErrorPanelProps> = (props) => {
         }}>
         <MdRestartAlt />
         &nbsp;Click here to try again.
-      </a>
+      </button>
       {props.isItProfile && props.logout ? (
-        <a
+        <Link
           className="with-leading"
           style={{ color: 'var(--IndicatorRed)' }}
-          href="">
+          to="">
           or&nbsp;
           <MdLogout />
           &nbsp;Logout?
-        </a>
+        </Link>
       ) : null}
     </div>
   );

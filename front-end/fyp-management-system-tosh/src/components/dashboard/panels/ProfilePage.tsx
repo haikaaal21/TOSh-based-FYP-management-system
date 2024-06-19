@@ -24,6 +24,7 @@ import ErrorPanel from './ErrorPanel';
 import Loading from '../../Loading';
 import DefaultProjectImage from '../../../assets/images/default/Project.png';
 import usePost from '../../../hooks/api/usePost';
+import { Link } from 'react-router-dom';
 
 const ProfilePage = () => {
   const { auth, logoutUser } = useContext(AuthUser);
@@ -553,8 +554,8 @@ const ProfilePage = () => {
                     <Grid container spacing={4}>
                       <Grid item xs={12}>
                         <Card sx={{ borderRadius: '20px' }}>
+                          <Link to={`../project/${detailsData[0].projectid}`}>
                           <CardActionArea
-                            href={`../project/${detailsData[0].projectid}`}
                             sx={{ padding: '10px 15px' }}>
                             <p>{detailsData[0].projecttype}</p>
                             <h2>{detailsData[0].projecttitle}</h2>
@@ -589,6 +590,7 @@ const ProfilePage = () => {
                               </Grid>
                             </Grid>
                           </CardActionArea>
+                          </Link>
                         </Card>
                       </Grid>
 
