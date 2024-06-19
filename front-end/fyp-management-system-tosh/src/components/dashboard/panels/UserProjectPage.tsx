@@ -68,7 +68,7 @@ const UserProject = () => {
             <img
               src={
                 state.data.project[0].projectimage
-                  ? import.meta.env.VITE_APPLICATION_TEST_SERVER_URL + '/assets' +
+                  ? import.meta.env.VITE_APPLICATION_TEST_SERVER_URL + 'assets' +
                   state.data.project[0].projectimage
                   : DefaultImage
               }

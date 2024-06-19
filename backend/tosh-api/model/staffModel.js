@@ -6,7 +6,7 @@ class SparesAcademicStaffModel {
         let coordinator = balancer? true: false;
         let supervisor = !balancer? true:false;
         const query = {
-            text: 'insert into "AcademicStaff" (email, name, password, salt, dob, matricNumber, institution, isCoordinator, isSupervisor, isStudent, isStaff) values ($1, $2, $3, $4, $5, $6, $7, $8, $9, false, true);',
+            text: 'insert into "AcademicStaff" (email, name, password, salt, dob, matricNumber, institution, isCoordinator, isSupervisor, isStudent, isStaff) values ($1, $2, $3, $4, $5, $6, $7, $8, $9, false, true) returning userid, verificationkey',
             values: [email, name, password, salt, dob, matricNumber, institution, coordinator, supervisor]
         }
         const result = await client.query(query);

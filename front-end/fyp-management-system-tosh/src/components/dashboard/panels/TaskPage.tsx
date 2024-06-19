@@ -687,7 +687,7 @@ const TaskPage = () => {
                             }}>
                             <Avatar
                               src={
-                                file.profilepic ? `${import.meta.env.VITE_APPLICATION_TEST_SERVER_URL}/assets${file.profilepic}` : DefaultImage
+                                file.profilepic ? `${import.meta.env.VITE_APPLICATION_TEST_SERVER_URL}assets${file.profilepic}` : DefaultImage
                               }
                             />
                             <div style={{ marginLeft: '15px' }}>

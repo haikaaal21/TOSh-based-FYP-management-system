@@ -179,7 +179,7 @@ const RequestsPage = () => {
                             }}
                             src={
                               request.profilepic
-                                ? `${url}/assets/profilepic`
+                                ? `${url}assets/profilepic`
                                 : DefaultImage
                             }
                             alt={request.name}

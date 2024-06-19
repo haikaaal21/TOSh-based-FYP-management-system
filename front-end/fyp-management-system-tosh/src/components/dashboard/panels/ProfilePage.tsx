@@ -258,7 +258,7 @@ const ProfilePage = () => {
                         }}
                         component="img"
                         image={
-                        profileData.image.name ? URL.createObjectURL(profileData.image) : state.data && state.data.user[0].profilepic ?  import.meta.env.VITE_APPLICATION_TEST_SERVER_URL + '/assets' +
+                        profileData.image.name ? URL.createObjectURL(profileData.image) : state.data && state.data.user[0].profilepic ?  import.meta.env.VITE_APPLICATION_TEST_SERVER_URL + 'assets' +
                         state.data.user[0].profilepic : DefaultImage
                         }
                       />
@@ -571,7 +571,7 @@ const ProfilePage = () => {
                                   image={
                                     detailsData[0].projectimage
                                       ? import.meta.env
-                                          .VITE_APPLICATION_TEST_SERVER_URL + '/assets' +
+                                          .VITE_APPLICATION_TEST_SERVER_URL + 'assets' +
                                         detailsData[0].projectimage
                                       : DefaultProjectImage
                                   }
@@ -611,7 +611,7 @@ const ProfilePage = () => {
                                 src={
                                   detailsData[0].profilepic
                                     ? import.meta.env
-                                        .VITE_APPLICATION_TEST_SERVER_URL + '/assets' +
+                                        .VITE_APPLICATION_TEST_SERVER_URL + 'assets' +
                                       detailsData[0].profilepic
                                     : DefaultImage
                                 }
@@ -645,7 +645,17 @@ const ProfilePage = () => {
                     </Grid>
                   </Grid>
                 ) : userData[0].isstaff ? null : (
-                  <p>This student has not undertaken a project</p>
+                  <Grid item xs={12} md={6}>
+                  <div style={{
+                    width: '100%',
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    height: '80px',
+                  }}>
+                    <h3>This student has yet undertaken a project</h3>
+                  </div>
+                  </Grid>
                 )}
               </Grid>
               <div style={{ height: '25px' }} />

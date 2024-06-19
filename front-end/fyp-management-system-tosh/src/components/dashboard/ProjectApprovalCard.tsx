@@ -61,7 +61,7 @@ const ProjectApprovalCard: React.FC<ProjectApprovalCardProps> = (props) => {
         <Grid item xs={12} md={5}>
           
           <img
-            src={props.imageUrl ? url + '/assets' + props.imageUrl : DefaultImage}
+            src={props.imageUrl ? url + 'assets' + props.imageUrl : DefaultImage}
             alt={props.title}
             style={{ width: '100%', height: '100%', objectFit: 'cover' }}
           />

@@ -50,7 +50,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ ...props }) => {
               component="img"
               image={
                 props.projectimg
-                  ? import.meta.env.VITE_APPLICATION_TEST_SERVER_URL + '/assets' +
+                  ? import.meta.env.VITE_APPLICATION_TEST_SERVER_URL + 'assets' +
                     props.projectimg
                   : DefaultImage
               }

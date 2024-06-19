@@ -110,7 +110,7 @@ const LoginPage = () => {
                 setFetchErrorMessage(errormessage.message);
                 setSnackbar({
                   open: true,
-                  message: fetchErrorMessage,
+                  message: 'Incorrect Email or Password!',
                   severity: 'error',
                 });
               })

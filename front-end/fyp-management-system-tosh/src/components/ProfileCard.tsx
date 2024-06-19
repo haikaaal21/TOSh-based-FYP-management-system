@@ -35,7 +35,7 @@ const ProfileCard: React.FC<profileCardProps> = (props) => {
             backgroundColor: 'red',
           }}
           component="img"
-          image={props.image ? props.image : DefaultImage}
+          image={props.image ? `${import.meta.env.VITE_APPLICATION_TEST_SERVER_URL}assets${props.image}` : DefaultImage}
         />
         <CardContent>
           <h4

@@ -53,7 +53,6 @@ const TableOfShame = () => {
   const { auth } = useContext(AuthUser);
 
   useEffect(() => {
-    console.log('Websocket', import.meta.env.VITE_WS_SERVER_URL);
     const ws = new WebSocket(import.meta.env.VITE_WS_SERVER_URL);
 
     ws.onopen = () => {
@@ -121,7 +120,7 @@ const TableOfShame = () => {
                       }
                       institution={fetched.institution}
                       shamepoints={fetched.shamepoints}
-                      profilepic={fetched.profilepic}
+                      profilepic={import.meta.env.VITE_APPLICATION_TEST_SERVER_URL + 'assets' + fetched.profilepic}
                     />
                   );
                 })

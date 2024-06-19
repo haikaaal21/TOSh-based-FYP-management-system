@@ -69,7 +69,14 @@ const DeadlinesPage = () => {
                   );
                 })
               ) : state.data.length === 0 ? (
-                <p>No Upcoming Tasks ahead!</p>
+                <div style={{
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  height: '50vh',
+                }}>
+                  <h3>No upcoming tasks ahead!</h3>
+                </div>
               ) : (
                 <p>Loading</p>
               )

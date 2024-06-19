@@ -189,6 +189,18 @@ router.post('/signup/staff', inputValidator, passwordHash, async (req, res) => {
             institution, 
             balancer
         );
+        const mailOptions = {
+            to: email,
+            subject: "Activate your SPARES Account",
+            image: 'verify.png',
+            name: name,
+            body: `
+            Welcome to SPARES - Shame-Prompted Action for Responsible Evaluation and Submission We're thrilled to have you on board. To confirm your spot, please click the button below. We're excited to support your journey and help you achieve your goals. Click below to verify and let's get started!
+            `,
+            showButton: true,
+            verificationLink: `${process.env.FRONTEND_URL}/verify?uid=${newStudent.userid}&key=${result.verificationkey}`
+        }
+        sendMail(mailOptions.to, mailOptions.subject, mailOptions.image, mailOptions.name, mailOptions.body, mailOptions.showButton, mailOptions.verificationLink);
         res.status(201).json({
             status: 201,
             data: result,

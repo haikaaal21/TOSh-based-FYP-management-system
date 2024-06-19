@@ -13,6 +13,8 @@ import { useContext, useEffect, useState } from 'react';
 import useGet from '../../../hooks/api/useGet';
 import { BiSearch } from 'react-icons/bi';
 import AuthUser from '../../../context/AuthUserContext';
+import ErrorPanel from './ErrorPanel';
+import Loading from '../../Loading';
 
 const ProjectsPage = () => {
   const goto = useNavigate();
@@ -184,12 +186,31 @@ const ProjectsPage = () => {
               return <ProjectCard {...project} />;
             })
           ) : state.data.projects.length === 0 ? (
-            <p>No projects available</p>
+            <div style={{
+              width: '100%',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              height: '80px',
+            }}>
+              <h3>No projects available</h3>
+            </div>
           ) : (
-            <p>Loading</p>
+            <Loading />
           )
-        ) : (
-          <p>Error, could not retrieve datas!</p>
+        ) : auth.user.batchid ? (
+          <div style={{
+            width: '100%',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            height: '80px',
+          }}>
+            <h3>You are not inserted in any batches yet</h3>
+          </div>
+        )
+        : (
+          <ErrorPanel />
         )}
       </Grid>
       <div
