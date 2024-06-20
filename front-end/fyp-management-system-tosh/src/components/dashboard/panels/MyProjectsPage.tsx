@@ -34,7 +34,6 @@ const MyProjectsPage = () => {
       setProjects(state.data.projects);
       setOnDeletion(state.data.onDeletion);
     }
-    console.log(state.data);
   }, [state.data]);
 
   return (

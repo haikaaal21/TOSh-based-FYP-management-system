@@ -31,7 +31,6 @@ const ComplaintCard: React.FC<ComplaintCardProps> = (props) => {
     } else if (props.complaintstatus === 'Under Process') {
       setStatusColor('blue');
     }
-    console.log(statusColor);
   }, []);
 
   const goto = useNavigate();

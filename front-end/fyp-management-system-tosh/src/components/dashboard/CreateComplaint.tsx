@@ -62,7 +62,6 @@ const CreateComplaint = () => {
       for (let i = 0; i < files.length; i++) {
         formData.append('file', files[i].file);
       }
-      console.log(formData);
       handlePost(
         import.meta.env.VITE_APPLICATION_TEST_SERVER_URL +
           'complaint/create/' +

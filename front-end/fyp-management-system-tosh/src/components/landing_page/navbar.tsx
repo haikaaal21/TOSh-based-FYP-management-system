@@ -48,7 +48,6 @@ const CustomHeader = styled.header`
 
 //! Do this!
 function openNav() {
-  console.log('Opening Nav!');
   const mobileSideNav = document.getElementById('#mobile-sideNav');
   if (mobileSideNav) {
     mobileSideNav.style.height = '100%';

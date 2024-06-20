@@ -105,8 +105,15 @@ class Task {
                    WHERE taskid = $1 AND userid = $2`,
             values: [taskid, userid]
         }
+        const assignedFromEmail = {
+            text: `select "AcademicStaff".email from "AcademicStaff"
+                    join "Task" on "AcademicStaff".staffid = "Task".assignedfrom
+                    where taskid = $1`,
+            values: [taskid]
+        }
         const res = await client.query(query);
-        return res.rows;
+        const email = await client.query(assignedFromEmail);
+        return email.rows;
     }
 
     async createTask(taskFiles, taskInstance) { 

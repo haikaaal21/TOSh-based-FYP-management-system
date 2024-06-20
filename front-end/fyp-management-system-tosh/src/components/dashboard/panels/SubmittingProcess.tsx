@@ -44,7 +44,6 @@ const SubmittingProcess: React.FC<SubmittingProcessProps> = (props) => {
     if (props.type === 'Event') {
       handlePost(url + 'event/create/' + auth.user.specialid, eventFormat());
     } else if (props.type === 'Task') {
-      console.log(taskFormat());
       handlePost(url + 'task/create/' + auth.user.id, taskFormat());
     }
   };

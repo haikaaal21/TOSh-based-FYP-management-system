@@ -38,7 +38,6 @@ const StaffDeadlinesPage = () => {
     if (state.data) {
       auth.user.role.includes('Supervisor') ? setTasks(state.data.tasks) : null;
       setOwnTasks(state.data.createdTask);
-      console.log(state.data);
     }
   }, [state]);
 

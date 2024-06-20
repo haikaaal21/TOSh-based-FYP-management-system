@@ -32,13 +32,9 @@ const ComplaintsPage = () => {
   useEffect(() => {
     if (state.data) {
       state.data.status === 200 ? setComplaints(state.data.complaints) : null;
-      console.log(state.data);
     }
   }, [state.data]);
 
-  useEffect(() => {
-    console.log(auth.user.specialid);
-  });
 
   return (
     <>
@@ -68,7 +64,6 @@ const ComplaintsPage = () => {
           <Grid sx={{ padding: '25px 0' }} container spacing={2}>
             {complaints ? (
               complaints.map((complaint: any) => {
-                console.log(complaint.name);
                 return <ComplaintCard {...complaint} />;
               })
             ) : state.error ? (

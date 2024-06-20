@@ -114,14 +114,12 @@ const ParticipantCreationComponent: React.FC<
   };
 
   const submitItem = () => {
-    console.log('Item');
     errors === '' ? props.goto(4) : null;
   };
 
   useEffect(() => {
     if (props.type === 'Event') {
       onChangeEvent('batch', batch);
-      console.log(eventItem);
     } else if (props.type === 'Task') {
       onChangetask('batch', batch);
     }

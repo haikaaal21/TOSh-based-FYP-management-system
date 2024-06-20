@@ -1,5 +1,5 @@
 import { Button, CircularProgress, Container, Stack } from '@mui/material';
-import image from '../../assets/images/placeholder.jpeg';
+import image from '../../assets/images/tasksubmitted.png';
 import AccountContext from '../../context/AccountContext';
 import { useContext, useEffect, useState } from 'react';
 import usePost from '../../hooks/api/usePost';

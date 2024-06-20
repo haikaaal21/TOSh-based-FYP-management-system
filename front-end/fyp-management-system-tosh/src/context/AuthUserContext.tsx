@@ -5,7 +5,6 @@ const AuthUser = createContext({} as any);
 
 const getInitialAuth = () => {
   const auth = localStorage.getItem('Auth');
-  console.log(auth);
   if (auth) {
     return JSON.parse(auth);
   } else {
@@ -29,7 +28,6 @@ export const AuthUserProvider = ({ children }: any) => {
   }, [auth]);
 
   const loginUser = (newUserData: any, role: string) => {
-    console.log(newUserData);
     setAuth({
       auth: true,
       role: role,

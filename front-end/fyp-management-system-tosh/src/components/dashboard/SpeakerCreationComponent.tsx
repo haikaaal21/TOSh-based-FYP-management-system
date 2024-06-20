@@ -60,8 +60,6 @@ const SpeakerCreationComponent: React.FC<SpeakerCreationComponentProps> = (
   };
 
   const nextPage = (alreadyWarned: boolean) => {
-    console.log(alreadyWarned);
-    //TODO: Make an alert if there are no speakers
     if (eventItem.speakers.length < 1 && !alreadyWarned) {
       setPop(true);
     } else {

@@ -100,9 +100,6 @@ const ComplaintPage = () => {
     validator();
   }, [replyInput]);
 
-  useEffect(() => {
-    console.log(replies);
-  });
 
   const didMount = useRef(false);
 

@@ -9,7 +9,6 @@ export const useCheckLength = () => {
     maxChar: number
   ) {
     for (const key in initialValues) {
-      console.log(initialValues[key].length, minChar, maxChar);
       if (initialValues[key].length < minChar)
         errors[key] =
           'This field must be at least ' + minChar + ' characters long';

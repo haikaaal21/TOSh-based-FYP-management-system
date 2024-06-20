@@ -1,5 +1,4 @@
 import { Card, CardActionArea, Divider, Grid } from '@mui/material';
-import { useEffect } from 'react';
 import { MdCalendarMonth, MdPeople } from 'react-icons/md';
 import { useNavigate } from 'react-router';
 import DefaultImage from '../../assets/images/default/Batch.png';
@@ -22,10 +21,6 @@ const BatchCard: React.FC<batchCardProps> = (props) => {
   const navigate = () => {
     goto(`${props.batchId}`);
   };
-
-  useEffect(() => {
-    console.log(props.status);
-  });
 
   return (
     <div onClick={navigate} id={props.batchId.toString()}>

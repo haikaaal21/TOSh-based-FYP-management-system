@@ -125,7 +125,17 @@ router.post ('/submit/:multerid/:userid', uploadSubmission.array('file'), async 
         }
     }
     try{
-        task.submittedTask(taskid, userid);    
+        const email = task.submittedTask(taskid, userid);    
+        const mailObj = {
+            to : email.map(user => user.email),
+            subject : `Someone submitted a task for task#${taskid}!`,
+            image: 'remind.png',
+            name: 'you!',
+            body: `
+                Someone has submitted a task for task#${taskid}! Make sure to check it out!
+            `
+        }
+        sendMail(mailObj.to, mailObj.subject, mailObj.image, mailObj.name, mailObj.body);
     } catch(error) {
         console.error('Error in Submitting Task:', error);
         res.status(500).json({message: 'Error in Submitting Task!'});

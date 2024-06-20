@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from 'react';
+import { createContext, useState } from 'react';
 
 interface Speaker {
   name: string;
@@ -51,10 +51,6 @@ export const EventContextProvider = ({ children }: any) => {
     image: {} as File,
     contact: '',
   });
-
-  useEffect(() => {
-    console.log(eventItem);
-  }, [eventItem]);
 
   const clearSpeakerInstance = () => {
     setNewSpeaker({

@@ -47,7 +47,6 @@ const EventsPage = () => {
     }
     if (groupedData !== null) {
       Object.keys(groupedData).slice(0, 3);
-      console.log(groupedData);
     }
   }, [state.data]);
 

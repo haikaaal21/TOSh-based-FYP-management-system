@@ -34,7 +34,6 @@ const EventCreationComponent: React.FC<EventCreationComponentProps> = (
   }, []);
 
   const imageProcessing = (file: File[]) => {
-    console.log('CALLED', file);
     const item = file[0];
     const maxSize = 10 * 1024 * 1024;
     const acceptedTypes = ['image/png', 'image/jpg', 'image/jpeg'];
@@ -49,7 +48,6 @@ const EventCreationComponent: React.FC<EventCreationComponentProps> = (
   };
 
   const filesProcessing = (files: File[]) => {
-    console.log(files);
     const maxSize = 10 * 1024 * 1024;
     files.forEach((file) => {
       if (file.size > maxSize) {
@@ -141,7 +139,6 @@ const EventCreationComponent: React.FC<EventCreationComponentProps> = (
         const concat = `${dayjs(eventItem.date).format('YYYY-MM-DD')}T${eventItem.time}`;
         const date = new Date(concat);
         const now = new Date();
-        console.log(date < now);
         if (eventItem.date && eventItem.time && date) {
           if (date < now) {
             errorInstance['dateNTime'] = 'Event cannot be in the past';

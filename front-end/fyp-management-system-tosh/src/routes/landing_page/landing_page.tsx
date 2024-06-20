@@ -119,10 +119,6 @@ export default function LandingPage() {
 
   const { scrollYProgress } = useScroll();
 
-  useEffect(() => {
-    console.log(`rgba(0, 0, 0, ${scrollYProgress.get()})`);
-  })
-
   const [dialog,setDialog] = useState(true)
 
   const names = ['Family','TinkeringTurian','HasyaHasyiii','Arting', 'ArberJeki', 'Abigell', 'BimoBimskyy', 'MasReee', 'Fatraaaa', 'Ganangg', 'Rafii', 'L', 'anisfmtnz', 'redcore33', 'kaachang', 'joovis', 'adaadaamm', 'Ashton', 'manggar', 'babehh', 'adit', 'utin', 'athena', 'aan']

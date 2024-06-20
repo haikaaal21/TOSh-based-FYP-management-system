@@ -115,7 +115,6 @@ const CreateProject = () => {
   }, [state.data]);
 
   const handleChange = (event: any) => {
-    console.log(event.target.name, event.target.value);
     setProject({
       ...project,
       [event.target.name]: event.target.value,
@@ -182,7 +181,6 @@ const CreateProject = () => {
   };
 
   const appendFile = (file: File) => {
-    console.log(file);
     const maxSize = 1024 * 1024 * 35;
     const typeOfFile = 'image/*';
     const refuseGif = ['gif', 'webp', 'svg'];
@@ -296,7 +294,6 @@ const CreateProject = () => {
   };
 
   useEffect(() => {
-    console.log(postState.errorDetails);
     if (postState.error) {
       handlePop();
       setPopupProps({
@@ -308,7 +305,6 @@ const CreateProject = () => {
       });
     }
     if (postState.data) {
-      console.log(postState.data.status);
       sessionStorage.clear();
       handlePop();
       if (edittingProject) {

@@ -12,7 +12,6 @@ const useForm = (initialValues: FormValues) => {
     e.target.id === ''
       ? setValues({ ...values, [e.target.name]: e.target.value })
       : setValues({ ...values, [e.target.id]: e.target.value });
-    console.log(values);
   };
 
   const handleDateChange = (date: Date | null, id: string) => {
