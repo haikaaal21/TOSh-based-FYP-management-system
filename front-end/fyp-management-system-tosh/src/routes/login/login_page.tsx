@@ -19,7 +19,7 @@ import AuthUser from '../../context/AuthUserContext';
 import { MdLogin } from 'react-icons/md';
 import Loading from '../../components/Loading';
 import LoginImage from '../../assets/images/login.png';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 /**! ERRORS
  * 1. Logging in if the value is empty will cause an infinite loading button (Check the isLoading boolean)
@@ -28,6 +28,8 @@ import { Link } from 'react-router-dom';
  * 4. Layouting Issues
  */
 const LoginPage = () => {
+
+  const message = new URLSearchParams(useLocation().search);
   //* Validator Hooks
   useEffect(() => {
     document.title = 'Login';
@@ -241,6 +243,9 @@ const LoginPage = () => {
             </Grid>
           </form>
           <p>Forgot your password?</p>
+          {
+            message? <p>{message}</p> : null
+          }
           <Link to="/forgotPassword">Click here to reset your password</Link>
         </div>
       </motion.div>

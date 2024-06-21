@@ -35,7 +35,7 @@ const ForgotPassword = () => {
     }
 
     useEffect(() => {
-        if(state.data) {goto('./login')}
+        if(state.data) {goto('../login?message=Password changed successfully')}
     }, [state])
  
     useEffect(() => {
