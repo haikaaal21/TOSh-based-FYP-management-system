@@ -135,6 +135,7 @@ router.post ('/submit/:multerid/:userid', uploadSubmission.array('file'), async 
                 Someone has submitted a task for task#${taskid}! Make sure to check it out!
             `
         }
+        console.log(mailObj);
         sendMail(mailObj.to, mailObj.subject, mailObj.image, mailObj.name, mailObj.body);
         res.status(200).json({message: 'Task Submitted Successfully!'});
     } catch(error) {
