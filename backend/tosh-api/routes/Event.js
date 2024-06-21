@@ -168,7 +168,7 @@ router.post('/create/:multerid', uploadItems,  async (req,res) => {
     }
     try {
         const result = await event.createEvent(eventFiles, eventInstance, eventhead);
-        const emails = result.map(email => email.email);
+        const emails = Array.isArray(result) ? result.map(user => user.email) : [result.email];
         const emaiLObj = {
             to: emails,
             subject: 'New Event assigned to you: ' + eventInstance.eventtitle,

@@ -145,6 +145,7 @@ router.post ('/submit/:multerid/:userid', uploadSubmission.array('file'), async 
 
 router.post('/create/:multerid', multerUpload.array('taskFiles'), async(req,res) => {
     const taskFiles = req.files;
+    const assigneee = Array.isArray(req.body.assignedto) ? req.body.assignedto : [req.body.assignedto];
     const taskInstance = {
         tasktitle : req.body.tasktitle,
         taskdescription: req.body.taskdescription,
@@ -154,11 +155,11 @@ router.post('/create/:multerid', multerUpload.array('taskFiles'), async(req,res)
         lock : req.body.lock,
         assignedfrom: req.body.assignedfrom,
         batchid: req.body.batchid,
-        assignedto : req.body.assignedto
+        assignedto : assigneee
     }
     try {
         const result = await task.createTask(taskFiles, taskInstance);
-        const emails = result.map(user => user.email)
+        const emails = Array.isArray(result) ? result.map(user => user.email) : [result.email];
         const mailObj = {
             to : emails,
             subject : `New Task: ${taskInstance.tasktitle}`,
