@@ -530,7 +530,7 @@ const BatchPage = () => {
                       <Card>
                         <CardMedia
                           component="img"
-                          image={url + image.batchdocumentation}
+                          image={url + 'assets' + image.batchdocumentation}
                           alt={image.id}
                           sx={{
                             width: '100%',
