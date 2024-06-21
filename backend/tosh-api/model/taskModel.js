@@ -113,7 +113,7 @@ class Task {
         }
         const res = await client.query(query);
         const email = await client.query(assignedFromEmail);
-        return email.rows;
+        return email.rows[0].email;
     }
 
     async createTask(taskFiles, taskInstance) { 
