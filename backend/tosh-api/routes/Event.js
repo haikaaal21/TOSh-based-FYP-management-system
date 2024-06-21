@@ -2,8 +2,9 @@ const express = require('express');
 const router = express.Router();
 const Event = require('../model/eventModel');
 const createMulterInstance = require('../middleware/authMiddleware/storageMiddleware');
-
+const fs = require('fs');
 const uploadFiles = createMulterInstance('event/');
+const {sendMail} = require('../middleware/SendMail');
 
 const event = new Event();
 
@@ -107,7 +108,7 @@ router.get(`/:eventid`, async (req,res) => {
     }
 });
 
-const fs = require('fs');
+
 router.post('/deleteEvent', async(req,res) => {
     const eventid = req.body.eventid;
     try {
