@@ -34,7 +34,7 @@ const BatchCard: React.FC<batchCardProps> = (props) => {
               <img
                 src={
                   props.batchImage
-                    ? import.meta.env.VITE_APPLICATION_TEST_SERVER_URL + + 'assets' + 
+                    ? import.meta.env.VITE_APPLICATION_TEST_SERVER_URL + 'assets' + 
                       props.batchImage
                     : DefaultImage
                 }
