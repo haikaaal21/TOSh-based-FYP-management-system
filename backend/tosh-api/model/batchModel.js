@@ -2,6 +2,24 @@ const client = require('../connectDB');
 
 class BatchModel {
 
+    async deleteBatch(batchid) {
+        const unassignFromStudentQuery = {
+            text: `update "Student" set batchid = null where batchid = $1;`,
+            values: [batchid]
+        }
+        const unassignFromSupervisorQuery = {
+            text: `delete from "BatchSupervisor" where batchid = $1;`,
+            values: [batchid]
+        }
+        const batchDeleteQuery = {
+            text: `delete from "Batch" where batchid = $1;`,
+            values: [batchid]
+        }
+        await client.query(unassignFromStudentQuery);
+        await client.query(unassignFromSupervisorQuery);
+        return await client.query(batchDeleteQuery);        
+    }
+
     async createBatch(batchnname, batchhead, batchYear) {
         const query = {
             text: `insert into "Batch" (batchname, batchhead, batchyear) values ($1, $2, $3)

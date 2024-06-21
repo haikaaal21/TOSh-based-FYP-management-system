@@ -147,6 +147,13 @@ const BatchPage = () => {
       title: title,
     });
   };
+  
+  const {handlePost: deleteBatch} = usePost();
+
+  const sendToApiDeleteBatch = () => {
+    deleteBatch(`${import.meta.env.VITE_APPLICATION_TEST_SERVER_URL}batch/delete`, {batchid: batchid});
+    goto('../');
+  }
 
   const [editedBatch, setEditedBatch] = useState({
     batchname: '',
@@ -271,6 +278,7 @@ const BatchPage = () => {
                 <MenuItem value={'Finished'}>Finished</MenuItem>
               </Select>
               <button
+                onClick={sendToApiDeleteBatch}
                 style={{
                   backgroundColor: 'var(--IndicatorRed)',
                   width: '250px',

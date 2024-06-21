@@ -6,7 +6,16 @@ const createMulterInstance = require('../middleware/authMiddleware/storageMiddle
 const uploadImage = createMulterInstance('batch-documentation/');
 const BatchModel = new batchModel();
 
-
+router.post('/delete', async(req,res) => {
+    const batchid = req.body.batchid;
+    try {
+        const result = await BatchModel.deleteBatch(batchid);
+        res.status(200).json({message: 'Batch Deleted Successfully!'});
+    } catch (error) {
+        console.error('Error in Deleting Batch:', error);
+        res.status(500).json({message: 'Error in Deleting Batch!'});
+    }
+})
 
 router.get('/fetch/:institution', async (req,res) => {
     const institution = req.params.institution.replace(/_/g, ' ');
