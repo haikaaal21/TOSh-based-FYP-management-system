@@ -143,7 +143,7 @@ const BatchPage = () => {
     e.preventDefault();
     setPopImage({
       open: true,
-      image: url + imageUrl,
+      image: url + 'assets' + imageUrl,
       title: title,
     });
   };
