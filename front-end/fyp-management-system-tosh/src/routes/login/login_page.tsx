@@ -29,7 +29,9 @@ import { Link, useLocation } from 'react-router-dom';
  */
 const LoginPage = () => {
 
-  const message = new URLSearchParams(useLocation().search);
+  const location = useLocation();
+  const query = new URLSearchParams(location.search);
+  const message = query.get('message');
   //* Validator Hooks
   useEffect(() => {
     document.title = 'Login';
@@ -244,7 +246,7 @@ const LoginPage = () => {
           </form>
           <p>Forgot your password?</p>
           {
-            message? <p>{message}</p> : null
+            message? <p style={{backgroundColor:'var(--GoodGreen)', padding:'10px 5px'}}>{message}</p> : null
           }
           <Link to="/forgotPassword">Click here to reset your password</Link>
         </div>
