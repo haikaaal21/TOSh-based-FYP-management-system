@@ -113,6 +113,7 @@ class Task {
         }
         const res = await client.query(query);
         const email = await client.query(assignedFromEmail);
+        console.log(email.rows[0]);
         return email.rows[0].email;
     }
 
