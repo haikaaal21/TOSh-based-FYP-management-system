@@ -16,7 +16,7 @@ import {
 } from '@mui/material';
 import { motion } from 'framer-motion';
 import AuthUser from '../../context/AuthUserContext';
-import { MdLogin } from 'react-icons/md';
+import { MdCheck, MdLogin } from 'react-icons/md';
 import Loading from '../../components/Loading';
 import LoginImage from '../../assets/images/login.png';
 import { Link, useLocation } from 'react-router-dom';
@@ -246,7 +246,7 @@ const LoginPage = () => {
           </form>
           <p>Forgot your password?</p>
           {
-            message? <p style={{backgroundColor:'var(--GoodGreen)', padding:'10px 5px'}}>{message}</p> : null
+            message? <p style={{backgroundColor:'var(--GoodGreen)', padding:'5px 10px', color:'white'}}><MdCheck /> {message}</p> : null
           }
           <Link to="/forgotPassword">Click here to reset your password</Link>
         </div>
