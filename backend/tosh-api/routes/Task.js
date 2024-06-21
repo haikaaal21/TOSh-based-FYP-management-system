@@ -127,7 +127,7 @@ router.post ('/submit/:multerid/:userid', uploadSubmission.array('file'), async 
     try{
         const email = task.submittedTask(taskid, userid);    
         const mailObj = {
-            to : Array.isArray(email) ? email.map(user => user.email) : [email[0].email],
+            to : email.email,
             subject : `Someone submitted a task for task#${taskid}!`,
             image: 'remind.png',
             name: 'you!',
