@@ -146,7 +146,7 @@ class Event {
             }
             await client.query(speakerQuery);
         }
-        return emails;
+        return emails.rows;
     }
 
     async deleteEvent(eventid) {
