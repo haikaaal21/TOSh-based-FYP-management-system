@@ -152,7 +152,7 @@ const BatchPage = () => {
 
   const sendToApiDeleteBatch = () => {
     deleteBatch(`${import.meta.env.VITE_APPLICATION_TEST_SERVER_URL}batch/delete`, {batchid: batchid});
-    goto('../');
+    goto('../batch');
   }
 
   const [editedBatch, setEditedBatch] = useState({
