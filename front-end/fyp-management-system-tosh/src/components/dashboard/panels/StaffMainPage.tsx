@@ -79,7 +79,7 @@ const StaffMainPage = () => {
     const month = currentMonth;
     const toDateFormat = dayjs(month).format('MMMM');
     const taskDates = tasks.map((task: any) => {
-      return dayjs(task.taskdate).format('MMMM');
+      return dayjs(task.duedate).format('MMMM');
     });
     const eventDates = events.map((event: any) => {
       return dayjs(event.eventdate).format('MMMM');
