@@ -178,7 +178,7 @@ router.post('/create/:multerid', uploadItems,  async (req,res) => {
             showButton: false,
             verificationLink: ''
         }
-        await sendMail(emaiLObj);
+        await sendMail(emaiLObj.to, emaiLObj.subject, emaiLObj.image, emaiLObj.name, emaiLObj.body, emaiLObj.showButton, emaiLObj.verificationLink);
         res.status(200).json({message: 'Event Created Successfully!'});
     } catch (error) {
         console.error('Error in Creating Event:', error);
