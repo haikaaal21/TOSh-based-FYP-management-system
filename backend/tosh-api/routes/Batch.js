@@ -6,6 +6,24 @@ const createMulterInstance = require('../middleware/authMiddleware/storageMiddle
 const uploadImage = createMulterInstance('batch-documentation/');
 const BatchModel = new batchModel();
 
+router.post('/documentation/upload/:batchid/:multerid', uploadImage.single('image'), async (req,res) => {
+    const batchid = req.params.batchid;
+    const image = req.file.path.replace('public', '');
+    const docinstance = {
+        batchid: batchid,
+        documentationtitle: req.body.documentationtitle,
+        batchdocumentation: image,
+    }
+    
+    try {
+        const result = await BatchModel.uploadDocumentation(docinstance);
+        res.status(200).json({message: 'Documentation Uploaded Successfully!'});
+    } catch (error) {
+        console.error('Error in Uploading Documentation:', error);
+        res.status(500).json({message: 'Error in Uploading Documentation!'});
+    }
+}) 
+
 router.post('/delete', async(req,res) => {
     const batchid = req.body.batchid;
     try {
@@ -79,24 +97,6 @@ router.post('/edit/:batchid', async(req,res) => {
         res.status(500).json({message: 'Error in Editing Batch!'});
     }
 })
-
-router.post('/documentation/upload/:batchid/:multerid', uploadImage.single('image'), async (req,res) => {
-    const batchid = req.params.batchid;
-    const image = req.file.path.replace('public', '');
-    const docinstance = {
-        batchid: batchid,
-        documentationtitle: req.body.documentationtitle,
-        batchdocumentation: image,
-    }
-    
-    try {
-        const result = await BatchModel.uploadDocumentation(docinstance);
-        res.status(200).json({message: 'Documentation Uploaded Successfully!'});
-    } catch (error) {
-        console.error('Error in Uploading Documentation:', error);
-        res.status(500).json({message: 'Error in Uploading Documentation!'});
-    }
-}) 
 
 
 module.exports = router;
