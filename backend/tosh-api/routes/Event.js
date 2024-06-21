@@ -107,7 +107,7 @@ router.get(`/:eventid`, async (req,res) => {
     }
 });
 
-
+const fs = require('fs');
 router.post('/deleteEvent', async(req,res) => {
     const eventid = req.body.eventid;
     try {
