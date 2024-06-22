@@ -1,4 +1,4 @@
-![SparesBanner](./markdownDecos/headerImage.png)
+![SparesBanner](./markdownheader.png)
 ## About
 Shame Prompted Action for Responsible Evaluation and Submission (SPARES for short) is a website designed to pressure Final Year Project participants, including both academic faculty and students, by leveraging psychological tactics to encourage efficient and high-quality project completion.
 
