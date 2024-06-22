@@ -75,8 +75,9 @@ app.listen(port, () => {
     console.log("Server Listening on PORT:", port);
 });
 
-let clients = [];
+let clients = []; //? Websocket Client Length
 
+//? Websocket Functions
 wss.on('connection', (ws) => {
     if(clients.length > 100) {
         ws.close(1001, "Server at it's maximum capacity!");
