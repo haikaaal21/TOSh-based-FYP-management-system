@@ -9,6 +9,8 @@ export const useCheckEmpty = () => {
         errors[key] = 'This field cannot be empty';
       } else if (initialValues[key].length < 3) {
         errors[key] = 'This field must be at least 3 characters long';
+      } else {
+        return {};
       }
     }
     return errors;

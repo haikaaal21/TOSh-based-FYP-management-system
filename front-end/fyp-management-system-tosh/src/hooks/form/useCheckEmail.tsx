@@ -8,6 +8,8 @@ export const useCheckEmail = () => {
     for (const key in valuesToCheck) {
       if (!regex.test(valuesToCheck[key])) {
         errors[key] = 'Invalid email';
+      } else {
+        return {} as FormValues;
       }
     }
     return errors;
