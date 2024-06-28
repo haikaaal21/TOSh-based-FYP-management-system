@@ -2,7 +2,7 @@ import Sidebar from '../../components/dashboard/Sidebar';
 import '../../styles/dashboardStyle.css';
 import { useEffect } from 'react';
 import { Route, Routes } from 'react-router';
-import { Breadcrumbs } from '@mui/material';
+import { Breadcrumbs, Grid } from '@mui/material';
 import { useLocation } from 'react-router';
 import '../../styles/breadcrumbStyle.css';
 import SparesLogoS from '../../components/svgcomponents/spares_logo_s';
@@ -89,7 +89,11 @@ const studentDashboard = () => {
         </Routes>
       </main>
       <div style={{ height: '3.8rem' }}></div>
+      <Grid container>
+        <Grid item xs={12}>
       <p style={{marginBottom:'1.5rem'}} className='subtitle'>Unstable build - Beta 1.0</p>
+      </Grid>
+      </Grid>
       <div id="mobile-separator" style={{ height: '3.8rem' }}></div>
     </div>
   );

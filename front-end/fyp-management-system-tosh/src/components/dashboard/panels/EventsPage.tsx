@@ -5,6 +5,7 @@ import dayjs from 'dayjs';
 import useGet from '../../../hooks/api/useGet';
 import ItemCardProps from '../../../types/itemCardsProps';
 import AuthUser from '../../../context/AuthUserContext';
+import { BiSolidParty } from 'react-icons/bi';
 
 const EventsPage = () => {
   const { handleGet, state } = useGet();
@@ -56,7 +57,7 @@ const EventsPage = () => {
       <div>
         <Grid sx={{ padding: '25px 25px' }} container spacing={4}>
           {state.data ? (
-            groupedData ? (
+            groupedData && state.data.length > 0 ? (
               Object.keys(groupedData).map((event: any) => {
                 return (
                   <MonthlyGrid
@@ -66,7 +67,10 @@ const EventsPage = () => {
                 );
               })
             ) : state.data.length === 0 ? (
-              <p>No upcoming events ahead</p>
+              <Grid item xs={12}>
+                  <BiSolidParty />
+                  <h3>No Tasks ahead for the meantime!</h3>
+                </Grid>
             ) : (
               <p>Loading</p>
             )

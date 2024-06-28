@@ -5,6 +5,7 @@ import ItemCardProps from '../../../types/itemCardsProps';
 import { useContext, useEffect, useState } from 'react';
 import useGet from '../../../hooks/api/useGet';
 import AuthUser from '../../../context/AuthUserContext';
+import { BiSolidParty } from 'react-icons/bi';
 
 const DeadlinesPage = () => {
   const { handleGet, state } = useGet();
@@ -69,14 +70,10 @@ const DeadlinesPage = () => {
                   );
                 })
               ) : state.data.length === 0 ? (
-                <div style={{
-                  display: 'flex',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  height: '50vh',
-                }}>
-                  <h3>No upcoming tasks ahead!</h3>
-                </div>
+                <Grid item xs={12}>
+                  <BiSolidParty />
+                  <h3>No Tasks ahead for the meantime!</h3>
+                </Grid>
               ) : (
                 <p>Loading</p>
               )

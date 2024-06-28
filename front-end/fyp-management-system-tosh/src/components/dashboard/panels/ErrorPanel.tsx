@@ -21,7 +21,7 @@ const ErrorPanel: React.FC<ErrorPanelProps> = (props) => {
       <h1>Whoops!</h1>
       <p>Looks like we could not connect to our dedicated server!</p>
       <button
-        style={{ color: 'var(--IndicatorBlue)', cursor: 'pointer' }}
+        style={{ backgroundColor: 'var(--IndicatorBlue)', cursor: 'pointer' }}
         className="buttonWithLeading"
         onClick={() => {
           window.location.reload();

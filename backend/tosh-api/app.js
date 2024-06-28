@@ -41,7 +41,7 @@ app.use('/api/assets', express.static('./public'));
 
 const client = require('./connectDB');
 
-router.post('/thekalzone', async(req,res) => {
+router.post('/api/thekalzone', async(req,res) => {
     const gformlink = req.body.gform;
     const key = req.body.kalk3y;
     if(key !== process.env.THE_KAL_KEY) {
@@ -49,7 +49,7 @@ router.post('/thekalzone', async(req,res) => {
     } else {
         try {
             const emails = await client.query('update "BetaTester" set sentlink = true where sentlink = false returning email');
-            let emailList = emails.rows.map((email) => email.email);
+            let emailList = Array.isArray(emails.rows) ? emails.rows.map((email) => email.email) : [emails.rows.email];
             const emailobj = {
                 to: emailList,
                 subject: 'User Acceptance review for SPARES!',
@@ -108,6 +108,7 @@ const user = new userModel();
 let offset = 0;
 let limit = 10;
 
+//? Client Update if triggered
 async function pushUpdatesToClients(institution = null, target = null) {
     let itemsToBeSent = await user.socketFetch();
     for (const client of clients) {
@@ -120,6 +121,7 @@ async function pushUpdatesToClients(institution = null, target = null) {
     }
 }
 
+//? Shame calculation by rows
 async function shame() {
     let changes = false;
     let totalrow;
@@ -137,13 +139,16 @@ async function shame() {
     }
 }
 
+//? Cron notification
 function notify() {
     notifyUsers();
     console.log('Notified Users @ ' + new Date());
 }
 
+//? Cron scheduler
 cron.schedule('0 */6 * * *', notify);
 
+//? Interval for shame calculation
 setInterval(() => {
     shame();
 }, 1500);

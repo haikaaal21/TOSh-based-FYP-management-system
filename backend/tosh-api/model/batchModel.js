@@ -1,4 +1,5 @@
 const client = require('../connectDB');
+const fs = require('fs');
 
 class BatchModel {
 
@@ -11,10 +12,25 @@ class BatchModel {
             text: `delete from "BatchSupervisor" where batchid = $1;`,
             values: [batchid]
         }
+        const selectBatchDocumentationQuery = {
+            text: `select batchdocumentation from "BatchDocumentation" where batchid = $1;`,
+            values: [batchid]
+        }
+        const batchDocumentation = await client.query(selectBatchDocumentationQuery);
+        if(batchDocumentation.rows.length > 0) {
+            for(let i = 0; i < batchDocumentation.rows.length; i++) {
+                fs.unlinkSync(batchDocumentation.rows[i].batchdocumentation);
+            }
+        }
+        const deleteBatchDocumentationQuery = {
+            text: `delete from "BatchDocumentation" where batchid = $1;`,
+            values: [batchid]
+        }
         const batchDeleteQuery = {
             text: `delete from "Batch" where batchid = $1;`,
             values: [batchid]
         }
+        await client.query(deleteBatchDocumentationQuery);
         await client.query(unassignFromStudentQuery);
         await client.query(unassignFromSupervisorQuery);
         return await client.query(batchDeleteQuery);        
