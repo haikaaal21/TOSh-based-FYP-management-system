@@ -45,12 +45,12 @@ const ForgotPassword = () => {
     const validate = () => {
         const errors = {} as { [key: string]: string };
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@$!%*?&]).{6,20}$/;
-        if(!toBeInput.email || !emailRegex.test(toBeInput.email)){
+        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*_.\\-])[a-zA-Z\d!@#$%^&*_.\\-]{8,}$/;
+                        if(!toBeInput.email || !emailRegex.test(toBeInput.email)){
             errors.email = 'Valid email is required';
         } 
         if(!toBeInput.newpass || !passwordRegex.test(toBeInput.newpass)){
-            errors.newpass = 'Password must be 6-20 characters long and contain at least one numeric digit, one uppercase and one lowercase letter, and one special character';
+            errors.newpass = 'Password must be 8-20 characters long and contain at least one numeric digit, one uppercase and one lowercase letter, and one special character';
         }
         return errors;
     }

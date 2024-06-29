@@ -15,6 +15,10 @@ const KalPage = () => {
 
     useEffect(() => {
         console.log(state.data);
+    })
+    
+    useEffect(() => {
+        console.log(state.data);
     }, [state])
 
     return (
