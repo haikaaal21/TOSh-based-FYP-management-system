@@ -10,7 +10,7 @@ describe('Login and Authentication Test Cases', () => {
     });
     
     //? #SPARES01
-    test('Test login with valid credentials', async ({ page }) => {
+    test('TCTosh-01 :Test login with valid credentials', async ({ page }) => {
         const agreeButton = page.locator('text=I agree');
         await expect(agreeButton).toBeVisible();
         await agreeButton.click();
@@ -29,7 +29,7 @@ describe('Login and Authentication Test Cases', () => {
     });
 
     //? #SPARES02
-    test('Test login with invalid credentials', async ({ page }) => {
+    test('TCTosh-02 :Test login with invalid credentials', async ({ page }) => {
         const agreeButton = page.locator('text=I agree');
         await expect(agreeButton).toBeVisible();
         await agreeButton.click();
@@ -47,7 +47,7 @@ describe('Login and Authentication Test Cases', () => {
     })
 
     //? #SPARES03
-    test('Test login with unverified account', async({page}) => {
+    test('TCTosh-03 :Test login with unverified account', async({page}) => {
         await page.getByRole('button', { name: 'I agree' }).click();
         await page.getByRole('button', { name: 'Login' }).click();
         await page.getByLabel('Email').click();
@@ -59,7 +59,7 @@ describe('Login and Authentication Test Cases', () => {
     })
 
     //? #SPARES04
-    test('Test login directly through URL', async({page}) => {
+    test('TCTosh-04 :Test login directly through URL', async({page}) => {
         await page.goto('https://spares.work/staff');
         await page.waitForNavigation();
         await expect(page).toHaveURL('https://spares.work/login');

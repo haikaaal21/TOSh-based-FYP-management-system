@@ -1,6 +1,6 @@
 const { expect } = require("@playwright/test");
 
-describe('Project creation and Verification Test Cases', () => {
+describe('User pressuring test case', () => {
 
     beforeEach(async ({ page }) => {
         await page.context().clearCookies();
@@ -15,7 +15,7 @@ describe('Project creation and Verification Test Cases', () => {
         await page.goto('https://spares.work/staff/deadlines');
     });
 
-    test('Pressure User', async ({ page }) => {
+    test('TCTosh-19: Pressure User', async ({ page }) => {
         await page.getByRole('button', { name: 'FYP Research paper From: You' }).click();
         await page.getByRole('button', { name: 'Send Notification Letters' }).click();
         await expect(page.getByRole('button', { name: 'Users Pressured Successfully!' })).toBeVisible();

@@ -17,7 +17,7 @@ describe('Event Creation Test Cases', () => {
         await page.getByRole('button', { name: 'Events' }).click();
     });
 
-    test('Create an event with valid details', async ({ page }) => {
+    test('TCTosh-10: Create an event with valid details', async ({ page }) => {
         await page.getByRole('button', { name: 'Create a new event' }).click();
         await page.getByLabel('Event Title').click();
         await page.getByLabel('Event Title').fill('New Event');
@@ -52,7 +52,7 @@ describe('Event Creation Test Cases', () => {
         await expect(page.getByText('Event Created Successfully!')).toBeVisible();
     });
 
-    test('Create an event with empty speaker details', async ({ page }) => {
+    test('TCTosh-11: Create an event with empty speaker details', async ({ page }) => {
         await page.getByRole('button', { name: 'Create a new event' }).click();
         await page.getByLabel('Event Title').click();
         await page.getByLabel('Event Title').fill('New Event');
@@ -80,7 +80,7 @@ describe('Event Creation Test Cases', () => {
         await expect(page.getByText('Event Created Successfully!')).toBeVisible();
     });
 
-    test('Create an event with date and time before current date and time', async ({ page }) => {
+    test('TCTosh-12: Create an event with date and time before current date and time', async ({ page }) => {
         await page.getByRole('button', { name: 'Create a new event' }).click();
         await page.getByLabel('Event Title').click();
         await page.getByLabel('Event Title').fill('cool event before today');
@@ -98,7 +98,7 @@ describe('Event Creation Test Cases', () => {
 
     });
 
-    test('Create an event with empty description', async ({ page }) => {
+    test('TCTosh-13: Create an event with empty description', async ({ page }) => {
         await page.getByRole('button', { name: 'Create a new event' }).click();
         await page.getByRole('button', { name: 'Next' }).click();
         await expect(page.locator('div').filter({ hasText: /^Event TitleEvent TitleThis field is required$/ }).getByRole('paragraph')).toBeVisible();

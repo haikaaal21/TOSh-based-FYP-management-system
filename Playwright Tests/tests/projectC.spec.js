@@ -15,7 +15,7 @@ describe('Project creation Test Cases', () => {
         await page.getByRole('button', { name: 'Projects' }).click();
     });
 
-    test('Create a project with valid details', async ({ page }) => {
+    test('TCTosh-15: Create a project with valid details', async ({ page }) => {
         await page.getByRole('button', { name: 'Create a new project' }).click();
         await expect(page.url()).toMatch('https://spares.work/project/create');
         await page.locator('input[name="title"]').click();
@@ -33,7 +33,7 @@ describe('Project creation Test Cases', () => {
         await expect(page.getByText('Your project has been created')).toBeVisible();
     });
 
-    test('Create a project with valid details but empty markdown', async ({page}) => {
+    test('TCTosh-16: Create a project with valid details but empty markdown', async ({page}) => {
         await page.getByRole('button', { name: 'Create a new project' }).click();
         await expect(page.url()).toMatch('https://spares.work/project/create');
         await page.locator('input[name="title"]').click();
@@ -50,7 +50,7 @@ describe('Project creation Test Cases', () => {
         await expect(page.getByText('Your project has been created')).toBeVisible();
     })
 
-    test('Create a project with empty details', async({page}) => {
+    test('TCTosh-17: Create a project with empty details', async({page}) => {
         await page.getByRole('button', { name: 'Create a new project' }).click();
         await expect(page.url()).toMatch('https://spares.work/project/create');
         await page.getByRole('button', { name: 'Create Project' }).click();
@@ -60,7 +60,7 @@ describe('Project creation Test Cases', () => {
         await expect(page.getByText('This field is required').nth(3)).toBeVisible();
     })
 
-    test('Approve a request to get into a project', async ({ page }) => {
+    test('TCTosh-18: Approve a request to get into a project', async ({ page }) => {
         await page.getByRole('button', { name: 'Automated Customer Support' }).click();
         await page.getByRole('button', { name: 'Show Requests' }).click();
         await page.getByRole('button', { name: 'Accept Request' }).first().click();

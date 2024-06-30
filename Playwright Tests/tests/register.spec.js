@@ -10,7 +10,7 @@ describe('Account Registration Test Cases', () => {
     });    
 
     //? #SPARES05
-    test('SPARES05: Register with valid credentials', async ({ page }) => {
+    test('TCTosh-05: Register with valid credentials', async ({ page }) => {
         await page.getByRole('button', { name: 'I agree' }).click();
         await page.getByRole('button', { name: 'Get Started' }).click();
         await expect(page).toHaveURL('https://spares.work/register');
@@ -41,7 +41,7 @@ describe('Account Registration Test Cases', () => {
     });
 
     //? #SPARES06
-    test('Register with Valid Credentials and already existing email', async({page}) => {
+    test('TCTosh-06: Register with Valid Credentials and already existing email', async({page}) => {
         await page.getByRole('button', { name: 'I agree' }).click();
         await page.getByRole('button', { name: 'Get Started' }).click();
         await expect(page).toHaveURL('https://spares.work/register');

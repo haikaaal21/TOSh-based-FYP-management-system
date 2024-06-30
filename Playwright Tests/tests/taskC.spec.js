@@ -17,7 +17,7 @@ describe('Task Creation Test Cases', () => {
         await page.getByRole('button', { name: 'Deadlines' }).click();
     });
 
-    test('Task creation with valid date-time and description', async ({ page }) => {
+    test('TCTosh-07: Task creation with valid date-time and description', async ({ page }) => {
         await page.getByRole('button', { name: 'Create a new Task' }).click();
         await expect(page.url()).toMatch('https://spares.work/task/create');
         await page.getByLabel('Task name *').click();
@@ -43,7 +43,7 @@ describe('Task Creation Test Cases', () => {
         await expect(page.getByText('Task Created Successfully!')).toBeVisible();
     });
 
-    test('Task creation with invalid date-time and description', async ({ page }) => {
+    test('TCTosh-08: Task creation with invalid date-time and description', async ({ page }) => {
         await page.getByRole('button', { name: 'Create a new Task' }).click();
         await expect(page.url()).toMatch('https://spares.work/task/create');
         await page.getByLabel('Task name *').click();
@@ -64,7 +64,7 @@ describe('Task Creation Test Cases', () => {
         await expect(page.getByText('This field must be at least 3').nth(1)).toBeVisible();
     });
 
-    test('Task creation with empty date-time and description', async ({ page }) => {
+    test('TCTosh-09: Task creation with empty date-time and description', async ({ page }) => {
         await page.getByRole('button', { name: 'Create a new Task' }).click();
         await expect(page.url()).toMatch('https://spares.work/task/create');
         await page.getByRole('button', { name: 'Create task' }).click();

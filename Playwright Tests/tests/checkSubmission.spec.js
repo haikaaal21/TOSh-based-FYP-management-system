@@ -15,7 +15,7 @@ describe('Check submissions test case', () => {
         await page.goto('https://spares.work/staff/deadlines');
     });
 
-    test('Check submissions', async({page}) => {
+    test('TCTosh-14: Check submissions', async({page}) => {
         await page.getByRole('button', { name: 'FYP Research paper From: You' }).click();
         await expect(page.getByRole('button', { name: 'Arya Ardiandamar' })).toBeVisible();
         await page.getByRole('button', { name: 'Arya Ardiandamar' }).click();
